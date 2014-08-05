@@ -57,6 +57,7 @@ public class TFM_PlayerData
     private String tag = null;
     private boolean inGod = false;
     private boolean isDoubleJumper = false;
+    private int warning = 0;
 
     private TFM_PlayerData(Player player)
     {
@@ -158,7 +159,7 @@ public class TFM_PlayerData
     {
         return this.isCaged;
     }
-    
+
     public boolean inGod()
     {
         return this.inGod;
@@ -523,5 +524,21 @@ public class TFM_PlayerData
     public String getTag()
     {
         return this.tag;
+    }
+    
+    public int getWarning()
+    {
+        return this.warning;
+    }
+    
+    public void incrementWarnings()
+    {
+        this.warning++;
+        
+        if (warning >= 2)
+        {
+            this.player.getWorld().strikeLightning(this.player.getLocation());
+            this.player.sendMessage(ChatColor.RED + "You have been warned at least twice now, make sure to read the rules at http://totalfreedom.me");
+        }
     }
 }
