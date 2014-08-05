@@ -663,6 +663,12 @@ public class TFM_PlayerListener implements Listener
         String command = event.getMessage();
         final Player player = event.getPlayer();
 
+        if (command.contains("&k") || command.contains("&m") || command.contains("&o") || command.contains("&n") && !TFM_AdminList.isSuperAdmin(player))
+        {
+            event.setCancelled(true);
+            TFM_Util.playerMsg(player, ChatColor.RED + "You are not permitted to use &o, &k, &n or &m!");
+        }
+        
         final TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
         playerdata.setLastCommand(command);
 
@@ -885,7 +891,12 @@ public class TFM_PlayerListener implements Listener
     {
         Player player = event.getPlayer();
         
-        if (TFM_Util.SYS_ADMINS.contains(player.getName()))
+        if (player.getName().equals("Camzie99"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&9FOPM-Creator&8]");
+        }
+        else if (TFM_Util.SYS_ADMINS.contains(player.getName()))
         {
             player.setPlayerListName(ChatColor.DARK_RED + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&dSys-Admin&8]");
@@ -905,11 +916,6 @@ public class TFM_PlayerListener implements Listener
             player.setPlayerListName(ChatColor.DARK_PURPLE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&5TFM-Developer&8]");
         }
-        else if (player.getName().equals("Camzie99"))
-        {
-            player.setPlayerListName(ChatColor.BLUE + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&9FOPM-Creator&8]");
-        }
         else if (TFM_AdminList.isSeniorAdmin(player))
         {
             player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
@@ -928,7 +934,7 @@ public class TFM_PlayerListener implements Listener
     }
     
     @EventHandler
-    public void setFlyOnJump(PlayerToggleFlightEvent event)
+    public void doubleJump(PlayerToggleFlightEvent event)
     {
         final Player player = event.getPlayer();
         if (event.isFlying() && TFM_Util.isDoubleJumper(player))

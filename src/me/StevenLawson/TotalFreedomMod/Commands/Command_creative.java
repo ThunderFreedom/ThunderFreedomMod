@@ -62,13 +62,12 @@ public class Command_creative extends TFM_Command
                 sender.sendMessage(TotalFreedomMod.PLAYER_NOT_FOUND);
                 return true;
             }
-
         }
 
         playerMsg("Setting " + player.getName() + " to game mode 'Creative'.");
         playerMsg(player, sender.getName() + " set your game mode to 'Creative'.");
         player.setGameMode(GameMode.CREATIVE);
-
+        
         return true;
     }
 }
