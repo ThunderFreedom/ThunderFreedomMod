@@ -41,6 +41,7 @@ public enum TFM_ConfigEntry
     //
     ENABLE_PREPROCESS_LOG(Boolean.class, "preprocess_log"),
     ENABLE_PET_PROTECT(Boolean.class, "petprotect.enabled"),
+    ENABLE_ADMINWORLD(Boolean.class, "adminworld_enabled"),
     //
     LANDMINES_ENABLED(Boolean.class, "landmines_enabled"),
     TOSSMOB_ENABLED(Boolean.class, "tossmob_enabled"),

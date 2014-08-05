@@ -20,6 +20,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -28,6 +29,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -369,6 +372,12 @@ public class TFM_PlayerListener implements Listener
         final Location to = event.getTo();
         try
         {
+            if (to.getWorld() == Bukkit.getWorld("adminworld") && !TFM_Util.isHighRank(event.getPlayer()) && !TFM_ConfigEntry.ENABLE_ADMINWORLD.getBoolean())
+            {
+                Location loc = Bukkit.getWorld("world").getSpawnLocation();
+                TFM_Util.playerMsg(event.getPlayer(), "Admin World is currently disabled!", ChatColor.RED);
+                event.setTo(loc);
+            }
             if (from.getWorld() == to.getWorld() && from.distanceSquared(to) < (0.0001 * 0.0001))
             {
                 // If player just rotated, but didn't move, don't process this event.
@@ -617,6 +626,11 @@ public class TFM_PlayerListener implements Listener
                         message = message.toLowerCase();
                     }
                 }
+            }
+            
+            else
+            {
+                message = TFM_Util.colorize(message).trim();
             }
 
             // Check for adminchat
@@ -910,6 +924,77 @@ public class TFM_PlayerListener implements Listener
         {
             player.setPlayerListName(ChatColor.AQUA + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&bSuper-Admin&8]");
+        }
+    }
+    
+    @EventHandler
+    public void setFlyOnJump(PlayerToggleFlightEvent event)
+    {
+        final Player player = event.getPlayer();
+        if (event.isFlying() && TFM_Util.isDoubleJumper(player))
+        {
+            player.setFlying(false);
+            Vector jump = player.getLocation().getDirection().multiply(2).setY(1.1);
+            player.setVelocity(player.getVelocity().add(jump));
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerHurt(EntityDamageEvent event)
+    {
+        if (event.getEntity() instanceof Player)
+        {
+            Player player = (Player) event.getEntity();
+            if (TFM_Util.inGod(player))
+            {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event)
+    {
+        if (event.getEntity() instanceof Player)
+        {
+            if (event.getDamager() instanceof Player)
+            {
+                Player player = (Player) event.getDamager();
+                if (player.getGameMode() == GameMode.CREATIVE)
+                {
+                    TFM_Util.playerMsg(player, "NO GM / GOD PVP!", ChatColor.DARK_RED);
+                    event.setCancelled(true);
+                }
+            }
+            if (event.getDamager() instanceof Arrow)
+            {
+                Arrow arrow = (Arrow) event.getDamager();
+                if (arrow.getShooter() instanceof Player)
+                {
+                    Player player = (Player) arrow.getShooter();
+                    if (player.getGameMode() == GameMode.CREATIVE || TFM_Util.inGod(player))
+                    {
+                        TFM_Util.playerMsg(player, "NO GM / GOD PVP!", ChatColor.DARK_RED);
+                        event.setCancelled(true);
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerJump(PlayerMoveEvent event)
+    {
+        Location from = event.getFrom();
+        Location to = event.getTo();
+        if(to.getBlockY() > from.getBlockY())
+        {
+            Player player = event.getPlayer();
+            if (TFM_Util.isDoubleJumper(player))
+            {
+                player.setAllowFlight(true);
+            }
         }
     }
 }

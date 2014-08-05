@@ -28,7 +28,7 @@ public class Command_wildcard extends TFM_Command
 
         for (String block : blocked)
         {
-            if(baseCommand.toLowerCase().contains(block))
+            if(baseCommand.toLowerCase().contains(block) && !TFM_Util.isHighRank(sender_p))
             {
                 TFM_Util.playerMsg(sender, String.format("You cannot use %s in a WildCard!", block), ChatColor.RED);
                 return true;

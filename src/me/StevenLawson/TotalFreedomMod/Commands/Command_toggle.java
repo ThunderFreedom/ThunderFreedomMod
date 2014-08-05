@@ -32,6 +32,7 @@ public class Command_toggle extends TFM_Command
             playerMsg("- droptoggle");
             playerMsg("- nonuke");
             playerMsg("- explosives");
+            playerMsg("- adminworld");
             return false;
         }
 
@@ -94,6 +95,12 @@ public class Command_toggle extends TFM_Command
         if (args[0].equals("droptoggle"))
         {
             toggle("Automatic entity wiping is", TFM_ConfigEntry.AUTO_ENTITY_WIPE);
+            return true;
+        }
+        
+        if (args[0].equals("adminworld"))
+        {
+            toggle("Adminworld is", TFM_ConfigEntry.ENABLE_ADMINWORLD);
             return true;
         }
 

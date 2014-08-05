@@ -1,9 +1,11 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.World.TFM_AdminWorld;
 import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -21,6 +23,12 @@ public class Command_adminworld extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
+        if(!TFM_ConfigEntry.ENABLE_ADMINWORLD.getBoolean())
+        {
+            TFM_Util.playerMsg(sender, "Admin World is currently disabled!", ChatColor.RED);
+            return true;
+        }
+        
         CommandMode commandMode = null;
 
         if (args.length == 0)

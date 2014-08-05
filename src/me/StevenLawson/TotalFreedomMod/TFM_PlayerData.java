@@ -55,6 +55,8 @@ public class TFM_PlayerData
     private String lastCommand = "";
     private boolean cmdspyEnabled = false;
     private String tag = null;
+    private boolean inGod = false;
+    private boolean isDoubleJumper = false;
 
     private TFM_PlayerData(Player player)
     {
@@ -155,6 +157,25 @@ public class TFM_PlayerData
     public boolean isCaged()
     {
         return this.isCaged;
+    }
+    
+    public boolean inGod()
+    {
+        return this.inGod;
+    }
+    
+    public void setGod(boolean state)
+    {
+        this.inGod = state;
+    }
+    public boolean isDoubleJumper()
+    {
+        return this.isDoubleJumper;
+    }
+    
+    public void setDoubleJumper(boolean state)
+    {
+        this.isDoubleJumper = state;
     }
 
     public enum CageLayer

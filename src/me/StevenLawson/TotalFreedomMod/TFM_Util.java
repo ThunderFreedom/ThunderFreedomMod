@@ -52,7 +52,8 @@ public class TFM_Util
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "AcidicCyanide", "wild1145", "WickedGamingUK");
     public static final List<String> FOP_DEVELOPERS = Arrays.asList("Paldiu", "buildcarter8", "RobinGall2910", "Freelix2000", "PieGuy7896");
     public static final List<String> SPECIAL_EXECS = Arrays.asList("aggelosQQ", "immurtle", "SupItsDillon");
-    public static final List<String> SYS_ADMINS = Arrays.asList("CrafterSmith12", "lynxlps", "cowgomoo12", "EnderLolzeh");
+    public static final List<String> SYS_ADMINS = Arrays.asList("lynxlps", "cowgomoo12", "EnderLolzeh");
+    public static List<String> GOD_PLAYERS = Arrays.asList();
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
     public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<String, ChatColor>();
@@ -69,7 +70,6 @@ public class TFM_Util
             ChatColor.RED,
             ChatColor.LIGHT_PURPLE,
             ChatColor.YELLOW);
-
     static
     {
         for (EntityType type : EntityType.values())
@@ -1014,9 +1014,15 @@ public class TFM_Util
         return packageName.substring(packageName.lastIndexOf('.') + 1);
     }
     
-    public static void spawnMob(Player player, EntityType entity)
+    public static void spawnMob(Player player, EntityType entity, int amount)
     {
-        player.getWorld().spawnEntity(player.getLocation(), entity);
+        int i = 0;
+        do
+        {
+            player.getWorld().spawnEntity(player.getLocation(), entity);
+            i++;
+        }
+        while (i <= amount);
     }
     
     public static boolean isHighRank(Player player)
@@ -1057,8 +1063,42 @@ public class TFM_Util
         TFM_Util.bcastMsg("                         ) `--'       ,..:::: ", TFM_Util.randomChatColor());
         TFM_Util.bcastMsg("                         ; `.        ,::::::: ", TFM_Util.randomChatColor());
         TFM_Util.bcastMsg("                          ;  ``::.    ::::::: ", TFM_Util.randomChatColor());
-     }
+    }
 
+    public static boolean inGod(Player player)
+    {
+        return TFM_PlayerData.getPlayerData(player).inGod();
+    }
+    
+    public static void setGod(Player player, boolean enabled)
+    {
+        TFM_PlayerData.getPlayerData(player).setGod(enabled);
+    }
+    
+    public static void SeniorAdminChatMessage(CommandSender sender, String message, boolean senderIsConsole)
+    {
+        String name = sender.getName() + " " + TFM_PlayerRank.fromSender(sender).getPrefix() + ChatColor.WHITE;
+        TFM_Log.info("[SENIOR-ADMIN] " + name + ": " + message);
+
+        for (Player player : Bukkit.getOnlinePlayers())
+        {
+            if (TFM_AdminList.isSeniorAdmin(player))
+            {
+                player.sendMessage("[" + ChatColor.YELLOW + "SENIOR-ADMIN" + ChatColor.WHITE + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.YELLOW + message);
+            }
+        }
+    }
+    
+    public static boolean isDoubleJumper(Player player)
+    {
+        return TFM_PlayerData.getPlayerData(player).isDoubleJumper();
+    }
+    
+    public static void setDoubleJumper(Player player, boolean state)
+    {
+        TFM_PlayerData.getPlayerData(player).setDoubleJumper(state);
+    }
+    
     public static class TFM_EntityWiper
     {
         private static final List<Class<? extends Entity>> WIPEABLES = new ArrayList<Class<? extends Entity>>();
