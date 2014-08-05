@@ -860,6 +860,8 @@ public class TFM_PlayerListener implements Listener
         {
             TFM_Util.bcastMsg(ChatColor.AQUA + player.getName() + " is " + TFM_PlayerRank.getLoginMessage(player));
         }
+        
+        TFM_Util.bcastMsg(ChatColor.GOLD + String.format("Welcome %s%s%s to %s%sFreedomOp!", ChatColor.LIGHT_PURPLE, ChatColor.BOLD, player.getName(), ChatColor.DARK_AQUA, ChatColor.BOLD));
 
         new BukkitRunnable()
         {
