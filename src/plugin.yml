@@ -1,9 +1,9 @@
 name: FreedomOpMod
 main: me.StevenLawson.TotalFreedomMod.TotalFreedomMod
-version: 1.0
+version: 1.1
 description: Plugin for the Total Freedom server.
 softdepend: [BukkitTelnet, WorldEdit, Essentials]
-depend: [BarAPI]
-authors: [Madgeek1450, DarthSalamon, Camzie99]
+depend: [BarAPI, CoreProtect]
+authors: [Madgeek1450, DarthSalamon, Camzie99, RobinGall2910]
 
 # plugin.yml is no longer used to define commands.

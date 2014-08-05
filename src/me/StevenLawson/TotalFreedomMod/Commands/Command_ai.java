@@ -17,14 +17,15 @@ public class Command_ai extends TFM_Command
         }
         else
         {
-            playerMsg(ChatColor.GREEN + "Applying for admin: ");
-            playerMsg(ChatColor.GREEN + "To apply for admin, please go to the forums, at http://www.freedomop.boards.net");
-            playerMsg(ChatColor.GREEN + "You must then read the requirements.");
-            playerMsg(ChatColor.GREEN + "Then, if you feel you are ready, make a new thread in the Admin Applications board, ");
-            playerMsg(ChatColor.GREEN + "and fill out the template in a new thread.");
-            playerMsg(ChatColor.RED + "Do not ask any admins for recommendations. This will get your application auto-denied.");
-            playerMsg(ChatColor.RED + "Don't lie on your application. That is also a way to be auto-denied.");
-            playerMsg(ChatColor.GREEN + "Good Luck!");
+            playerMsg(ChatColor.AQUA + "The following is accurate as of 8/5/14");
+            playerMsg(ChatColor.RED + "Currently applying for Super Admin is impossible, the admin applications are on hold until september.");
+         /*  playerMsg(ChatColor.GREEN + "To apply for admin you need to go to the forums at http://to.fop.us.to/apply");
+            playerMsg(ChatColor.YELLOW + "Then read the requirements in the Super Admin in the \"Admin Application Template\".");
+            playerMsg(ChatColor.WHITE + "Then if you feel you are ready, make a new thread in the 'admin applications'' board.");
+            playerMsg(ChatColor.BLUE + "And fill out the template in the new thread.");
+            playerMsg(ChatColor.RED + "We ask for you not to ask existing admins for recommendations, this will get your application denied.");
+            playerMsg(ChatColor.GOLD + "Good Luck!");
+        */
             return true;
         }
     }
