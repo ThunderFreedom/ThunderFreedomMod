@@ -1130,7 +1130,7 @@ public class TFM_Util
         {
             if (TFM_AdminList.isSeniorAdmin(player))
             {
-                player.sendMessage("[" + ChatColor.YELLOW + "SENIOR-ADMIN" + ChatColor.WHITE + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.YELLOW + message);
+                player.sendMessage("[" + ChatColor.GOLD + "SENIOR-ADMIN" + ChatColor.WHITE + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.YELLOW + message);
             }
         }
     }
