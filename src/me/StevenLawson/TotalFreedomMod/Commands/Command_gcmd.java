@@ -37,10 +37,13 @@ public class Command_gcmd extends TFM_Command
             return true;
         }
         
-        if (TFM_AdminList.isSuperAdmin(player) && !TFM_Util.isHighRank(sender_p))
+        if (TFM_AdminList.isSuperAdmin(player) && !senderIsConsole)
         {
-            TFM_Util.playerMsg(sender, ChatColor.RED + "You cannot gcmd other admins, stop trying to cause trouble!");
-            return true;
+            if (!TFM_Util.isHighRank(sender_p))
+            {
+                TFM_Util.playerMsg(sender, ChatColor.RED + "You cannot gcmd other admins, stop trying to cause trouble!");
+                return true;
+            }
         }
 
         try

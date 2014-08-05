@@ -32,10 +32,13 @@ public class Command_fc extends TFM_Command
 
         final String outCommand = StringUtils.join(args, " ", 1, args.length);
         
-        if (TFM_AdminList.isSuperAdmin(player) && !TFM_Util.isHighRank(sender_p))
+        if (TFM_AdminList.isSuperAdmin(player) && !senderIsConsole)
         {
-            TFM_Util.playerMsg(sender, ChatColor.RED + "You cannot fchat other admins, stop trying to cause trouble!");
-            return true;
+            if (!TFM_Util.isHighRank(sender_p))
+            {
+                TFM_Util.playerMsg(sender, ChatColor.RED + "You cannot fchat other admins, stop trying to cause trouble!");
+                return true;
+            }
         }
 
         try

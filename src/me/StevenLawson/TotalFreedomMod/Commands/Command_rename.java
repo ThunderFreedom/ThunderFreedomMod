@@ -18,6 +18,10 @@ public class Command_rename extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
+        if (args.length < 1)
+        {
+            return false;
+        }
         String itemRaw = StringUtils.join(args);
         String itemName = TFM_Util.colorize(itemRaw.trim());
         ItemStack i = sender_p.getItemInHand();

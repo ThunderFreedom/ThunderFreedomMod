@@ -3,9 +3,8 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import static me.StevenLawson.TotalFreedomMod.Commands.Command_deafen.STEPS;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
-import static org.apache.commons.lang.RandomStringUtils.random;
+import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -31,7 +30,19 @@ public class Command_personal extends TFM_Command
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
         String which;
-        if (sender.getName().equals("eagleeye64000") || sender.getName().equals("R1SSY") || sender.getName().equals("escojay"))
+        if (args.length >= 1)
+        {
+            if (!senderIsConsole)
+            {
+                if (!TFM_Util.isHighRank(sender_p))
+                {
+                    TFM_Util.playerMsg(sender, TotalFreedomMod.MSG_NO_PERMS, ChatColor.RED);
+                    return true;
+                }
+            }
+            which = args[0];
+        }
+        else if (sender.getName().equals("eagleeye64000") || sender.getName().equals("R1SSY") || sender.getName().equals("escojay"))
         {
             which = "multiEagle";
         }
@@ -57,6 +68,9 @@ public class Command_personal extends TFM_Command
                     world.strikeLightningEffect(loc);
                 }
                 TFM_Util.adminAction(sender_p.getName(), "Gracing the world with Purple!", false);
+            break;
+            case "jumpymonkey123" :
+                TFM_Util.asciiUnicorn();
             break;
             case "cowgomoo12":
                 for(Player player : Bukkit.getOnlinePlayers())
@@ -84,7 +98,7 @@ public class Command_personal extends TFM_Command
                 for (Player player : Bukkit.getOnlinePlayers())
                 {
                     PlayerInventory inv = player.getInventory();
-                    ItemStack potato = new ItemStack(Material.POTATO, 1);
+                    ItemStack potato = new ItemStack(Material.POTATO_ITEM, 1);
                     ItemMeta meta = potato.getItemMeta();
                     List<String> lore = Arrays.asList(ChatColor.DARK_PURPLE + "It's dangerous to go alone; take this!");
                     meta.setLore(lore);
@@ -92,6 +106,49 @@ public class Command_personal extends TFM_Command
                     inv.addItem(potato);
                 }
             break;
+            case "TheLunarPrincess":
+                StringBuilder output = new StringBuilder();
+                Random randomGenerator = new Random();
+
+                String[] words = "You have been given a Moonstone from the Moon Princess!".split(" ");
+                for (String word : words)
+                {
+                    String color_code = Integer.toHexString(1 + randomGenerator.nextInt(14));
+                    output.append(ChatColor.COLOR_CHAR).append(color_code).append(word).append(" ");
+                }
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    TFM_Util.playerMsg(player, output.toString());
+                    PlayerInventory inv = player.getInventory();
+                    ItemStack moonstone = new ItemStack(Material.NETHER_STAR, 1);
+                    ItemMeta meta = moonstone.getItemMeta();
+                    List<String> lore = Arrays.asList(ChatColor.DARK_BLUE + "This mysterious stone", ChatColor.BLUE + "was given to you by", ChatColor.GOLD + "the Moon Princess!");
+                    meta.setDisplayName(TFM_Util.randomChatColor() + "" + ChatColor.BOLD + "Moonstone");
+                    meta.setLore(lore);
+                    moonstone.setItemMeta(meta);
+                    inv.addItem(moonstone);
+                }
+            break;
+            case "Dev238":
+                TFM_Util.adminAction(sender.getName(), "You have been DEV'D!!!", true);
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    PlayerInventory inv = player.getInventory();
+                    inv.addItem(new ItemStack(Material.SNOW_BALL, 1));
+                }
+            break;
+            case "lukkan99":
+                TFM_Util.adminAction(sender.getName(), "When life gives you lemons, don't make lemonade! Make life take the lemons back! Get mad!", true);
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    PlayerInventory inv = player.getInventory();
+                    ItemStack glados = new ItemStack(Material.POTATO_ITEM, 1);
+                    ItemMeta meta = glados.getItemMeta();
+                    meta.setDisplayName(TFM_Util.randomChatColor() + "" + ChatColor.BOLD + "GlaDOS");
+                    glados.setItemMeta(meta);
+                    inv.addItem(glados);
+                }
+            break;    
             case "robotexplorer":
                 TFM_Util.adminAction(sender_p.getName(), "You can't outsmart a robot? I think NOT!", true);
                 for (Player player : Bukkit.getOnlinePlayers())
@@ -125,7 +182,7 @@ public class Command_personal extends TFM_Command
                 }
             break;
             case "lynxlps":
-                TFM_Util.adminAction("Dahlia Hawthrone", "Eliminating all signs of life.", true);
+                TFM_Util.adminAction("Dahlia Hawthorne", "Eliminating all signs of life.", true);
                 for (World world : Bukkit.getWorlds())
                 {
                     for (Entity entity : world.getEntities())
