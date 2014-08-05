@@ -5,8 +5,8 @@ import me.StevenLawson.BukkitTelnet.api.TelnetPreLoginEvent;
 import me.StevenLawson.TotalFreedomMod.TFM_CommandBlocker;
 import me.StevenLawson.TotalFreedomMod.TFM_Admin;
 import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
+import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -32,6 +32,7 @@ public class TFM_TelnetListener implements Listener
 
         event.setBypassPassword(true);
         event.setName(admin.getLastLoginName());
+        TFM_Util.adminAction(admin.getLastLoginName(), ChatColor.DARK_AQUA + "Logged in Via Telnet", true);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

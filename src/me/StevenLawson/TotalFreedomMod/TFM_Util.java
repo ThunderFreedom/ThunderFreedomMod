@@ -50,6 +50,9 @@ public class TFM_Util
     private static final Map<String, Integer> ejectTracker = new HashMap<String, Integer>();
     public static final Map<String, EntityType> mobtypes = new HashMap<String, EntityType>();
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "AcidicCyanide", "wild1145", "WickedGamingUK");
+    public static final List<String> FOP_DEVELOPERS = Arrays.asList("Paldiu", "buildcarter8", "RobinGall2910", "Freelix2000", "PieGuy7896");
+    public static final List<String> SPECIAL_EXECS = Arrays.asList("aggelosQQ", "immurtle", "SupItsDillon");
+    public static final List<String> SYS_ADMINS = Arrays.asList("CrafterSmith12", "lynxlps", "cowgomoo12", "EnderLolzeh");
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
     public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<String, ChatColor>();
@@ -1009,8 +1012,52 @@ public class TFM_Util
     {
         String packageName = Bukkit.getServer().getClass().getPackage().getName();
         return packageName.substring(packageName.lastIndexOf('.') + 1);
-
     }
+    
+    public static void spawnMob(Player player, EntityType entity)
+    {
+        player.getWorld().spawnEntity(player.getLocation(), entity);
+    }
+    
+    public static boolean isHighRank(Player player)
+    {
+        String name = player.getName();
+        if(SYS_ADMINS.contains(name) || SPECIAL_EXECS.contains(name) || name.equals("Camzie99"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    public static void asciiDog()
+    {
+        //This was VERY annoying to make!
+        TFM_Util.bcastMsg("                     ,", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("                ,.  | \\ ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("               |: \\ ; :\\ ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("               :' ;\\| ::\\", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("                \\ : | `::\\ ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("                _)  |   `:`. ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("              ,' , `.    ;: ; ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("            ,' ;:  ;\"'  ,:: |", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("           /,   ` .    ;::: |:`-.__ ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("        _,' _o\\  ,::.`:' ;  ;   . ' ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("    _,-'           `:.          ;\"\"", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg(" ,-'                     ,:         `-;, ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg(" \\,                       ;:           ;--._ ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("  `.______,-,----._     ,' ;:        ,/ ,  ,` ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("         / /,-';'  \\     ; `:      ,'/,::.::: ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("       ,',;-'-'_,--;    ;   :.   ,',',;:::::: ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("      ( /___,-'     `.     ;::,,'o/  ,::::::: ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("       `'             )    ;:,'o /  ;\"-   -:: ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("                      \\__ _,'o ,'         ,:: ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("                         ) `--'       ,..:::: ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("                         ; `.        ,::::::: ", TFM_Util.randomChatColor());
+        TFM_Util.bcastMsg("                          ;  ``::.    ::::::: ", TFM_Util.randomChatColor());
+     }
 
     public static class TFM_EntityWiper
     {

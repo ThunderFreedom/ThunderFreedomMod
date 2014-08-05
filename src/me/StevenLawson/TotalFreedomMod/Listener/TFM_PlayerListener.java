@@ -588,31 +588,34 @@ public class TFM_PlayerListener implements Listener
 
                 playerdata.setMuted(false);
             }
-
-            // Strip color from messages
-            message = ChatColor.stripColor(message);
-
-            // Truncate messages that are too long - 100 characters is vanilla client max
-            if (message.length() > 100)
+            
+            if (!TFM_AdminList.isSuperAdmin(player))
             {
-                message = message.substring(0, 100);
-                TFM_Util.playerMsg(player, "Message was shortened because it was too long to send.");
-            }
+                // Strip color from messages
+                message = ChatColor.stripColor(message);
 
-            // Check for caps
-            if (message.length() >= 6)
-            {
-                int caps = 0;
-                for (char c : message.toCharArray())
+                // Truncate messages that are too long - 100 characters is vanilla client max
+                if (message.length() > 100)
                 {
-                    if (Character.isUpperCase(c))
-                    {
-                        caps++;
-                    }
+                    message = message.substring(0, 100);
+                    TFM_Util.playerMsg(player, "Message was shortened because it was too long to send.");
                 }
-                if (((float) caps / (float) message.length()) > 0.65) //Compute a ratio so that longer sentences can have more caps.
+
+                // Check for caps
+                if (message.length() >= 6)
                 {
-                    message = message.toLowerCase();
+                    int caps = 0;
+                    for (char c : message.toCharArray())
+                    {
+                        if (Character.isUpperCase(c))
+                        {
+                            caps++;
+                        }
+                    }
+                    if (((float) caps / (float) message.length()) > 0.65) //Compute a ratio so that longer sentences can have more caps.
+                    {
+                        message = message.toLowerCase();
+                    }
                 }
             }
 
@@ -704,15 +707,23 @@ public class TFM_PlayerListener implements Listener
             event.setCancelled(true);
         }
 
-        if (!TFM_AdminList.isSuperAdmin(player))
+        for (Player pl : Bukkit.getOnlinePlayers())
         {
-            for (Player pl : Bukkit.getOnlinePlayers())
+            if (TFM_AdminList.isSeniorAdmin(pl) && TFM_PlayerData.getPlayerData(pl).cmdspyEnabled())
             {
-                if (TFM_AdminList.isSuperAdmin(pl) && TFM_PlayerData.getPlayerData(pl).cmdspyEnabled())
-                {
-                    TFM_Util.playerMsg(pl, player.getName() + ": " + command);
-                }
+                TFM_Util.playerMsg(pl, player.getName() + ": " + command);
             }
+            else
+            if (!TFM_AdminList.isSuperAdmin(player) && TFM_PlayerData.getPlayerData(pl).cmdspyEnabled() && TFM_AdminList.isSuperAdmin(pl))
+            {
+                TFM_Util.playerMsg(pl, player.getName() + ": " + command);
+            }
+        }
+        
+        if (command.contains("175:") || command.contains("double_plant:"))
+        {
+            event.setCancelled(true);
+            TFM_Util.autoEject(player, ChatColor.DARK_RED + "Do not attempt to use any command involving the crash item!");
         }
     }
 
@@ -859,25 +870,46 @@ public class TFM_PlayerListener implements Listener
     public static void onPlayerJoinEvent(PlayerJoinEvent event)
     {
         Player player = event.getPlayer();
-        if (TFM_Util.DEVELOPERS.contains(player.getName()))
+        
+        if (TFM_Util.SYS_ADMINS.contains(player.getName()))
+        {
+            player.setPlayerListName(ChatColor.DARK_RED + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&dSys-Admin&8]");
+        }
+        else if (TFM_Util.SPECIAL_EXECS.contains(player.getName()))
+        {
+            player.setPlayerListName(ChatColor.RED + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&cSpecial-Exec&8]");
+        }
+        else if (TFM_Util.FOP_DEVELOPERS.contains(player.getName()))
         {
             player.setPlayerListName(ChatColor.DARK_PURPLE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&5Developer&8]");
         }
+        else if (TFM_Util.DEVELOPERS.contains(player.getName()))
+        {
+            player.setPlayerListName(ChatColor.DARK_PURPLE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&5TFM-Developer&8]");
+        }
+        else if (player.getName().equals("Camzie99"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&9FOPM-Creator&8]");
+        }
         else if (TFM_AdminList.isSeniorAdmin(player))
         {
             player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&dSenior Admin&8]");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&dSenior-Admin&8]");
         }
         else if (TFM_AdminList.isTelnetAdmin(player, true))
         {
             player.setPlayerListName(ChatColor.DARK_GREEN + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&2Telnet Admin&8]");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&2Telnet-Admin&8]");
         }
         else if (TFM_AdminList.isSuperAdmin(player))
         {
             player.setPlayerListName(ChatColor.AQUA + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&BSuper Admin&8]");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&bSuper-Admin&8]");
         }
     }
 }

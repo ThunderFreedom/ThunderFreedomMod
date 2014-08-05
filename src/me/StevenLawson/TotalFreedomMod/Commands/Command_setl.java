@@ -1,22 +1,24 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
-import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.Bridge.TFM_WorldEditBridge;
+import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH)
-@CommandParameters(description = "Sets everyone's Worldedit block modification limit to 500.", usage = "/<command>")
+@CommandParameters(description = "Sets everyone's Worldedit block modification limit to a custom amount (defaults to 500).", usage = "/<command> [limit]")
 public class Command_setl extends TFM_Command
 {
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        TFM_Util.adminAction(sender.getName(), "Setting everyone's Worldedit block modification limit to 500.", true);
+        int limit = (args[0] != null ? Integer.parseInt(args[0]) : 500);
+        TFM_Util.adminAction(sender.getName(), String.format("Setting everyone's Worldedit block modification limit to %s.", limit), true);
         for (final Player player : server.getOnlinePlayers())
         {
-            TFM_WorldEditBridge.setLimit(player, 500);
+            TFM_WorldEditBridge.setLimit(player, limit);
         }
         return true;
     }
