@@ -150,7 +150,7 @@ public class Command_personal extends TFM_Command
                 }
             break;    
             case "robotexplorer":
-                TFM_Util.adminAction(sender_p.getName(), "You can't outsmart a robot? I think NOT!", true);
+                TFM_Util.adminAction(sender_p.getName(), "You think you can outsmart a robot? I think NOT!", true);
                 for (Player player : Bukkit.getOnlinePlayers())
                 {
                     PlayerInventory inv = player.getInventory();
@@ -228,7 +228,7 @@ public class Command_personal extends TFM_Command
                     ItemStack cookie = new ItemStack(Material.COOKIE, 1);
                     ItemMeta meta = cookie.getItemMeta();
                     meta.setDisplayName(ChatColor.GREEN + "Crafter's Cookie!");
-                    meta.addEnchant(Enchantment.KNOCKBACK, 10, senderIsConsole);
+                    meta.getEnchantLevel(Enchantment.KNOCKBACK);
                     cookie.setItemMeta(meta);
                     inv.addItem(cookie);
                 }
