@@ -14,6 +14,7 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
+import static org.bukkit.enchantments.Enchantment.KNOCKBACK;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -221,14 +222,14 @@ public class Command_personal extends TFM_Command
                 }
             break;
             case "CrafterSmith12":
-                TFM_Util.adminAction(sender_p.getName(), "Cookies for all!", true);
+                TFM_Util.adminAction(sender_p.getName(), "Cookies for all! Don't let others take yours!", true);
                 for (Player player : Bukkit.getOnlinePlayers())
                 {
                     PlayerInventory inv = player.getInventory();
                     ItemStack cookie = new ItemStack(Material.COOKIE, 1);
+                    cookie.addUnsafeEnchantment(KNOCKBACK, 100);
                     ItemMeta meta = cookie.getItemMeta();
                     meta.setDisplayName(ChatColor.GREEN + "Crafter's Cookie!");
-                    meta.getEnchantLevel(Enchantment.KNOCKBACK);
                     cookie.setItemMeta(meta);
                     inv.addItem(cookie);
                 }
