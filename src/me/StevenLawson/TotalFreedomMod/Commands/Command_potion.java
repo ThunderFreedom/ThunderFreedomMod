@@ -131,6 +131,12 @@ public class Command_potion extends TFM_Command
                     sender.sendMessage(ChatColor.AQUA + "Invalid potion effect type.");
                     return true;
                 }
+                
+                if (potion_effect_type == PotionEffectType.INVISIBILITY)
+                {
+                    sender.sendMessage(ChatColor.RED + "You do not have permission to use invisibility!");
+                    return true;
+                }
 
                 int duration;
                 try

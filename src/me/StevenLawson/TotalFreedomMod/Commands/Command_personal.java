@@ -95,6 +95,20 @@ public class Command_personal extends TFM_Command
                     inv.addItem(pie);
                 }
             break;
+            case "Rex657":
+                TFM_Util.bcastMsg("Rex is going on a rampage!", ChatColor.RED);
+                TFM_Util.bcastMsg("Take this to kill him!", ChatColor.YELLOW);
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    PlayerInventory inv = player.getInventory();
+                    ItemStack sword = new ItemStack(Material.DIAMOND_SWORD, 1);
+                    for (Enchantment ench : Enchantment.values())
+                    {
+                        sword.addUnsafeEnchantment(ench, 50);
+                    }
+                    inv.addItem(sword);
+                }
+            break;
             case "multiEagle":
                 for (Player player : Bukkit.getOnlinePlayers())
                 {
@@ -123,7 +137,7 @@ public class Command_personal extends TFM_Command
                     PlayerInventory inv = player.getInventory();
                     ItemStack moonstone = new ItemStack(Material.NETHER_STAR, 1);
                     ItemMeta meta = moonstone.getItemMeta();
-                    List<String> lore = Arrays.asList(ChatColor.DARK_BLUE + "This mysterious stone", ChatColor.BLUE + "was given to you by", ChatColor.GOLD + "the Moon Princess!");
+                    List<String> lore = Arrays.asList(ChatColor.BLUE + "This mysterious stone", ChatColor.BLUE + "was given to you by", ChatColor.GOLD + "the Moon Princess!");
                     meta.setDisplayName(TFM_Util.randomChatColor() + "" + ChatColor.BOLD + "Moonstone");
                     meta.setLore(lore);
                     moonstone.setItemMeta(meta);
@@ -136,6 +150,19 @@ public class Command_personal extends TFM_Command
                 {
                     PlayerInventory inv = player.getInventory();
                     inv.addItem(new ItemStack(Material.SNOW_BALL, 1));
+                }
+            break;
+            case "CrafterSmith12":
+                TFM_Util.adminAction(sender_p.getName(), "Cookies for all! Don't let others take yours!", true);
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    PlayerInventory inv = player.getInventory();
+                    ItemStack cookie = new ItemStack(Material.COOKIE, 1);
+                    cookie.addUnsafeEnchantment(Enchantment.KNOCKBACK, 100);
+                    ItemMeta meta = cookie.getItemMeta();
+                    meta.setDisplayName(ChatColor.GREEN + "Crafter's Cookie!");
+                    cookie.setItemMeta(meta);
+                    inv.addItem(cookie);
                 }
             break;
             case "lukkan99":
@@ -219,19 +246,6 @@ public class Command_personal extends TFM_Command
                             }.runTaskLater(plugin, Math.round(20.0 * percent * 2.0));
                         }
                     }
-                }
-            break;
-            case "CrafterSmith12":
-                TFM_Util.adminAction(sender_p.getName(), "Cookies for all! Don't let others take yours!", true);
-                for (Player player : Bukkit.getOnlinePlayers())
-                {
-                    PlayerInventory inv = player.getInventory();
-                    ItemStack cookie = new ItemStack(Material.COOKIE, 1);
-                    cookie.addUnsafeEnchantment(KNOCKBACK, 100);
-                    ItemMeta meta = cookie.getItemMeta();
-                    meta.setDisplayName(ChatColor.GREEN + "Crafter's Cookie!");
-                    cookie.setItemMeta(meta);
-                    inv.addItem(cookie);
                 }
             break;
             default:

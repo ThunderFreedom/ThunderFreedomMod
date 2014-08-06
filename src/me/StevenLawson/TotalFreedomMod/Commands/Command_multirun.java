@@ -1,5 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
@@ -9,20 +10,17 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandPermissions(level = AdminLevel.SENIOR, source = SourceType.BOTH)
+@CommandPermissions(level = AdminLevel.OP, source = SourceType.BOTH)
 @CommandParameters(description = "Run a command a configurable amount of times.", usage = "/<command> <times> <outcommand>")
 public class Command_multirun extends TFM_Command
 {
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        if (!senderIsConsole)
+        if (!TFM_AdminList.isTelnetAdmin(sender, false))
         {
-            if (!TFM_Util.isHighRank(sender_p))
-            {
-                TFM_Util.playerMsg(sender, TotalFreedomMod.MSG_NO_PERMS, ChatColor.RED);
-                return true;
-            }
+            playerMsg(TotalFreedomMod.MSG_NO_PERMS, ChatColor.RED);
+            return true;
         }
         if (args.length < 2)
         {
@@ -41,7 +39,7 @@ public class Command_multirun extends TFM_Command
             Bukkit.dispatchCommand(sender, baseCommand);
             i++;
         }
-        while (i <= Integer.parseInt(args[0]));
+        while (i < Integer.parseInt(args[0]));
         return true;
     }
 }

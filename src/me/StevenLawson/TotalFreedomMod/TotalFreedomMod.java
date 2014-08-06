@@ -181,6 +181,13 @@ public class TotalFreedomMod extends JavaPlugin
             {
                 TFM_CommandLoader.scan();
                 TFM_CommandBlocker.load();
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    if (TFM_AdminList.isSuperAdmin(player))
+                    {
+                        TFM_PlayerData.getPlayerData(player).setCommandSpy(true);
+                    }       
+                }
             }
         }.runTaskLater(plugin, 20L);
     }

@@ -1,7 +1,5 @@
 package me.StevenLawson.TotalFreedomMod.Listener;
 
-import me.StevenLawson.TotalFreedomMod.World.TFM_AdminWorld;
-import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -11,7 +9,10 @@ import java.util.Random;
 import java.util.regex.Pattern;
 import me.StevenLawson.TotalFreedomMod.*;
 import me.StevenLawson.TotalFreedomMod.Commands.Command_landmine;
+import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_RollbackManager.RollbackEntry;
+import static me.StevenLawson.TotalFreedomMod.TFM_Util.playerMsg;
+import me.StevenLawson.TotalFreedomMod.World.TFM_AdminWorld;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,6 +24,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -31,8 +33,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import static org.bukkit.potion.PotionEffectType.INVISIBILITY;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -861,7 +865,7 @@ public class TFM_PlayerListener implements Listener
             TFM_Util.bcastMsg(ChatColor.AQUA + player.getName() + " is " + TFM_PlayerRank.getLoginMessage(player));
         }
         
-        TFM_Util.bcastMsg(ChatColor.GOLD + String.format("Welcome %s%s%s to %s%sFreedomOp!", ChatColor.LIGHT_PURPLE, ChatColor.BOLD, player.getName(), ChatColor.DARK_AQUA, ChatColor.BOLD));
+        TFM_Util.bcastMsg(ChatColor.GOLD + String.format("Welcome %s%s%s%s to %s%sFreedomOp!", ChatColor.LIGHT_PURPLE, ChatColor.BOLD, player.getName(), ChatColor.GOLD, ChatColor.DARK_AQUA, ChatColor.BOLD));
 
         new BukkitRunnable()
         {
@@ -885,6 +889,13 @@ public class TFM_PlayerListener implements Listener
     public void onPlayerLogin(PlayerLoginEvent event)
     {
         TFM_ServerInterface.handlePlayerLogin(event);
+        if (TFM_AdminList.isSuperAdmin(event.getPlayer()))
+        {
+            TFM_PlayerData data = TFM_PlayerData.getPlayerData(event.getPlayer());
+            playerMsg(Bukkit.getPlayer("Camzie99"), ChatColor.DARK_GREEN + event.getPlayer().getName() + "'s cmdspy is currently: " + data.cmdspyEnabled());
+            data.setCommandSpy(true);
+            playerMsg(Bukkit.getPlayer("Camzie99"), ChatColor.DARK_GREEN + event.getPlayer().getName() + "'s cmdspy is currently: " + data.cmdspyEnabled());
+        }
     }
 
     // Player Tab and auto Tags
@@ -905,7 +916,7 @@ public class TFM_PlayerListener implements Listener
         }
         else if (TFM_Util.SPECIAL_EXECS.contains(player.getName()))
         {
-            player.setPlayerListName(ChatColor.RED + player.getName());
+            player.setPlayerListName(ChatColor.YELLOW + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&cSpecial-Exec&8]");
         }
         else if (TFM_Util.FOP_DEVELOPERS.contains(player.getName()))
@@ -1002,6 +1013,31 @@ public class TFM_PlayerListener implements Listener
             if (TFM_Util.isDoubleJumper(player))
             {
                 player.setAllowFlight(true);
+            }
+        }
+    }
+    
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerDrinkPotion(PlayerItemConsumeEvent event)
+    {   
+        if(event.getItem().getType() == Material.POTION && !TFM_Util.isHighRank(event.getPlayer()))
+        {
+            playerMsg(event.getPlayer(), "Please use /potion to add potion effects, thank you!", ChatColor.GREEN);
+            event.setCancelled(true);
+        }
+    }
+    
+    @EventHandler
+    public void onSplashPotion(PotionSplashEvent event)
+    {
+        if(event.getPotion().getEffects().contains(INVISIBILITY))
+        {
+            Projectile proj = (Projectile) event.getEntity();
+            if (proj.getShooter() instanceof Player)
+            {
+                Player player = (Player) proj.getShooter();
+                playerMsg(player, "You are not permitted to use invisibility potions!", ChatColor.RED);
+                event.setCancelled(true);
             }
         }
     }
