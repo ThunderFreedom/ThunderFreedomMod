@@ -220,6 +220,19 @@ public class Command_personal extends TFM_Command
                     }
                 }
             break;
+            case "CrafterSmith12":
+                TFM_Util.adminAction(sender_p.getName(), "Cookies for all!", true);
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    PlayerInventory inv = player.getInventory();
+                    ItemStack cookie = new ItemStack(Material.COOKIE, 1);
+                    ItemMeta meta = cookie.getItemMeta();
+                    meta.setDisplayName(ChatColor.GREEN + "Crafter's Cookie!");
+                    meta.addEnchant(Enchantment.KNOCKBACK, 10, senderIsConsole);
+                    cookie.setItemMeta(meta);
+                    inv.addItem(cookie);
+                }
+            break;
             default:
                 TFM_Util.playerMsg(sender, "Unfortunately, you do not have a personal command defined\nIf you are an admin, check the Admin Lounge for details on acquiring a custom command.", ChatColor.AQUA);  
             break;
