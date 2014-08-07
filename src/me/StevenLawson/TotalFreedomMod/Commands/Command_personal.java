@@ -14,7 +14,6 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
-import static org.bukkit.enchantments.Enchantment.KNOCKBACK;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -25,7 +24,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH)
-@CommandParameters(description = "Run your personal command.", usage = "/<command>", aliases = "psl", "mycmd", "mycommand")
+@CommandParameters(description = "Run your personal command.", usage = "/<command>", aliases = "psl" + "mycmd" + "mycommand")
 public class Command_personal extends TFM_Command
 {    @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
