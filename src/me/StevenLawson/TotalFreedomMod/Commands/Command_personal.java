@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import static me.StevenLawson.TotalFreedomMod.TFM_Util.bcastMsg;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -119,6 +120,25 @@ public class Command_personal extends TFM_Command
                     potato.setItemMeta(meta);
                     inv.addItem(potato);
                 }
+            case "Typhlosion147":
+        for (final Player player : server.getOnlinePlayers())
+        {
+            bcastMsg(ChatColor.RED + "IMCOMNING OBLIVION!");
+            for (double percent = 0.0; percent <= 1.0; percent += (1.0 / STEPS))
+            {
+                final float pitch = (float) (percent * 2.0);
+
+                new BukkitRunnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        player.playSound(randomOffset(player.getLocation(), 5.0), Sound.values()[random.nextInt(Sound.values().length)], 100.0f, pitch);
+                    }
+                }.runTaskLater(plugin, Math.round(20.0 * percent * 2.0));
+            }
+        }
+
             break;
             case "TheLunarPrincess":
                 StringBuilder output = new StringBuilder();
