@@ -121,7 +121,7 @@ public class Command_personal extends TFM_Command
                     inv.addItem(potato);
                 }
             case "Typhlosion147":
-         TFM_Util.adminAction(sender.getName(), ChatColor.RED + "INCOMNING OBLIVION!", true);
+         TFM_Util.adminAction(sender.getName(), ChatColor.RED + "INCOMING OBLIVION!", true);
 
             for (final Player player : server.getOnlinePlayers())
         {
