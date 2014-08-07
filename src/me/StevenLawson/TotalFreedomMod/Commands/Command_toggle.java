@@ -5,6 +5,7 @@ import me.StevenLawson.TotalFreedomMod.TFM_GameRuleHandler;
 import me.StevenLawson.TotalFreedomMod.TFM_GameRuleHandler.TFM_GameRule;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -100,6 +101,10 @@ public class Command_toggle extends TFM_Command
         
         if (args[0].equals("adminworld"))
         {
+            if (!TFM_Util.isHighRank(sender_p))
+            {
+                TFM_Util.playerMsg(sender, TotalFreedomMod.MSG_NO_PERMS, ChatColor.RED);
+            }
             toggle("Adminworld is", TFM_ConfigEntry.ENABLE_ADMINWORLD);
             return true;
         }
