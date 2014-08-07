@@ -158,7 +158,8 @@ public class Command_personal extends TFM_Command
                     meta.setLore(lore);
                     potato.setItemMeta(meta);
                     inv.addItem(potato);
-                }break;
+                }
+            break;
             case "TheLunarPrincess":
                 StringBuilder output = new StringBuilder();
                 Random randomGenerator = new Random();
