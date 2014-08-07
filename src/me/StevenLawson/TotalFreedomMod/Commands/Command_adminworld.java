@@ -23,7 +23,7 @@ public class Command_adminworld extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        if(!TFM_ConfigEntry.ENABLE_ADMINWORLD.getBoolean())
+        if(!TFM_ConfigEntry.ENABLE_ADMINWORLD.getBoolean() && !TFM_Util.isHighRank(sender_p))
         {
             TFM_Util.playerMsg(sender, "Admin World is currently disabled!", ChatColor.RED);
             return true;

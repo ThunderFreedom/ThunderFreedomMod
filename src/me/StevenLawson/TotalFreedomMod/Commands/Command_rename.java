@@ -22,7 +22,7 @@ public class Command_rename extends TFM_Command
         {
             return false;
         }
-        String itemRaw = StringUtils.join(args);
+        String itemRaw = StringUtils.join(args, " ");
         String itemName = TFM_Util.colorize(itemRaw.trim());
         ItemStack i = sender_p.getItemInHand();
         if (i != null)
