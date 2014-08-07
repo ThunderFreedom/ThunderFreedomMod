@@ -66,7 +66,6 @@ public class Command_potion extends TFM_Command
                         return true;
                     }
                 }
-
                 if (!target.equals(sender_p))
                 {
                     if (!TFM_AdminList.isSuperAdmin(sender))
@@ -97,6 +96,11 @@ public class Command_potion extends TFM_Command
         {
             if (args[0].equalsIgnoreCase("add"))
             {
+                if(args[2].equalsIgnoreCase("invisibility") && !TFM_Util.isHighRank(sender_p))
+                {
+                    TFM_Util.playerMsg(sender, "You are not allowed to use invisibility!", ChatColor.RED);
+                    return true;
+                }
                 Player target = sender_p;
 
                 if (args.length == 5)
@@ -129,12 +133,6 @@ public class Command_potion extends TFM_Command
                 if (potion_effect_type == null)
                 {
                     sender.sendMessage(ChatColor.AQUA + "Invalid potion effect type.");
-                    return true;
-                }
-                
-                if (potion_effect_type == PotionEffectType.INVISIBILITY)
-                {
-                    sender.sendMessage(ChatColor.RED + "You do not have permission to use invisibility!");
                     return true;
                 }
 

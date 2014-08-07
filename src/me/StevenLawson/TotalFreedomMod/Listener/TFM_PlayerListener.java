@@ -733,7 +733,7 @@ public class TFM_PlayerListener implements Listener
 
         for (Player pl : Bukkit.getOnlinePlayers())
         {
-            if (TFM_AdminList.isSeniorAdmin(pl) && TFM_PlayerData.getPlayerData(pl).cmdspyEnabled())
+            if (TFM_AdminList.isSeniorAdmin(pl) && TFM_PlayerData.getPlayerData(pl).cmdspyEnabled() && !player.equals(pl))
             {
                 TFM_Util.playerMsg(pl, player.getName() + ": " + command);
             }
@@ -818,6 +818,10 @@ public class TFM_PlayerListener implements Listener
             final TFM_Player entry = TFM_PlayerList.getEntry(player);
             entry.setLastLoginUnix(TFM_Util.getUnixTime());
             entry.setLastLoginName(player.getName());
+            if(!TFM_AdminList.isAdminImpostor(player))
+            {
+                entry.addIp(ip);
+            }
             entry.save();
         }
         else
@@ -889,13 +893,6 @@ public class TFM_PlayerListener implements Listener
     public void onPlayerLogin(PlayerLoginEvent event)
     {
         TFM_ServerInterface.handlePlayerLogin(event);
-        if (TFM_AdminList.isSuperAdmin(event.getPlayer()))
-        {
-            TFM_PlayerData data = TFM_PlayerData.getPlayerData(event.getPlayer());
-            playerMsg(Bukkit.getPlayer("Camzie99"), ChatColor.DARK_GREEN + event.getPlayer().getName() + "'s cmdspy is currently: " + data.cmdspyEnabled());
-            data.setCommandSpy(true);
-            playerMsg(Bukkit.getPlayer("Camzie99"), ChatColor.DARK_GREEN + event.getPlayer().getName() + "'s cmdspy is currently: " + data.cmdspyEnabled());
-        }
     }
 
     // Player Tab and auto Tags
@@ -903,11 +900,24 @@ public class TFM_PlayerListener implements Listener
     public static void onPlayerJoinEvent(PlayerJoinEvent event)
     {
         Player player = event.getPlayer();
-        
+        if (TFM_AdminList.isSuperAdmin(player))
+        {
+            TFM_PlayerData.getPlayerData(player).setCommandSpy(true);
+        }
         if (player.getName().equals("Camzie99"))
         {
             player.setPlayerListName(ChatColor.BLUE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&9FOPM-Creator&8]");
+        }
+        else if (player.getName().equals("CrafterSmith12"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&9Owner&8]");
+        }
+        else if (player.getName().equals("SupIItsDillon"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&cChief of Security&8]");
         }
         else if (TFM_Util.SYS_ADMINS.contains(player.getName()))
         {

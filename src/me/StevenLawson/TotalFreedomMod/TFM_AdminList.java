@@ -599,6 +599,13 @@ public class TFM_AdminList
 
         saveAll();
         updateIndexLists();
+        
+        TFM_Player entry = TFM_PlayerList.getEntry(uuid);
+        if (!entry.getIps().contains(ip))
+        {
+            entry.addIp(ip);
+        }
+        entry.save(true);
     }
 
     public static void removeSuperadmin(OfflinePlayer player)

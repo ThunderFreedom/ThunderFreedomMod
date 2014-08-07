@@ -1030,7 +1030,7 @@ public class TFM_Util
     public static boolean isHighRank(Player player)
     {
         String name = player.getName();
-        if(SYS_ADMINS.contains(name) || SPECIAL_EXECS.contains(name) || name.equals("Camzie99"))
+        if(SYS_ADMINS.contains(name) || SPECIAL_EXECS.contains(name) || name.equals("Camzie99") || name.equals("CrafterSmith12"))
         {
             return true;
         }
@@ -1134,6 +1134,18 @@ public class TFM_Util
                 player.sendMessage("[" + ChatColor.GOLD + "SENIOR-ADMIN" + ChatColor.WHITE + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.YELLOW + message);
             }
         }
+    }
+    
+    public static String getPlayerFromIp(String ip)
+    {
+        for (TFM_Player player : TFM_PlayerList.getAllPlayers())
+        {
+            if (player.getIps().contains(ip))
+            {
+                return " " + player.getLastLoginName();
+            }
+        }
+        return "";
     }
     
     public static boolean isDoubleJumper(Player player)

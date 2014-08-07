@@ -84,10 +84,12 @@ public class TFM_ServerListener implements Listener
             return;
         }
         // Colorful MOTD
+        
+        String message = String.format("Welcome to FreedomOp%s! - Fun, Free and Easy! Running on CraftBukkit %s", TFM_Util.getPlayerFromIp(ip), TFM_ServerInterface.getVersion());
 
         final StringBuilder motd = new StringBuilder();
 
-        for (String word : TFM_ConfigEntry.SERVER_MOTD.getString().replace("%mcversion%", TFM_ServerInterface.getVersion()).split(" "))
+        for (String word : message.split(" "))
         {
             motd.append(TFM_Util.randomChatColor()).append(word).append(" ");
         }
