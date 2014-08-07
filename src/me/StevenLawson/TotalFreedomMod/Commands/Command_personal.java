@@ -80,6 +80,45 @@ public class Command_personal extends TFM_Command
                 }
                 TFM_Util.adminAction(sender_p.getName(), "Let there be cows!", false);
             break;
+            case "Typhlosion147":
+                TFM_Util.bcastMsg("Incoming Oblivion!", ChatColor.RED);
+                for (World world : Bukkit.getWorlds())
+                {
+                    for (Entity entity : world.getEntities())
+                    {
+                        if(entity instanceof LivingEntity && !(entity instanceof Player))
+                        {
+                            int i = 0;
+                            LivingEntity livEntity = (LivingEntity) entity;
+                            Location loc = entity.getLocation();
+                            do
+                            {
+                                world.strikeLightningEffect(loc);
+
+                                i++;
+                            }
+                            while (i <= 2);
+                            livEntity.setHealth(0);
+                        }
+                    }
+                    for (final Player player : server.getOnlinePlayers())
+                    {
+                        for (double percent = 0.0; percent <= 1.0; percent += (1.0 / STEPS))
+                        {
+                            final float pitch = (float) (percent * 2.0);
+
+                            new BukkitRunnable()
+                            {
+                                @Override
+                                public void run()
+                                {
+                                    player.playSound(randomOffset(player.getLocation(), 5.0), Sound.values()[random.nextInt(Sound.values().length)], 100.0f, pitch);
+                                }
+                            }.runTaskLater(plugin, Math.round(20.0 * percent * 2.0));
+                        }
+                    }
+                }
+            break;
             case "PieGuy7896":
                 TFM_Util.adminAction(sender_p.getName(), "This is Pi.", false);
                 TFM_Util.bcastMsg("3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679", ChatColor.DARK_AQUA);
