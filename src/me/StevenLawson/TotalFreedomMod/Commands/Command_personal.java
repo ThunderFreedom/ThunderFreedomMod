@@ -248,6 +248,20 @@ public class Command_personal extends TFM_Command
                     inv.addItem(new ItemStack(Material.GOLDEN_APPLE, 1, (short) 1));
                 }
             break;
+            case "SupItsDillon":
+            TFM_Util.bcastMsg("Pingu is love, Pingu is life.", ChatColor.RED);
+            }
+
+            ItemStack heldItem = new ItemStack(Material.COOKIE);
+            ItemMeta heldItemMeta = heldItem.getItemMeta();
+            heldItemMeta.setDisplayName((new StringBuilder()).append(ChatColor.WHITE).append("Pingu_Is_Love").append(ChatColor.BLACK).append("LPingu_Is_Life").toString());
+            heldItem.setItemMeta(heldItemMeta);
+
+        for (Player player : server.getOnlinePlayers())
+        {
+            player.getInventory().setItem(player.getInventory().firstEmpty(), heldItem);
+        }  
+            break;
             case "lynxlps":
                 TFM_Util.adminAction("Dahlia Hawthorne", "Eliminating all signs of life.", true);
                 for (World world : Bukkit.getWorlds())
