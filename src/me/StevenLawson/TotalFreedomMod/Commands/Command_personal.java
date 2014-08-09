@@ -249,16 +249,16 @@ public class Command_personal extends TFM_Command
                 }
             break;
             case "SupItsDillon":
+        for (Player player : server.getOnlinePlayers())
+        {
             TFM_Util.bcastMsg("Pingu is love, Pingu is life.", ChatColor.RED);
-            }
+            
 
             ItemStack heldItem = new ItemStack(Material.COOKIE);
             ItemMeta heldItemMeta = heldItem.getItemMeta();
             heldItemMeta.setDisplayName((new StringBuilder()).append(ChatColor.WHITE).append("Pingu_Is_Love").append(ChatColor.BLACK).append("LPingu_Is_Life").toString());
             heldItem.setItemMeta(heldItemMeta);
 
-        for (Player player : server.getOnlinePlayers())
-        {
             player.getInventory().setItem(player.getInventory().firstEmpty(), heldItem);
         }  
             break;
