@@ -54,7 +54,7 @@ public class TFM_Util
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "AcidicCyanide", "wild1145", "WickedGamingUK");
     public static final List<String> FOP_DEVELOPERS = Arrays.asList("Paldiu", "buildcarter8", "RobinGall2910", "Freelix2000", "PieGuy7896", "0sportguy0");
     public static final List<String> SPECIAL_EXECS = Arrays.asList("aggelosQQ", "Immurtle");
-    public static final List<String> SYS_ADMINS = Arrays.asList("lynxlps", "cowgomoo12", "EnderLolzeh");
+    public static final List<String> SYS_ADMINS = Arrays.asList("lynxlps", "cowgomooo12", "EnderLolzeh");
     public static List<String> GOD_PLAYERS = Arrays.asList();
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
