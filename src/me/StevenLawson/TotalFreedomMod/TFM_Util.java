@@ -1071,7 +1071,39 @@ public class TFM_Util
         TFM_Util.bcastMsg("                         ; `.        ,::::::: ", TFM_Util.randomChatColor());
         TFM_Util.bcastMsg("                          ;  ``::.    ::::::: ", TFM_Util.randomChatColor());
     }
-    
+    public void asciiHorse()
+    {
+        /*
+            // Credit to GreatRaider for his wonderfull Ascii skills xD
+        */
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + ",  ,.~"""""~~..");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + " )\,)\`-,       `~._                                     .--._");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + " \  \ | )           `~._                   .-"""""-._   /     `.");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "/ ('  ( _(\            `~~,__________..-"'          `-<        \");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + " )   )   `   )/)   )        \                            \,-.     |");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "') /)`      \` \,-')/\      (                             \ /     |");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "(_(\ /7      |.   /'  )'  _(`                              Y      |");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "    \       (  `.     ')_/`                                |      /");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "     \       \   \                                         |)    (");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "      \ _  /\/   /                                         (      `~.");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "       `-._)     |                                        / \        `,");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                |                          |           .'   )      (`");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                \                        _,\          /     \_    (`");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                  `.,      /       __..'7"   \         |       )  (");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                  .'     _/`-..--""      `.   `.        \      `._/");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                .'    _.j     /            `-.  `.       \");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "              .'   _.'   \    |               `.  `.      \");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "             |   .'       ;   ;               .'  .'`.     \");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "             \_  `.       |   \             .'  .'   /    .'");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "               `.  `-, __ \   /           .'  .'     |   (");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                 `.  `'` \|  |           /  .-`     /   .'");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                   `-._.--t  ;          |_.-)      /  .'");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                          ; /           \  /      / .'");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                         / /             `'     .' /");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                        /,_\                  .',_(");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                       /___(                 /___(");
+        
+    }
     public static void asciiUnicorn()
     {
         for (Player player : Bukkit.getOnlinePlayers())
