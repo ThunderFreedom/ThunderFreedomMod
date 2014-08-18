@@ -24,7 +24,7 @@ public class Command_busy extends TFM_Command
         }
         else if (args[0].equals("off"))
         {
-      TFM_Util.adminAction(ChatColor.AQUA + sender.getName(), "I'm not busy anymore, you can conatact me now.", false);
+      TFM_Util.adminAction(ChatColor.AQUA + sender.getName(), "I'm not busy anymore, you can contact me now.", false);
       return true;
         }
         }
