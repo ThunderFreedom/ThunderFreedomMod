@@ -73,7 +73,7 @@ public class Command_personal extends TFM_Command
             case "jumpymonkey123" :
                 TFM_Util.asciiUnicorn();
             break;
-            case "cowgomoo12":
+            case "cowgomooo12":
                 for(Player player : Bukkit.getOnlinePlayers())
                 {
                     TFM_Util.spawnMob(player, EntityType.COW, 2);
@@ -120,14 +120,13 @@ public class Command_personal extends TFM_Command
                 }
             break;
             case "PieGuy7896":
-                TFM_Util.adminAction(sender_p.getName(), "This is Pi.", false);
-                TFM_Util.bcastMsg("3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679", ChatColor.DARK_AQUA);
+                TFM_Util.adminAction(sender_p.getName(), "Pies for all!.", false);
                 for(Player player : Bukkit.getOnlinePlayers())
                 {
                     PlayerInventory inv = player.getInventory();
-                    ItemStack pie = new ItemStack(Material.PUMPKIN_PIE, 64);
+                    ItemStack pie = new ItemStack(Material.PUMPKIN_PIE, 1);
                     ItemMeta meta = pie.getItemMeta();
-                    meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Pie!");
+                    meta.setDisplayName(ChatColor.LIGHT_PURPLE + "FREE PIE");
                     meta.addEnchant(Enchantment.FIRE_ASPECT, 25, true);
                     meta.addEnchant(Enchantment.KNOCKBACK, 10, true);
                     pie.setItemMeta(meta);
