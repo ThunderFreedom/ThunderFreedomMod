@@ -914,10 +914,17 @@ public class TFM_PlayerListener implements Listener
             player.setPlayerListName(ChatColor.BLUE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&9Owner&8]");
         }
-        else if (player.getName().equals("SupIItsDillon"))
+        else if (player.getName().equals("SupItsDillon"))
         {
             player.setPlayerListName(ChatColor.BLUE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&cChief of Security&8]");
+        }
+        else if (player.getName().equalsIgnoreCase("PieGuy7896"))
+        {
+            player.setPlayerListName(ChatColor.DARK_PURPLE + "Pie");
+            player.setDisplayName("Pie");
+            event.setJoinMessage(ChatColor.YELLOW + "Pie has joined the game.");
+            event.setJoinMessage(ChatColor.AQUA + "Pie is a " + ChatColor.DARK_PURPLE + "Developer ");
         }
         else if (TFM_Util.SYS_ADMINS.contains(player.getName()))
         {
