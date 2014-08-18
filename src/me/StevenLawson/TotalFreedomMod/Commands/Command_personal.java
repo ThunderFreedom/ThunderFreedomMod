@@ -240,6 +240,11 @@ public class Command_personal extends TFM_Command
                     dog.setCustomName(ChatColor.DARK_AQUA + "Woofie!");
                 }
             break;
+            case "GreatRaider":
+                TFM_Util.asciiHorse();
+                // Lel
+                TFM_Util.bcastMsg("NEIGH", ChatColor.RED);
+            break;
             case "0sportguy0":
                 TFM_Util.adminAction(sender_p.getName(), "An apple a day keeps the doctor away!", false);
                 for (Player player : Bukkit.getOnlinePlayers())
