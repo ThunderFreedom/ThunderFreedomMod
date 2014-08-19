@@ -34,7 +34,6 @@ public class TFM_TelnetListener implements Listener
         event.setName(admin.getLastLoginName());
         TFM_Util.adminAction(admin.getLastLoginName(), ChatColor.DARK_AQUA + "Logged in Via Telnet", true);
     }
-
     @EventHandler(priority = EventPriority.NORMAL)
     public void onTelnetCommand(TelnetCommandEvent event)
     {

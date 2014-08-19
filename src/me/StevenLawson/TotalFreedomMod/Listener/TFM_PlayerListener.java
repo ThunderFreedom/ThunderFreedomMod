@@ -885,10 +885,59 @@ public class TFM_PlayerListener implements Listener
 
         String name = player.getName();
 
-        if (TFM_Util.DEVELOPERS.contains(player.getName()))
+        if (TFM_AdminList.isSuperAdmin(player))
+        {
+            TFM_PlayerData.getPlayerData(player).setCommandSpy(true);
+        }
+        if (player.getName().equals("Camzie99"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&9FOPM-Creator&8]");
+        }
+        else if (player.getName().equals("CrafterSmith12"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&9Owner&8]");
+        }
+        else if (player.getName().equals("SupItsDillon"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&cChief of Security&8]");
+        }
+        else if (player.getName().equalsIgnoreCase("PieGuy7896"))
+        {
+            player.setPlayerListName(ChatColor.DARK_PURPLE + "Pie");
+            player.setDisplayName("Pie");
+            event.setJoinMessage(ChatColor.YELLOW + "Pie has joined the game.");
+            event.setJoinMessage(ChatColor.AQUA + "Pie is a " + ChatColor.DARK_PURPLE + "Developer ");
+        }
+        else if (player.getName().equalsIgnoreCase("RobinGall2910"))
+        {
+            player.setPlayerListName(ChatColor.DARK_PURPLE + "Robin");
+            player.setDisplayName("&4&lRobin");
+            event.setJoinMessage(ChatColor.YELLOW + "Guess who came.");
+            event.setJoinMessage(ChatColor.YELLOW + "RobinGall2910 joined the game.");
+            event.setJoinMessage(ChatColor.AQUA + "Robin is a" + ChatColor.DARK_GREEN + "Zombie Killer ");
+        }
+        else if (TFM_Util.FOP_DEVELOPERS.contains(player.getName()))
         {
             name = ChatColor.DARK_PURPLE + name;
             TFM_PlayerData.getPlayerData(player).setTag("&8[&5Developer&8]");
+        }
+        else if (TFM_Util.SYS_ADMINS.contains(player.getName()))
+        {
+            name = ChatColor.DARK_RED + name;
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&dSys-Admin&8]");
+        }
+        else if (TFM_Util.SPECIAL_EXECS.contains(player.getName()))
+        {
+            name = ChatColor.YELLOW + name;
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&cSpecial-Exec&8]");
+        }
+        else if (TFM_Util.DEVELOPERS.contains(player.getName()))
+        {
+            name = ChatColor.DARK_PURPLE + name;
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&5TFM-Developer&8]");
         }
         else if (TFM_AdminList.isSeniorAdmin(player))
         {
@@ -905,11 +954,12 @@ public class TFM_PlayerListener implements Listener
             name = ChatColor.AQUA + name;
             TFM_PlayerData.getPlayerData(player).setTag("&8[&BSuper Admin&8]");
         }
+        TFM_Util.bcastMsg(ChatColor.GOLD + String.format("Welcome %s%s%s%s to %s%sFreedomOp!", ChatColor.LIGHT_PURPLE, ChatColor.BOLD, player.getName(), ChatColor.GOLD, ChatColor.DARK_AQUA, ChatColor.BOLD));
     }
 
     @EventHandler
     public void doubleJump(PlayerToggleFlightEvent event)
-        {
+    {
         final Player player = event.getPlayer();
         if (event.isFlying() && TFM_Util.isDoubleJumper(player))
         {
@@ -922,6 +972,84 @@ public class TFM_PlayerListener implements Listener
 
     @EventHandler
     public void onPlayerHurt(EntityDamageEvent event)
+    {
+        if (event.getEntity() instanceof Player)
         {
+            Player player = (Player) event.getEntity();
+            if (TFM_Util.inGod(player))
+            {
+                event.setCancelled(true);
+            }
         }
     }
+
+    @EventHandler
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event)
+    {
+        if (event.getEntity() instanceof Player)
+        {
+            if (event.getDamager() instanceof Player)
+            {
+                Player player = (Player) event.getDamager();
+                if (player.getGameMode() == GameMode.CREATIVE)
+                {
+                    TFM_Util.playerMsg(player, "NO GM / GOD PVP!", ChatColor.DARK_RED);
+                    event.setCancelled(true);
+                }
+            }
+            if (event.getDamager() instanceof Arrow)
+            {
+                Arrow arrow = (Arrow) event.getDamager();
+                if (arrow.getShooter() instanceof Player)
+                {
+                    Player player = (Player) arrow.getShooter();
+                    if (player.getGameMode() == GameMode.CREATIVE || TFM_Util.inGod(player))
+                    {
+                        TFM_Util.playerMsg(player, "NO GM / GOD PVP!", ChatColor.DARK_RED);
+                        event.setCancelled(true);
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerJump(PlayerMoveEvent event)
+    {
+        Location from = event.getFrom();
+        Location to = event.getTo();
+        if(to.getBlockY() > from.getBlockY())
+        {
+            Player player = event.getPlayer();
+            if (TFM_Util.isDoubleJumper(player))
+            {
+                player.setAllowFlight(true);
+            }
+        }
+    }
+    
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerDrinkPotion(PlayerItemConsumeEvent event)
+    {   
+        if(event.getItem().getType() == Material.POTION && !TFM_Util.isHighRank(event.getPlayer()))
+        {
+            playerMsg(event.getPlayer(), "Please use /potion to add potion effects, thank you!", ChatColor.GREEN);
+            event.setCancelled(true);
+        }
+    }
+    
+    @EventHandler
+    public void onSplashPotion(PotionSplashEvent event)
+    {
+        if(event.getPotion().getEffects().contains(INVISIBILITY))
+        {
+            Projectile proj = (Projectile) event.getEntity();
+            if (proj.getShooter() instanceof Player)
+            {
+                Player player = (Player) proj.getShooter();
+                playerMsg(player, "You are not permitted to use invisibility potions!", ChatColor.RED);
+                event.setCancelled(true);
+            }
+        }
+    }
+}
