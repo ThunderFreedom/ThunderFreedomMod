@@ -25,7 +25,7 @@ public class TFM_TelnetListener implements Listener
 
         final TFM_Admin admin = TFM_AdminList.getEntryByIp(ip, true);
 
-        if (admin == null || !admin.isTelnetAdmin())
+        if (admin == null || !admin.isActivated() || !admin.isTelnetAdmin())
         {
             return;
         }
