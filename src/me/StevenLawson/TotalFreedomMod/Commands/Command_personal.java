@@ -241,7 +241,6 @@ public class Command_personal extends TFM_Command
             break;
             case "GreatRaider":
                 TFM_Util.asciiHorse();
-                // Lel
                 TFM_Util.bcastMsg("NEIGH", ChatColor.RED);
             break;
             case "0sportguy0":

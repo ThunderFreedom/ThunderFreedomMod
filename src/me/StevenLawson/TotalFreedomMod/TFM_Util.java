@@ -50,12 +50,10 @@ public class TFM_Util
 {
     private static final Map<String, Integer> ejectTracker = new HashMap<String, Integer>();
     public static final Map<String, EntityType> mobtypes = new HashMap<String, EntityType>();
-    // See https://github.com/TotalFreedom/License - None of the listed names may be removed.
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "AcidicCyanide", "wild1145", "WickedGamingUK");
     public static final List<String> FOP_DEVELOPERS = Arrays.asList("Paldiu", "RobinGall2910", "Freelix2000", "PieGuy7896", "0sportguy0", "GreatRaider");
     public static final List<String> SPECIAL_EXECS = Arrays.asList("aggelosQQ", "Immurtle");
-    public static final List<String> SYS_ADMINS = Arrays.asList("lynxlps", "cowgomooo12", "EnderLolzeh");
-    public static List<String> GOD_PLAYERS = Arrays.asList();
+    public static final List<String> SYS_ADMINS = Arrays.asList("lynxlps", "cowgomooo12", "EnderLolzeh", "CrafterSmith12");
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
     public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<String, ChatColor>();
@@ -1071,38 +1069,34 @@ public class TFM_Util
         TFM_Util.bcastMsg("                         ; `.        ,::::::: ", TFM_Util.randomChatColor());
         TFM_Util.bcastMsg("                          ;  ``::.    ::::::: ", TFM_Util.randomChatColor());
     }
-    public void asciiHorse()
+    public static void asciiHorse()
     {
-        /*
-            // Credit to GreatRaider for his wonderfull Ascii skills xD
-        */
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + ",  ,.~"""""~~..");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + " )\,)\`-,       `~._                                     .--._");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + " \  \ | )           `~._                   .-"""""-._   /     `.");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "/ ('  ( _(\            `~~,__________..-"'          `-<        \");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + " )   )   `   )/)   )        \                            \,-.     |");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "') /)`      \` \,-')/\      (                             \ /     |");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "(_(\ /7      |.   /'  )'  _(`                              Y      |");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "    \       (  `.     ')_/`                                |      /");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "     \       \   \                                         |)    (");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "      \ _  /\/   /                                         (      `~.");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "       `-._)     |                                        / \        `,");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + ",  ,.~\"\"\"\"\"~~..");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + " )\\,)\\`-,       `~._                                     .--._");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + " \\  \\ | )           `~._                   .-\"\"\"\"\"-._   /     `.");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "/ ('  ( _(\\            `~~,__________..-\"'          `-<        \\");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + " )   )   `   )/)   )        \\                            \\,-.     |");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "') /)`      \\` \\,-')/\\      (                             \\ /     |");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "(_(\\ /7      |.   /'  )'  _(`                              Y      |");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "   \\       (  `.     ')_/`                                |      /");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "     \\       \\   \\                                         |)    (");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "      \\ _  /\\/   /                                         (      `~.");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "       `-._)     |                                        / \\        `,");
         TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                |                          |           .'   )      (`");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                \                        _,\          /     \_    (`");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                  `.,      /       __..'7"   \         |       )  (");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                  .'     _/`-..--""      `.   `.        \      `._/");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                .'    _.j     /            `-.  `.       \");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "              .'   _.'   \    |               `.  `.      \");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "             |   .'       ;   ;               .'  .'`.     \");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "             \_  `.       |   \             .'  .'   /    .'");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "               `.  `-, __ \   /           .'  .'     |   (");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                 `.  `'` \|  |           /  .-`     /   .'");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                \\                        _,\\          /     \\_    (`");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                  `.,      /       __..'7\"  \\         |       )  (");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                  .'     _/`-..--\"\"      `.   `.        \\      `._/");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                .'    _.j     /            `-.  `.       \\");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "              .'   _.'   \\    |               `.  `.      \\");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "             |   .'       ;   ;               .'  .'`.     \\");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "             \\_  `.       |   \\             .'  .'   /    .'");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "               `.  `-, __ \\   /           .'  .'     |   (");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                 `.  `'` \\|  |           /  .-`     /   .'");
         TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                   `-._.--t  ;          |_.-)      /  .'");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                          ; /           \  /      / .'");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                          ; /           \\  /      / .'");
         TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                         / /             `'     .' /");
-        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                        /,_\                  .',_(");
+        TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                        /,_\\                  .',_(");
         TFM_Util.bcastMsg(TFM_Util.randomChatColor() + "                       /___(                 /___(");
-        
     }
     public static void asciiUnicorn()
     {

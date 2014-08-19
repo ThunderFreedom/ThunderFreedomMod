@@ -104,6 +104,7 @@ public class Command_toggle extends TFM_Command
             if (!TFM_Util.isHighRank(sender_p))
             {
                 TFM_Util.playerMsg(sender, TotalFreedomMod.MSG_NO_PERMS, ChatColor.RED);
+                return true;
             }
             toggle("Adminworld is", TFM_ConfigEntry.ENABLE_ADMINWORLD);
             return true;
