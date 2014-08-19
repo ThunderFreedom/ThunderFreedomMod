@@ -113,11 +113,6 @@ public enum TFM_PlayerRank
             {
                 return OWNER;
             }
-            if (TFM_ConfigEntry.DEVELOPERS.getList().contains(sender.getName()))
-            {
-                return DEVELOPER;
-            }
-            
             if (entry.isSeniorAdmin())
             {
                 rank = SENIOR;
