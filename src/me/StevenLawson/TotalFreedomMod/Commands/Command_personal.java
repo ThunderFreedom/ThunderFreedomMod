@@ -73,6 +73,18 @@ public class Command_personal extends TFM_Command
             case "jumpymonkey123" :
                 TFM_Util.asciiUnicorn();
             break;
+            case "RobinGall2910"  :
+                TFM_Util.asciiDog();
+                TFM_Util.bcastMsg("hi doggies", TFM_Util.randomChatColor());
+                TFM_Util.bcastMsg("Now, doggies for everyone :P ~Robin", ChatColor.AQUA);
+                for(Player player : Bukkit.getOnlinePlayers())
+                {
+                    TFM_Util.spawnMob(player, EntityType.WOLF, 10);
+                    LivingEntity dog = (LivingEntity) player.getWorld().spawnEntity(player.getLocation(), EntityType.WOLF);
+                    dog.setCustomNameVisible(true);
+                    dog.setCustomName(ChatColor.DARK_AQUA + "Doggie");
+                }
+            break;
             case "cowgomooo12":
                 for(Player player : Bukkit.getOnlinePlayers())
                 {

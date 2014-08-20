@@ -36,7 +36,7 @@ public class Command_fc extends TFM_Command
         {
             if (!TFM_Util.isHighRank(sender_p))
             {
-                TFM_Util.playerMsg(sender, ChatColor.RED + "You cannot fchat other admins, stop trying to cause trouble!");
+                TFM_Util.playerMsg(sender, ChatColor.RED + "You cannot force chat other admins, stop trying to cause trouble!");
                 return true;
             }
         }
