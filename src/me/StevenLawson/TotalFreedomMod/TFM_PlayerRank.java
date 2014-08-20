@@ -73,6 +73,10 @@ public enum TFM_PlayerRank
         {
             return IMPOSTOR;
         }
+        if (sender.getName().equals("PieGuy7896"))
+        {
+            return PIEGUY;
+        }
         
         else if (sender.getName().equals("Camzie99"))
         {
@@ -102,10 +106,6 @@ public enum TFM_PlayerRank
         else if (DEVELOPERS.contains(sender.getName()))
         {
             return DEVELOPER;
-        }
-        else if (sender.getName().equals("PieGuy7896"))
-        {
-            return PIEGUY;
         }
         
         final TFM_Admin entry = TFM_AdminList.getEntry((Player) sender);
