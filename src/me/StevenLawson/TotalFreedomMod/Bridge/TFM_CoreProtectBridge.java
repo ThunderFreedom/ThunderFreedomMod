@@ -1,5 +1,4 @@
-/*
-package me.StevenLawson.TotalFreedomMod.Bridge;
+/*package me.StevenLawson.TotalFreedomMod.Bridge;
 
 public class TFM_CoreProtectBridge
 

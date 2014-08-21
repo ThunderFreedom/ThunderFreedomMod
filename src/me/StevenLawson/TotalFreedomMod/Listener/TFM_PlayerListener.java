@@ -850,13 +850,7 @@ public class TFM_PlayerListener implements Listener
         else if (TFM_AdminList.isSuperAdmin(player) || TFM_Util.DEVELOPERS.contains(player.getName()))
         {
             TFM_Util.bcastMsg(ChatColor.AQUA + player.getName() + " is " + TFM_PlayerRank.getLoginMessage(player));
-        }
-        
-        if (TFM_AdminList.isSuperAdmin(player))
-        {
-            player.setOp(true);
-            player.sendMessage(TotalFreedomMod.YOU_ARE_OP);
-        }
+        }        
         new BukkitRunnable()
         {
             @Override
@@ -908,6 +902,14 @@ public class TFM_PlayerListener implements Listener
             player.setPlayerListName(ChatColor.BLUE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&cChief of Security&8]");
         }
+         else if (player.getName().equalsIgnoreCase("aggelosQQ"))
+        {
+            player.setPlayerListName(ChatColor.YELLOW + "aggelosQQ");
+            TFM_EssentialsBridge.setNickname(player.getName(), ChatColor.DARK_RED + "ag" + ChatColor.RED + "ge" + ChatColor.DARK_BLUE + "lo" + ChatColor.BLUE + "sQ" + ChatColor.GREEN + "Q");
+            event.setJoinMessage(ChatColor.YELLOW + "aggelosQQ joined the game.");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&eSpecial Executive&8]");
+            player.chat("Hey everyone, I'm a Special Executive and the Lead Web Developer.");
+        }
         else if (player.getName().equalsIgnoreCase("PieGuy7896"))
         {
             player.setPlayerListName(ChatColor.DARK_PURPLE + "Pie");
@@ -922,14 +924,6 @@ public class TFM_PlayerListener implements Listener
             event.setJoinMessage(ChatColor.YELLOW + "Guess who came.");
             event.setJoinMessage(ChatColor.YELLOW + "RobinGall2910 joined the game.");
             event.setJoinMessage(ChatColor.AQUA + "Robin is a" + ChatColor.DARK_GREEN + "Zombie Killer ");
-        }
-        else if (player.getName().equalsIgnoreCase("aggelosQQ"))
-        {
-            player.setPlayerListName(ChatColor.YELLOW + "aggelosQQ");
-            TFM_EssentialsBridge.setNickname(player.getName(), ChatColor.DARK_RED + "ag" + ChatColor.RED + "ge" + ChatColor.DARK_BLUE + "lo" + ChatColor.BLUE + "sQ" + ChatColor.GREEN + "Q");
-            event.setJoinMessage(ChatColor.YELLOW + "aggelosQQ joined the game.");
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&eSpecial Executive&8]");
-            player.chat("Hey everyone, I'm a Special Executive and the Lead Web Developer.");
         }
         else if (TFM_Util.FOP_DEVELOPERS.contains(player.getName()))
         {
