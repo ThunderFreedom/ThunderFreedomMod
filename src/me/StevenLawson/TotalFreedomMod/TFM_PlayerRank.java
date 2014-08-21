@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 public enum TFM_PlayerRank
 {
+    PIEGUY("a " + ChatColor.LIGHT_PURPLE + "Probationary Senior Admin", ChatColor.LIGHT_PURPLE + "[SrA]"),
     DEVELOPER("a " + ChatColor.DARK_PURPLE + "TotalFreedomMod Developer", ChatColor.DARK_PURPLE + "[TFM Dev]"),
     FOP_DEVELOPER("a " + ChatColor.DARK_PURPLE + "Developer", ChatColor.DARK_PURPLE + "[Dev]"),
     SPEC_EXEC("a " + ChatColor.YELLOW + "Special Executive", ChatColor.YELLOW + "[Spec-Exec]"),
@@ -72,6 +73,10 @@ public enum TFM_PlayerRank
         {
             return IMPOSTOR;
         }
+        if (sender.getName().equals("PieGuy7896"))
+        {
+            return PIEGUY;
+        }
         
         else if (sender.getName().equals("Camzie99"))
         {
@@ -102,7 +107,7 @@ public enum TFM_PlayerRank
         {
             return DEVELOPER;
         }
-
+        
         final TFM_Admin entry = TFM_AdminList.getEntry((Player) sender);
 
         final TFM_PlayerRank rank;
