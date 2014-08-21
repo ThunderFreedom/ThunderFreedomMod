@@ -927,7 +927,7 @@ public class TFM_PlayerListener implements Listener
         else if (player.getName().equalsIgnoreCase("aggelosQQ"))
         {
             player.setPlayerListName(ChatColor.YELLOW + aggelosQQ());
-             TFM_EssentialsBridge.setNickname(player.getName(), ChatColor.DARK_RED + "ag" + ChatColor.RED + "ge" + ChatColor.DARK_BLUE + "lo" + ChatColor.BLUE + "sQ" + ChatColor.GREEN + "Q");
+            TFM_EssentialsBridge.setNickname(player.getName(), ChatColor.DARK_RED + "ag" + ChatColor.RED + "ge" + ChatColor.DARK_BLUE + "lo" + ChatColor.BLUE + "sQ" + ChatColor.GREEN + "Q");
             event.setJoinMessage(ChatColor.YELLOW + "aggelosQQ joined the game.");
             TFM_PlayerData.getPlayerData(player).setTag("&8[&eSpecial Executive&8]");
             player.chat(ChatColor.AQUA + "Hey everyone, I'm a Special Executive and the Lead Web Developer."
