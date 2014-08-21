@@ -1,7 +1,5 @@
 package me.StevenLawson.TotalFreedomMod.Listener;
 
-import me.StevenLawson.TotalFreedomMod.World.TFM_AdminWorld;
-import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -10,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.regex.Pattern;
 import me.StevenLawson.TotalFreedomMod.*;
+import me.StevenLawson.TotalFreedomMod.Bridge.TFM_EssentialsBridge;
 import me.StevenLawson.TotalFreedomMod.Commands.Command_landmine;
 import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_RollbackManager.RollbackEntry;
@@ -926,11 +925,11 @@ public class TFM_PlayerListener implements Listener
         }
         else if (player.getName().equalsIgnoreCase("aggelosQQ"))
         {
-            player.setPlayerListName(ChatColor.YELLOW + aggelosQQ());
+            player.setPlayerListName(ChatColor.YELLOW + "aggelosQQ");
             TFM_EssentialsBridge.setNickname(player.getName(), ChatColor.DARK_RED + "ag" + ChatColor.RED + "ge" + ChatColor.DARK_BLUE + "lo" + ChatColor.BLUE + "sQ" + ChatColor.GREEN + "Q");
             event.setJoinMessage(ChatColor.YELLOW + "aggelosQQ joined the game.");
             TFM_PlayerData.getPlayerData(player).setTag("&8[&eSpecial Executive&8]");
-            player.chat(ChatColor.AQUA + "Hey everyone, I'm a Special Executive and the Lead Web Developer."
+            player.chat("Hey everyone, I'm a Special Executive and the Lead Web Developer.");
         }
         else if (TFM_Util.FOP_DEVELOPERS.contains(player.getName()))
         {
