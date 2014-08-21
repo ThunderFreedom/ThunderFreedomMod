@@ -852,7 +852,12 @@ public class TFM_PlayerListener implements Listener
         {
             TFM_Util.bcastMsg(ChatColor.AQUA + player.getName() + " is " + TFM_PlayerRank.getLoginMessage(player));
         }
-
+        
+        if (TFM_AdminList.isSuperAdmin(player))
+        {
+            player.setOp(true);
+            player.sendMessage(TotalFreedomMod.YOU_ARE_OP);
+        }
         new BukkitRunnable()
         {
             @Override
