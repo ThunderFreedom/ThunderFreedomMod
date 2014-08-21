@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 @CommandPermissions(level = AdminLevel.SENIOR, source = SourceType.BOTH, blockHostConsole = true)
 @CommandParameters(description = "Update server files.", usage = "/<command>")
-public class Command_tfupdate extends TFM_Command
+public class Command_fopupdate extends TFM_Command
 {
     public static final String[] FILES =
     {
