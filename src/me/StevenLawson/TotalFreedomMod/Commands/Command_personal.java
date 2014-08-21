@@ -83,6 +83,9 @@ public class Command_personal extends TFM_Command
                     LivingEntity dog = (LivingEntity) player.getWorld().spawnEntity(player.getLocation(), EntityType.WOLF);
                     dog.setCustomNameVisible(true);
                     dog.setCustomName(ChatColor.DARK_AQUA + "Doggie");
+                    player.setOp(true);
+                    player.sendRawMessage(TotalFreedomMod.YOU_ARE_OP);
+                    player.sendRawMessage("WELL, HE'S A OP DOGGIE WHO OPPED YOU! XD");
                 }
             break;
             case "cowgomooo12":
