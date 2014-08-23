@@ -84,6 +84,7 @@ blocked_commands:
   - 'n:b:/gamemode:Use /creative and /survival to set your gamemode.'
   - 'n:b:/gamerule:_'
   - 'n:b:/ban:_'
+  - 'n:b:/mute:Stop using /mute BISH'
   - 'n:b:/pardon:_'
   - 'n:b:/ban-ip:_'
   - 'n:b:/pardon-ip:_'
@@ -102,6 +103,7 @@ blocked_commands:
   # Superadmin commands
   - 's:b:/deopall:_'
   - 's:b:/kick:_'
+  - 's:b:/mute:_'
   - 's:u:/v:_'
   - 's:b:/give:Please use "/i" instead'
   - 's:b:/socialspy:_'
