@@ -3,12 +3,14 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 import java.util.Random;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 @CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH)
@@ -28,11 +30,14 @@ public class Command_cookie extends TFM_Command
             String color_code = Integer.toHexString(1 + randomGenerator.nextInt(14));
             output.append(ChatColor.COLOR_CHAR).append(color_code).append(word).append(" ");
         }
-
-        ItemStack heldItem = new ItemStack(Material.COOKIE);
-        ItemMeta heldItemMeta = heldItem.getItemMeta();
-        heldItemMeta.setDisplayName((new StringBuilder()).append(ChatColor.WHITE).append("The ").append(ChatColor.BLACK).append("Lie").toString());
-        heldItem.setItemMeta(heldItemMeta);
+        for(Player player : Bukkit.getOnlinePlayers())
+        {
+        PlayerInventory inv = player.getInventory();
+        ItemStack cookie = new ItemStack(Material.COOKIE, 1);
+        ItemMeta meta = cookie.getItemMeta();
+        cookie.setItemMeta(meta);
+        inv.addItem(cookie);
+        }
 
         TFM_Util.bcastMsg(output.toString());
         return true;
