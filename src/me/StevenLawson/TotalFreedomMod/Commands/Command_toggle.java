@@ -101,7 +101,7 @@ public class Command_toggle extends TFM_Command
         
         if (args[0].equals("adminworld"))
         {
-            if (!TFM_Util.isHighRank(sender_p))
+            if (!TFM_Util.isHighRank(sender_p) || sender.getName().equals("SupItsDillon"))
             {
                 TFM_Util.playerMsg(sender, TotalFreedomMod.MSG_NO_PERMS, ChatColor.RED);
                 return true;
