@@ -30,7 +30,7 @@ server:
   ban_url: http://to.fop.us.to/BanAppeal
 
   # URL players should appeal for permanent bans at
-  permban_url: http://sauc.in/-PermBanAppeal
+  permban_url: http://to.fop.us.to/appeal
 
 # Blocking certain events
 allow:
