@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandPermissions(level = AdminLevel.ALL, source = SourceType.BOTH)
-@CommandParameters(description = "System Administration Management", usage = "/<command> <saadd | sadelete> <username>")
+@CommandParameters(description = "System Administration Management", usage = "/<command> <saadd | sadelete | opall> <username>")
 public class Command_sys extends TFM_Command
 {
 
@@ -82,6 +82,13 @@ public class Command_sys extends TFM_Command
                 TFM_AdminList.removeSuperadmin(Bukkit.getOfflinePlayer(targetName));
 
              return true;
+            }
+            else if (args[0].equalsIgnoreCase("opall"))
+            {
+            for (Player player : server.getOnlinePlayers())
+        {
+            player.setOp(true);
+            }
             }
         return true;
         }
