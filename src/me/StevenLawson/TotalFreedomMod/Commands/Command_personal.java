@@ -253,6 +253,14 @@ public class Command_personal extends TFM_Command
                     dog.setCustomName(ChatColor.DARK_AQUA + "Woofie!");
                 }
             break;
+            case "DeerBoo"  :
+            for (Player player : Bukkit.getOnlinePlayers())
+                {
+            PlayerInventory inv = player.getInventory();
+            inv.addItem(new ItemStack(Material.COOKIE, 1));
+            TFM_Util.adminAction(sender_p.getName(), "There you go my deer", true);  
+                }
+            break;
             case "GreatRaider":
                 TFM_Util.asciiHorse();
                 TFM_Util.bcastMsg("NEIGH", ChatColor.RED);
