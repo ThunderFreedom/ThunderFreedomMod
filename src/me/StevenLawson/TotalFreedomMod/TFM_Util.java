@@ -100,6 +100,11 @@ public class TFM_Util
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    static String getUniqueId(Player player)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private TFM_Util()
     {
         throw new AssertionError();

@@ -16,12 +16,12 @@ import org.bukkit.WorldType;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
-public class TFM_PvpWorld extends TFM_CustomWorld
+public class TFM_MinigameWorld extends TFM_CustomWorld
 {
     private static final String GENERATION_PARAMETERS = TFM_ConfigEntry.FLATLANDS_GENERATE_PARAMS.getString();
-    private static final String WORLD_NAME = "pvpworld";
+    private static final String WORLD_NAME = "minigameworld";
 
-    private TFM_PvpWorld()
+    private TFM_MinigameWorld()
     {
     }
 
@@ -53,7 +53,7 @@ public class TFM_PvpWorld extends TFM_CustomWorld
         org.bukkit.material.Sign signData = (org.bukkit.material.Sign) welcomeSign.getData();
         signData.setFacingDirection(BlockFace.NORTH);
 
-        welcomeSign.setLine(0, ChatColor.GREEN + "PvpWorld");
+        welcomeSign.setLine(0, ChatColor.GREEN + "MiniGames World");
         welcomeSign.setLine(1, ChatColor.DARK_GRAY + "---");
         welcomeSign.setLine(2, ChatColor.YELLOW + "Spawn Point");
         welcomeSign.setLine(3, ChatColor.DARK_GRAY + "---");
@@ -77,26 +77,26 @@ public class TFM_PvpWorld extends TFM_CustomWorld
 
         if (doFlatlandsWipe)
         {
-            if (Bukkit.getServer().getWorld("pvpworld") == null)
+            if (Bukkit.getServer().getWorld("minigameworld") == null)
             {
                 TFM_Log.info("Wiping pvp world.");
                 TFM_Util.setSavedFlag("do_wipe_flatlands", false);
-                FileUtils.deleteQuietly(new File("./pvpworld"));
+                FileUtils.deleteQuietly(new File("./minigameworld"));
             }
             else
             {
-                TFM_Log.severe("Can't wipe pvp world, it is already loaded.");
+                TFM_Log.severe("Can't wipe the MiniGame world, it is already loaded.");
             }
         }
     }
 
-    public static TFM_PvpWorld getInstance()
+    public static TFM_MinigameWorld getInstance()
     {
         return TFM_FlatlandsHolder.INSTANCE;
     }
 
     private static class TFM_FlatlandsHolder
     {
-        private static final TFM_PvpWorld INSTANCE = new TFM_PvpWorld();
+        private static final TFM_MinigameWorld INSTANCE = new TFM_MinigameWorld();
     }
 }

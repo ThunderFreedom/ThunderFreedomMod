@@ -18,14 +18,8 @@ server:
   # All players who show up as owner
   owners:
     - CrafterSmith12
-  
-  # All players who show up as developer
-   developers:
-    - RobinGall2910
-    - Freelix2000
     
-   
-   # URL players should appeal for bans at
+  # URL players should appeal for bans at
   ban_url: http://to.fop.us.to/BanAppeal
 
   # URL players should appeal for permanent bans at
@@ -202,6 +196,21 @@ console_is_senior: true
 host_sender_names:
   - rcon
   - remotebukkit
+
+# Announcer
+announcer:
+  enabled: true
+
+  # Interval between announcements, in seconds.
+  interval: 30
+
+  # Prefix for all announcements
+  prefix: '&5[&eTotalFreedom&5] &b'
+
+  announcements:
+    - 'Be sure to visit our forums at &6http://totalfreedom.boards.net/'
+    - 'You can always review the server rules here: &6http://totalfreedom.me/'
+    - 'If you aren''t OP, be sure to ask!'
 
 # Players who cannot be banned by username
 unbannable_usernames:

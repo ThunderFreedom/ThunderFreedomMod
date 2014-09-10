@@ -81,8 +81,6 @@ public class TotalFreedomMod extends JavaPlugin
         TFM_Log.info("Made by Madgeek1450 and DarthSalamon");
         TFM_Log.info("Compiled " + buildDate + " by " + buildCreator);
 
-        TFM_Util.deleteCoreDumps();
-
         if (!TFM_ServerInterface.COMPILE_NMS_VERSION.equals(TFM_Util.getNmsVersion()))
         {
             TFM_Log.warning(pluginName + " is compiled for " + TFM_ServerInterface.COMPILE_NMS_VERSION + " but the server is running "
@@ -90,19 +88,27 @@ public class TotalFreedomMod extends JavaPlugin
             TFM_Log.warning("This might result in unexpected behaviour!");
         }
 
-        // Admin list
+        TFM_Util.deleteCoreDumps();
+        TFM_Util.deleteFolder(new File("./_deleteme"));
+
+        // Create backups
         TFM_Util.createBackups(SUPERADMIN_FILE);
-        TFM_AdminList.load();
-
-        // Permban list
         TFM_Util.createBackups(PERMBAN_FILE);
-        TFM_PermbanList.load();
 
-        // Playerlist and bans
+        // Load services
+        TFM_AdminList.load();
+        TFM_PermbanList.load();
         TFM_PlayerList.load();
         TFM_BanManager.load();
+        TFM_Announcer.load();
 
-        TFM_Util.deleteFolder(new File("./_deleteme"));
+        // Protect area
+        // TODO: Refractor to single .load() method
+        if (TFM_ConfigEntry.PROTECTAREA_ENABLED.getBoolean())
+        {
+            TFM_ProtectedArea.loadProtectedAreas();
+            TFM_ProtectedArea.autoAddSpawnpoints();
+        }
 
         final PluginManager pm = server.getPluginManager();
         pm.registerEvents(new TFM_EntityListener(), plugin);
@@ -118,6 +124,7 @@ public class TotalFreedomMod extends JavaPlugin
         }
         catch (Exception ex)
         {
+            TFM_Log.warning("Could not load world: Flatlands");
         }
 
         try
@@ -126,6 +133,7 @@ public class TotalFreedomMod extends JavaPlugin
         }
         catch (Exception ex)
         {
+            TFM_Log.warning("Could not load world: AdminWorld");
         }
 
         // Initialize game rules
@@ -138,6 +146,7 @@ public class TotalFreedomMod extends JavaPlugin
         TFM_GameRuleHandler.setGameRule(TFM_GameRuleHandler.TFM_GameRule.NATURAL_REGENERATION, true, false);
         TFM_GameRuleHandler.commitGameRules();
 
+        // Disable weather
         if (TFM_ConfigEntry.DISABLE_WEATHER.getBoolean())
         {
             for (World world : server.getWorlds())
@@ -149,16 +158,16 @@ public class TotalFreedomMod extends JavaPlugin
             }
         }
 
-        if (TFM_ConfigEntry.PROTECTAREA_ENABLED.getBoolean())
-        {
-            TFM_ProtectedArea.loadProtectedAreas();
-            TFM_ProtectedArea.autoAddSpawnpoints();
-        }
-
         // Heartbeat
         new TFM_Heartbeat(plugin).runTaskTimer(plugin, HEARTBEAT_RATE * 20L, HEARTBEAT_RATE * 20L);
 
-        // metrics @ http://mcstats.org/plugin/TotalFreedomMod
+        // Start services
+        TFM_ServiceChecker.start();
+        TFM_HTTPD_Manager.start();
+
+        TFM_Log.info("Version " + pluginVersion + " for " + TFM_ServerInterface.COMPILE_NMS_VERSION + " enabled");
+
+        // Metrics @ http://mcstats.org/plugin/TotalFreedomMod
         try
         {
             final Metrics metrics = new Metrics(plugin);
@@ -169,12 +178,7 @@ public class TotalFreedomMod extends JavaPlugin
             TFM_Log.warning("Failed to submit metrics data: " + ex.getMessage());
         }
 
-        TFM_ServiceChecker.start();
-        TFM_HTTPD_Manager.start();
-
-        TFM_Log.info("Version " + pluginVersion + " for " + TFM_ServerInterface.COMPILE_NMS_VERSION + " enabled");
-
-        // Delayed Start:
+        // Load commands later
         new BukkitRunnable()
         {
             @Override
@@ -187,7 +191,7 @@ public class TotalFreedomMod extends JavaPlugin
                     if (TFM_AdminList.isSuperAdmin(player))
                     {
                         TFM_PlayerData.getPlayerData(player).setCommandSpy(true);
-                    }       
+            }
                 }
             }
         }.runTaskLater(plugin, 20L);

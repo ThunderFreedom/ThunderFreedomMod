@@ -914,7 +914,7 @@ public class TFM_PlayerListener implements Listener
         {
             player.setPlayerListName(ChatColor.LIGHT_PURPLE + "PieGuy7886");
             player.setDisplayName("Pie");
-            event.setJoinMessage(ChatColor.YELLOW + "Pie has joined the game.")
+            event.setJoinMessage(ChatColor.YELLOW + "Pie has joined the game.");
             TFM_PlayerData.getPlayerData(player).setTag("&8[&dSenior Admin &8/ &5Dev&8]");
             
         }
