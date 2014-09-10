@@ -1,3 +1,5 @@
+//No longer exisiting
+/*
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.Bridge.TFM_DisguiseCraftBridge;
@@ -21,3 +23,4 @@ public class Command_uall extends TFM_Command
         return true;
     }
 }
+*/

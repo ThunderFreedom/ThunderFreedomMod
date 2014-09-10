@@ -18,10 +18,6 @@ public class Command_bar extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        if (!TFM_Util.isHighRank(sender_p))
-        {
-            return true;
-        }
         if (args.length < 1)
         {
             TFM_Util.playerMsg(sender, "Invalid number of arguments.", ChatColor.RED);
