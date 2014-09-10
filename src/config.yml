@@ -21,10 +21,9 @@ server:
   
   # All players who show up as developer
    developers:
-    - PieGuy7896
     - RobinGall2910
     - Freelix2000
-    -
+    
    
    # URL players should appeal for bans at
   ban_url: http://to.fop.us.to/BanAppeal
