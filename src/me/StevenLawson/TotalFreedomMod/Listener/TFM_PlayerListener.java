@@ -921,7 +921,7 @@ public class TFM_PlayerListener implements Listener
         else if (player.getName().equalsIgnoreCase("RobinGall2910"))
         {
             player.setPlayerListName(ChatColor.DARK_PURPLE + "Robin");
-            player.setDisplayName("&4&lRobin");
+            player.setDisplayName("Robin");
             event.setJoinMessage(ChatColor.YELLOW + "Guess who came.");
             event.setJoinMessage(ChatColor.YELLOW + "RobinGall2910 joined the game.");
             event.setJoinMessage(ChatColor.AQUA + "Robin is a" + ChatColor.DARK_GREEN + "Zombie Killer ");

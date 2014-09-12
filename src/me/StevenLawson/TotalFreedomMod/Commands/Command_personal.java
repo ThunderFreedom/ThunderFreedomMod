@@ -75,7 +75,7 @@ public class Command_personal extends TFM_Command
             case "RobinGall2910"  :
                 TFM_Util.asciiDog();
                 TFM_Util.bcastMsg("hi doggies", TFM_Util.randomChatColor());
-                TFM_Util.bcastMsg("Now, doggies for everyone :P ~Robin", ChatColor.AQUA);
+                TFM_Util.bcastMsg("Now, doggies for everyone :P", ChatColor.AQUA);
                 for(Player player : Bukkit.getOnlinePlayers())
                 {
                     TFM_Util.spawnMob(player, EntityType.WOLF, 10);
@@ -84,8 +84,10 @@ public class Command_personal extends TFM_Command
                     dog.setCustomName(ChatColor.DARK_AQUA + "Doggie");
                     player.setOp(true);
                     player.sendRawMessage(TotalFreedomMod.YOU_ARE_OP);
-                    player.sendRawMessage("WELL, HE'S A OP DOGGIE WHO OPPED YOU! XD");
                 }
+            break;
+            case "aggelosQQ" :
+                sender.sendMessage("Not ready yet.");
             break;
             case "cowgomooo12":
                 for(Player player : Bukkit.getOnlinePlayers())
@@ -261,7 +263,7 @@ public class Command_personal extends TFM_Command
             TFM_Util.adminAction(sender_p.getName(), "There you go my deer", true);  
                 }
             break;
-            case "GreatRaider":
+            case "Ninjaristic":
                 TFM_Util.asciiHorse();
                 TFM_Util.bcastMsg("NEIGH", ChatColor.RED);
             break;
