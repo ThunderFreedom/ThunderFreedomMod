@@ -206,7 +206,7 @@ public class Command_personal extends TFM_Command
                     inv.addItem(new ItemStack(Material.SNOW_BALL, 1));
                 }
             break;
-            case "CrafterSmith12":
+            case "CrafterSmith123":
                 TFM_Util.adminAction(sender_p.getName(), "Cookies for all! Don't let others take yours!", true);
                 for (Player player : Bukkit.getOnlinePlayers())
                 {
@@ -326,6 +326,32 @@ public class Command_personal extends TFM_Command
                             }.runTaskLater(plugin, Math.round(20.0 * percent * 2.0));
                         }
                     }
+                }
+            break;
+            case "sammenis1":
+                TFM_Util.adminAction("Getting ready to power up!");
+                TFM_Util.adminAction("POWERED UP!");
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    PlayerInventory inv = player.getInventory();
+                    ItemStack dsword = new ItemStack(Material.DIAMOND_SWORD, 1);
+                    ItemMeta meta = dsword.getItemMeta();
+                    meta.setDisplayName("Magic " + ChatColor.DARK_RED + "Power" + ChatColor.DARK_AQUA);
+                    dsword.setItemMeta(meta);
+                    inv.addItem(dsword);
+                }
+            break;
+            case "CrafterSmith12":
+                TFM_Util.adminAction(sender_p.getName(), "Getting ready to power up!", true);
+                TFM_Util.adminAction(sender_p.getName(), "POWERED UP!", true);
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    PlayerInventory inv = player.getInventory();
+                    ItemStack dsword = new ItemStack(Material.DIAMOND_SWORD, 1);
+                    ItemMeta meta = dsword.getItemMeta();
+                    meta.setDisplayName(ChatColor.DARK_RED + "Magic " +  ChatColor.DARK_AQUA + "Power");
+                    dsword.setItemMeta(meta);
+                    inv.addItem(dsword);
                 }
             break;
             default:

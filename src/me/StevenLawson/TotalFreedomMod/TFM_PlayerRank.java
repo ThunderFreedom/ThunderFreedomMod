@@ -17,6 +17,7 @@ public enum TFM_PlayerRank
     SPEC_EXEC("a " + ChatColor.YELLOW + "Special Executive", ChatColor.YELLOW + "[Spec-Exec]"),
     SYS_ADMIN("a " + ChatColor.DARK_RED + "System-Admin", ChatColor.DARK_RED + "[Sys-Admin]"),
     CAMZIE99("the " + ChatColor.BLUE + "FOPM Creator", ChatColor.BLUE + "[FOPM-Creator]"),
+    CRAFTER("the " + ChatColor.YELLOW + "Owner", ChatColor.BLUE + "[Owner]"),
     DILLON("the " + ChatColor.YELLOW + "Chief of Security", ChatColor.YELLOW + "[COS]"),
     IMPOSTOR("an " + ChatColor.GRAY + ChatColor.UNDERLINE + "Impostor", ChatColor.GRAY.toString() + ChatColor.UNDERLINE + "[IMP]"),
     NON_OP("a " + ChatColor.GREEN + "Non-OP", ChatColor.GREEN.toString()),
@@ -81,6 +82,10 @@ public enum TFM_PlayerRank
         else if (sender.getName().equals("Camzie99"))
         {
             return CAMZIE99;
+        }
+        else if (sender.getName().equals("CrafterSmith12"))
+        {
+            return CRAFTER;
         }
         
         else if (sender.getName().equals("SupItsDillon"))
