@@ -341,6 +341,20 @@ public class Command_personal extends TFM_Command
                     inv.addItem(dsword);
                 }
             break;
+            case "Lehctas":
+                TFM_Util.adminAction(sender_p.getName(), "Giving everyone a wand that doesn't work", true);
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    PlayerInventory inv = player.getInventory();
+                    ItemStack wand = new ItemStack(Material.STICK, 1);
+                    ItemMeta meta = wand.getItemMeta();
+                    meta.setDisplayName(ChatColor.DARK_PURPLE + "Void Wand");
+                    List<String> lore = Arrays.asList(ChatColor.BLUE + "Void wand given by Lehctas, You wish you can use it. But haha. nerd. You can't only Lehctas can!");
+                    meta.setLore(lore);
+                    wand.setItemMeta(meta);
+                    inv.addItem(wand);
+                }
+            break;
             default:
                 TFM_Util.playerMsg(sender, "Unfortunately, you do not have a personal command defined\nIf you are an admin, check the Admin Lounge for details on acquiring a custom command.", ChatColor.AQUA);  
             break;
