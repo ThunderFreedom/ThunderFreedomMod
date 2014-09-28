@@ -45,6 +45,7 @@ public class Command_gban extends TFM_Command
                 ips.add(player.getAddress().getAddress().getHostAddress());
             }
                 TFM_Util.adminAction(sender.getName(), "Banning " + username + " and IPs: " + StringUtils.join(ips, ","), true);
+                server.dispatchCommand(sender, "co rb u:" + username + "r:global t:24h");
 
                 Player target = getPlayer(username, true);
                 if (target != null)

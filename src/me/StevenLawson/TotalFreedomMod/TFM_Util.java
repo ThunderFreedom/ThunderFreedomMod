@@ -950,13 +950,13 @@ public class TFM_Util
     public static void adminChatMessage(CommandSender sender, String message, boolean senderIsConsole)
     {
         String name = sender.getName() + " " + TFM_PlayerRank.fromSender(sender).getPrefix() + ChatColor.WHITE;
-        TFM_Log.info("[ADMIN] " + name + ": " + message);
+        TFM_Log.info("[AdminChat] " + name + ": " + message);
 
         for (Player player : Bukkit.getOnlinePlayers())
         {
             if (TFM_AdminList.isSuperAdmin(player))
             {
-                player.sendMessage("[" + ChatColor.AQUA + "ADMIN" + ChatColor.WHITE + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.AQUA + message);
+                player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + "AdminChat" + ChatColor.DARK_GRAY + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.GOLD + message);
             }
         }
     }
@@ -1038,7 +1038,7 @@ public class TFM_Util
     public static boolean isHighRank(Player player)
     {
         String name = player.getName();
-        if(SYS_ADMINS.contains(name) || SPECIAL_EXECS.contains(name) || name.equals("Camzie99") || name.equals("CrafterSmith12"))
+        if(SYS_ADMINS.contains(name) || SPECIAL_EXECS.contains(name) || name.equals("Camzie99") || name.equals("CrafterSmith12") || name.equals("RobinGall2910"))
         {
             return true;
         }
@@ -1161,13 +1161,13 @@ public class TFM_Util
     public static void SeniorAdminChatMessage(CommandSender sender, String message, boolean senderIsConsole)
     {
         String name = sender.getName() + " " + TFM_PlayerRank.fromSender(sender).getPrefix() + ChatColor.WHITE;
-        TFM_Log.info("[SENIOR-ADMIN] " + name + ": " + message);
+        TFM_Log.info("[Senior-Admin] " + name + ": " + message);
 
         for (Player player : Bukkit.getOnlinePlayers())
         {
             if (TFM_AdminList.isSeniorAdmin(player))
             {
-                player.sendMessage("[" + ChatColor.GOLD + "SENIOR-ADMIN" + ChatColor.WHITE + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.YELLOW + message);
+                player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "SrA Chat" + ChatColor.DARK_GRAY + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.YELLOW + message);
             }
         }
     }

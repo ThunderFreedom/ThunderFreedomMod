@@ -78,6 +78,7 @@ public class TotalFreedomMod extends JavaPlugin
     @Override
     public void onEnable()
     {
+        TFM_Log.info("Herro");
         TFM_Log.info("Made by Madgeek1450 and DarthSalamon");
         TFM_Log.info("Compiled " + buildDate + " by " + buildCreator);
 

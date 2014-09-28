@@ -3,7 +3,6 @@ package me.StevenLawson.TotalFreedomMod.Listener;
 import java.util.Iterator;
 import java.util.Map;
 import me.StevenLawson.BukkitTelnet.api.TelnetCommandEvent;
-import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.BukkitTelnet.api.TelnetRequestDataTagsEvent;
 import me.StevenLawson.BukkitTelnet.api.TelnetPreLoginEvent;
 import me.StevenLawson.TotalFreedomMod.Bridge.TFM_EssentialsBridge;
@@ -11,11 +10,14 @@ import me.StevenLawson.TotalFreedomMod.TFM_CommandBlocker;
 import me.StevenLawson.TotalFreedomMod.TFM_Admin;
 import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import me.StevenLawson.TotalFreedomMod.TFM_PlayerData;
+import static me.StevenLawson.TotalFreedomMod.TotalFreedomMod.server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.ChatColor;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import me.StevenLawson.TotalFreedomMod.TFM_Player;
+import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import org.bukkit.command.CommandSender;
 
 public class TFM_TelnetListener implements Listener
 {
@@ -38,7 +40,7 @@ public class TFM_TelnetListener implements Listener
 
         event.setBypassPassword(true);
         event.setName(admin.getLastLoginName());
-        TFM_Util.adminAction(admin.getLastLoginName(), ChatColor.DARK_AQUA + "Logged in Via Telnet", true);
+        TFM_Util.adminChatMessage((CommandSender) event, "User " + admin.getLastLoginName() + " has logged in to Telnet.", true);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
