@@ -13,7 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH)
-@CommandParameters(description = "Ban/Unban any player, even those who are not logged in anymore.", usage = "/<command> <purge | <ban | unban> <username>>")
+@CommandParameters(description = "Ban a griefer", usage = "/<command> <username>")
 public class Command_gban extends TFM_Command
 {
     @Override
@@ -45,17 +45,18 @@ public class Command_gban extends TFM_Command
                 ips.add(player.getAddress().getAddress().getHostAddress());
             }
                 TFM_Util.adminAction(sender.getName(), "Banning " + username + " and IPs: " + StringUtils.join(ips, ","), true);
-                server.dispatchCommand(sender, "co rb u:" + username + "r:global t:24h");
 
                 Player target = getPlayer(username, true);
                 if (target != null)
                 {
                     TFM_BanManager.addUuidBan(new TFM_Ban(TFM_Util.getUuid(target), target.getName()));
+                    server.dispatchCommand(sender, "co rb u:" + target.getName() + " r:#global t:1d");
                     target.kickPlayer("Griefing - CoreProtect Confirm!");
                 }
                 else
                 {
                     TFM_BanManager.addUuidBan(new TFM_Ban(TFM_Util.getUuid(username), username));
+                    server.dispatchCommand(sender, "co rb u:" + target.getName() + " r:#global t:1d");
                 }
 
                 for (String ip : ips)
@@ -68,4 +69,3 @@ public class Command_gban extends TFM_Command
             return true;
         }
 }
-
