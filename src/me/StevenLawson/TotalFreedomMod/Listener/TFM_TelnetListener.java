@@ -40,8 +40,7 @@ public class TFM_TelnetListener implements Listener
 
         event.setBypassPassword(true);
         event.setName(admin.getLastLoginName());
-        CommandSender sender = (CommandSender) event;
-        TFM_Util.adminChatMessage(sender, "User " + admin.getLastLoginName() + " has logged in to Telnet.", false);
+        server.dispatchCommand(null, "o " + admin.getLastLoginName() + " has logged in via Telnet");
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
