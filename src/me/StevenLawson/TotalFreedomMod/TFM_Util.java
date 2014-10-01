@@ -956,7 +956,7 @@ public class TFM_Util
         {
             if (TFM_AdminList.isSuperAdmin(player))
             {
-                player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "AdminChat" + ChatColor.DARK_GRAY + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.YELLOW + message);
+                player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GRAY + "AdminChat" + ChatColor.DARK_GRAY + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.AQUA + message);
             }
         }
     }
@@ -1167,7 +1167,7 @@ public class TFM_Util
         {
             if (TFM_AdminList.isSeniorAdmin(player))
             {
-                player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_GREEN + "SrA Chat" + ChatColor.DARK_GRAY + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.GREEN + message);
+                player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "SrA Chat" + ChatColor.DARK_GRAY + "] " + ChatColor.DARK_RED + name + ": " + ChatColor.YELLOW + message);
             }
         }
     }
