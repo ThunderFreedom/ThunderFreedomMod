@@ -86,9 +86,6 @@ public class Command_personal extends TFM_Command
                     player.sendRawMessage(TotalFreedomMod.YOU_ARE_OP);
                 }
             break;
-            case "aggelosQQ" :
-                sender.sendMessage("Not ready yet.");
-            break;
             case "cowgomooo12":
                 for(Player player : Bukkit.getOnlinePlayers())
                 {
@@ -354,7 +351,7 @@ public class Command_personal extends TFM_Command
                     wand.setItemMeta(meta);
                     inv.addItem(wand);
                 }
-                case "aggelosQQ":
+            case "aggelosQQ":
                 TFM_Util.adminAction(sender_p.getName(), "Giving everyone a free egg! EGG FIGHT!", true);
                 for (Player player : Bukkit.getOnlinePlayers())
                 {
