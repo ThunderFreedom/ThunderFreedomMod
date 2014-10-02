@@ -354,6 +354,18 @@ public class Command_personal extends TFM_Command
                     wand.setItemMeta(meta);
                     inv.addItem(wand);
                 }
+                case "aggelosQQ":
+                TFM_Util.adminAction(sender_p.getName(), "Giving everyone a free egg! EGG FIGHT!", true);
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    PlayerInventory inv = player.getInventory();
+                    ItemStack egg = new ItemStack(Material.EGG, 1);
+                    ItemMeta meta = egg.getItemMeta();
+                    meta.setDisplayName(ChatColor.DARK_GREEN + "eggelosQQ's" + ChatColor.AQUA + "Egg");
+                    meta.addEnchant(Enchantment.KNOCKBACK, 320, true);
+                    egg.setItemMeta(meta);
+                    inv.addItem(egg);
+                }   
             break;
             default:
                 TFM_Util.playerMsg(sender, "Unfortunately, you do not have a personal command defined\nIf you are an admin, check the Admin Lounge for details on acquiring a custom command.", ChatColor.AQUA);  
