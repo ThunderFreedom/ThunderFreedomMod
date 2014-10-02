@@ -30,11 +30,12 @@ public class Command_bar extends TFM_Command
                 BarAPI.removeBar(player);
             }
             TFM_Util.adminChatMessage(sender, "[BAR-API] Bar Cleared.", false);
+            BarAPI.setMessage("Welcome to FreedomOP!");
         }
         else
         {
             String message = StringUtils.join(ArrayUtils.subarray(args, 0, args.length), " ");
-            BarAPI.setMessage(message.replaceAll("&", "§"), 60);
+            BarAPI.setMessage(message.replaceAll("&", "§"), 120);
             TFM_Util.adminChatMessage(sender, "[BAR-API] Bar message changed.", false);
         }
         return true;

@@ -79,6 +79,7 @@ public enum TFM_ConfigEntry
     HOST_SENDER_NAMES(List.class, "host_sender_names"),
     UNBANNABLE_USERNAMES(List.class, "unbannable_usernames"),
     ADMIN_ONLY_MODE(Boolean.class, "admin_only_mode"),
+    TRAINING_SESSION(Boolean.class, "training_mode"),
     AUTO_ENTITY_WIPE(Boolean.class, "auto_wipe"),
     CONSOLE_IS_SENIOR(Boolean.class, "console_is_senior");
     //

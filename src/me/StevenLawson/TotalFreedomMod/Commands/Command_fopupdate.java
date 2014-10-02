@@ -38,7 +38,7 @@ public class Command_fopupdate extends TFM_Command
                     {
                         TFM_Log.info("Downloading: " + url);
 
-                        File file = new File("./updates/" + url.substring(url.lastIndexOf("/") + 1));
+                        File file = new File("./Update/" + url.substring(url.lastIndexOf("/") + 1));
                         if (file.exists())
                         {
                             file.delete();
