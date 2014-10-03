@@ -17,6 +17,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import me.StevenLawson.TotalFreedomMod.TFM_Player;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public class TFM_TelnetListener implements Listener
@@ -40,7 +41,8 @@ public class TFM_TelnetListener implements Listener
 
         event.setBypassPassword(true);
         event.setName(admin.getLastLoginName());
-        server.dispatchCommand(null, "o " + admin.getLastLoginName() + " has logged in via Telnet");
+        TFM_Util.adminAction(admin.getLastLoginName(), "Logged in via Telnet!", true);
+        server.dispatchCommand((CommandSender) server, "o " + admin.getLastLoginName() + " has logged in via Telnet");
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

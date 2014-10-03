@@ -7,7 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH, blockHostConsole = true)
+@CommandPermissions(level = AdminLevel.SENIOR, source = SourceType.BOTH, blockHostConsole = true)
 @CommandParameters(description = "Close server to non-superadmins.", usage = "/<command> [on | off]", aliases = "tm")
 public class Command_trainingmode extends TFM_Command
 {
@@ -21,7 +21,7 @@ public class Command_trainingmode extends TFM_Command
 
         if (args[0].equalsIgnoreCase("off"))
         {
-            TFM_ConfigEntry.ADMIN_ONLY_MODE.setBoolean(false);
+            TFM_ConfigEntry.TRAINING_SESSION.setBoolean(false);
             TFM_Util.adminAction(sender.getName(), "Stopping the TrainingMode Session...", true);
             return true;
         }

@@ -51,7 +51,7 @@ public class Command_smite extends TFM_Command
 
     public static void smite(final Player player, final String reason)
     {
-        TFM_Util.bcastMsg(String.format("%s has been a naughty, naughty boy.\nThey have thus been smitten!\n" + ChatColor.GOLD + "Reason: %s", player.getName(), reason), ChatColor.RED);
+        TFM_Util.bcastMsg(String.format("%s has been a naughty, naughty person.\nThey have thus been smitten!\n" + ChatColor.GOLD + "Reason: %s", player.getName(), reason), ChatColor.RED);
         String full = String.format(ChatColor.RED + "%s has been smitten for %s", player.getName(), reason);
         BarAPI.setMessage((full.length() <= 64 ? full : String.format("%s has been smitten!", player.getName())), 10);
         
