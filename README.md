@@ -1,7 +1,3 @@
-# TotalFreedomMod #
+# **FreedomOPMod** #
 
-TotalFreedomMod is a CraftBukkit server plugin designed primarily to support the [Official TotalFreedom Minecraft Server](http://totalfreedom.me/). However, you are more than welcome to adapt the source for your own server.
-
-This plugin was originally coded by StevenLawson (Madgeek1450), with Jerom van der Sar (DarthSalamon) becoming heavily involved in its development some time later. It consists of over 85 custom coded commands and a large variety of distinguishable features not included in any other plugin. The plugin has since its beginning grown immensely. Together, with the main TotalFreedom server, TotalFreedomMod has a long-standing reputation of effectiveness whilst maintaining a clear feeling of openness towards the administrators and the players themselves.
-
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) if you are interested in developing TotalFreedomMod. For information on how TotalFreedomMod is licensed, please see [LICENSE.md](LICENSE.md).
+The FreedomOPMod is currently a fork from **TotalFreedomMod**, for Bukkit server's who want a All-OP server. You can see the FreedomOP Fourms at http://freedomop.boards.net/ And you can see the TFM Github here. http://github.com/TotalFreedom/totalfreedommod If you have any problems ask our devs and our helpers. Our Dev support is here, http://to.fop.us.to/devsupport. Feel free to commit. Also, there won't be any public distributed releases just yet for the Camzie99 FOPM. Please watch the FreedomOP Boards for more info.
