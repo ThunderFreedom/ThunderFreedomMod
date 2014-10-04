@@ -43,7 +43,7 @@ public class Command_saconfig extends TFM_Command
                     return true;
                 }
 
-                TFM_Util.adminAction(TotalFreedomMod.FREEDOMOP_MOD + sender.getName(), "Cleaning superadmin list", true);
+                TFM_Util.adminAction(sender.getName(), "Cleaning superadmin list", true);
                 TFM_AdminList.cleanSuperadminList(true);
                 playerMsg("Superadmins: " + StringUtils.join(TFM_AdminList.getSuperNames(), ", "), ChatColor.YELLOW);
                 return true;
@@ -85,8 +85,7 @@ public class Command_saconfig extends TFM_Command
                     counter++;
                 }
 
-                TFM_AdminList.save();
-
+                TFM_AdminList.saveAll();
                 playerMsg(counter + " IPs removed.");
                 playerMsg(admin.getIps().get(0) + " is now your only IP address");
                 return true;
@@ -108,7 +107,7 @@ public class Command_saconfig extends TFM_Command
             TFM_Util.adminAction(sender.getName(), "Removing a supered IP", true);
 
             admin.removeIp(args[1]);
-            TFM_AdminList.save();
+            TFM_AdminList.saveAll();
 
             playerMsg("Removed IP " + args[1]);
             playerMsg("Current IPs: " + StringUtils.join(admin.getIps(), ", "));
@@ -200,7 +199,7 @@ public class Command_saconfig extends TFM_Command
             // Twitterbot
             if (TFM_ConfigEntry.TWITTERBOT_ENABLED.getBoolean())
             {
-                TFM_TwitterHandler.getInstance().delTwitterVerbose(targetName, sender);
+                TFM_TwitterHandler.delTwitterVerbose(targetName, sender);
             }
             return true;
         }

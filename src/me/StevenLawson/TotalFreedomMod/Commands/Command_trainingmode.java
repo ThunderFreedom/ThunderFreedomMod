@@ -18,16 +18,28 @@ public class Command_trainingmode extends TFM_Command
         {
             return false;
         }
+        
+        if (args[0].equalsIgnoreCase("off -s"))
+        {
+            TFM_ConfigEntry.TRAINING_SESSION.setBoolean(false);
+            TFM_ConfigEntry.ADMIN_ONLY_MODE.setBoolean(false);
+            TFM_ConfigEntry.TRAINING_SESSION.setBoolean(false);
+            return true;
+        }
 
         if (args[0].equalsIgnoreCase("off"))
         {
+            TFM_ConfigEntry.TRAINING_SESSION.setBoolean(false);
+            TFM_ConfigEntry.ADMIN_ONLY_MODE.setBoolean(false);
             TFM_ConfigEntry.TRAINING_SESSION.setBoolean(false);
             TFM_Util.adminAction(sender.getName(), "Stopping the TrainingMode Session...", true);
             return true;
         }
         else if (args[0].equalsIgnoreCase("on"))
         {
+            TFM_ConfigEntry.TRAINING_SESSION.setBoolean(true);
             TFM_ConfigEntry.ADMIN_ONLY_MODE.setBoolean(true);
+            TFM_ConfigEntry.TRAINING_SESSION.setBoolean(true);
             TFM_Util.adminAction(sender.getName(), "Starting the TrainingMode Session...", true);
             for (Player player : server.getOnlinePlayers())
             {

@@ -58,15 +58,16 @@ public class TFM_ServerListener implements Listener
             event.setMotd(ChatColor.RED + "You are banned.");
             return;
         }
+        
+        if (TFM_ConfigEntry.TRAINING_SESSION.getBoolean())
+        {
+            event.setMotd(ChatColor.RED + "FreedomOP is in a Training Session.");
+            return;
+        }
 
         if (TFM_ConfigEntry.ADMIN_ONLY_MODE.getBoolean())
         {
             event.setMotd(ChatColor.RED + "FreedomOP is closed.");
-            return;
-        }
-        if (TFM_ConfigEntry.TRAINING_SESSION.getBoolean())
-        {
-            event.setMotd(ChatColor.RED + "FreedomOP is in a Training Session.");
             return;
         }
       
