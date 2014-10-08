@@ -34,6 +34,7 @@ public class Command_toggle extends TFM_Command
             playerMsg("- nonuke");
             playerMsg("- explosives");
             playerMsg("- adminworld");
+            playerMsg("- chaos", ChatColor.DARK_RED);
             return false;
         }
 
@@ -109,6 +110,19 @@ public class Command_toggle extends TFM_Command
             toggle("Adminworld is", TFM_ConfigEntry.ENABLE_ADMINWORLD);
             return true;
         }
+
+/* 101:113 */     if (args[0].equals("chaos"))
+/* 102:    */     {
+/* 103:115 */       if (!TFM_Util.isHighRank(sender_p))
+/* 104:    */       {
+/* 105:117 */         TFM_Util.playerMsg(sender, TotalFreedomMod.MSG_NO_PERMS, ChatColor.RED);
+/* 106:118 */         return true;
+/* 107:    */       }
+/* 108:120 */       TFM_Util.adminAction(sender.getName(), "Toggling Chaos Mode!", false);
+/* 109:121 */       TFM_Util.bcastMsg(!TFM_ConfigEntry.ENABLE_CHAOS.getBoolean().booleanValue() ? "EEEK, HIDE THE FUCKING CHILDREN!!!!!" : "Everyone is safe... FOR NOW...", ChatColor.RED);
+/* 110:122 */       toggle("Chaos mode is", TFM_ConfigEntry.ENABLE_CHAOS);
+/* 111:123 */       return true;
+/* 112:    */     }
 
         if (args[0].equals("nonuke"))
         {
