@@ -1,5 +1,7 @@
 package me.StevenLawson.TotalFreedomMod.Listener;
 
+import me.StevenLawson.TotalFreedomMod.World.TFM_AdminWorld;
+import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -850,67 +852,12 @@ public class TFM_PlayerListener implements Listener
         else if (TFM_AdminList.isSuperAdmin(player) || TFM_Util.DEVELOPERS.contains(player.getName()))
         {
             TFM_Util.bcastMsg(ChatColor.AQUA + player.getName() + " is " + TFM_PlayerRank.getLoginMessage(player));
-        }        
-  @EventHandler(priority=EventPriority.MONITOR)
-  public void onPlayerJoin(PlayerJoinEvent event)
-  {
-    final Player player = event.getPlayer();
-    String ip = TFM_Util.getIp(player);
-    TFM_Log.info("[JOIN] " + TFM_Util.formatPlayer(player) + " joined the game with IP address: " + ip, Boolean.valueOf(true));
-    if (TFM_PlayerList.existsEntry(player))
-    {
-      TFM_Player entry = TFM_PlayerList.getEntry(player);
-      entry.setLastLoginUnix(TFM_Util.getUnixTime());
-      entry.setLastLoginName(player.getName());
-      if (!TFM_AdminList.isAdminImpostor(player)) {
-        entry.addIp(ip);
-      }
-      entry.save();
-    }
-    else
-    {
-      TFM_PlayerList.getEntry(player);
-      TFM_Log.info("Added new player: " + TFM_Util.formatPlayer(player));
-    }
-    TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
-    playerdata.setSuperadminIdVerified(false);
-    if (TFM_AdminList.isSuperAdmin(player))
-    {
-      TFM_BanManager.unbanIp(ip);
-      TFM_BanManager.unbanIp(TFM_Util.getFuzzyIp(ip));
-      TFM_BanManager.unbanUuid(TFM_Util.getUuid(player));
-      player.setOp(true);
-      if (!TFM_AdminList.isIdentityMatched(player))
-      {
-        playerdata.setSuperadminIdVerified(false);
-        
-        TFM_Util.bcastMsg("Warning: " + player.getName() + " is an admin, but is using an account not registered to one of their ip-list.", ChatColor.RED);
-      }
-      else
-      {
-        playerdata.setSuperadminIdVerified(true);
-        TFM_AdminList.updateLastLogin(player);
-      }
-    }
-    if (TFM_AdminList.isAdminImpostor(player))
-    {
-      TFM_Util.bcastMsg("Warning: " + player.getName() + " has been flagged as an impostor and has been frozen!", ChatColor.RED);
-      TFM_Util.bcastMsg(ChatColor.AQUA + player.getName() + " is " + TFM_PlayerRank.getLoginMessage(player));
-      player.getInventory().clear();
-      player.setOp(false);
-      player.setGameMode(GameMode.SURVIVAL);
-      TFM_PlayerData.getPlayerData(player).setFrozen(true);
-    }
-    else if ((TFM_AdminList.isSuperAdmin(player)) || (TFM_Util.DEVELOPERS.contains(player.getName())))
-    {
-      TFM_Util.bcastMsg(ChatColor.AQUA + player.getName() + " is " + TFM_PlayerRank.getLoginMessage(player));
-    }
-    TFM_Util.bcastMsg(ChatColor.GOLD + String.format("Welcome %s%s%s%s to %s%sFreedomOp!", new Object[] { ChatColor.LIGHT_PURPLE, ChatColor.BOLD, player.getName(), ChatColor.GOLD, ChatColor.DARK_AQUA, ChatColor.BOLD }));
-    
-    new BukkitRunnable()
-    {
-      public void run()
-      {
+        }
+
+        new BukkitRunnable()
+        {
+        public void run()
+        {
         if (TFM_ConfigEntry.ADMIN_ONLY_MODE.getBoolean().booleanValue()) {
           player.sendMessage(ChatColor.RED + "Server is currently closed to non-superadmins.");
         }
@@ -920,266 +867,202 @@ public class TFM_PlayerListener implements Listener
         if (TFM_ConfigEntry.ENABLE_CHAOS.getBoolean().booleanValue()) {
           TFM_Util.playerMsg(player, "Warning: Server is currenty in chaos mode! EXPECT SOME CRAZY SHIT!", ChatColor.RED);
         }
-      }
+        }
     }
     
 
       .runTaskLater(TotalFreedomMod.plugin, 60L);
   }
-  
-  @EventHandler(priority=EventPriority.HIGHEST)
-  public void onPlayerLogin(PlayerLoginEvent event)
-  {
-    TFM_ServerInterface.handlePlayerLogin(event);
-  }
-  
-  @EventHandler(priority=EventPriority.HIGH)
-  public static void onPlayerJoinEvent(PlayerJoinEvent event)
-  {
-    Player player = event.getPlayer();
-    if (TFM_AdminList.isSuperAdmin(player)) {
-      TFM_PlayerData.getPlayerData(player).setCommandSpy(true);
-    }
-    if (player.getName().equals("Camzie99"))
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerLogin(PlayerLoginEvent event)
     {
-      player.setPlayerListName(ChatColor.BLUE + player.getName());
-      TFM_PlayerData.getPlayerData(player).setTag("&8[&9FOPM-Creator&8]");
+        TFM_ServerInterface.handlePlayerLogin(event);
     }
-    else if (player.getName().equals("CrafterSmith12"))
+
+    // Player Tab and auto Tags
+    @EventHandler(priority = EventPriority.HIGH)
+    public static void onPlayerJoinEvent(PlayerJoinEvent event)
     {
-      player.setPlayerListName(ChatColor.BLUE + player.getName());
-      TFM_PlayerData.getPlayerData(player).setTag("&8[&9Owner&8]");
-    }
-    else if (player.getName().equals("SupItsDillon"))
-    {
-      player.setPlayerListName(ChatColor.BLUE + player.getName());
-      TFM_PlayerData.getPlayerData(player).setTag("&8[&cChief of Security&8]");
-    }
-    else if (player.getName().equalsIgnoreCase("PieGuy7896"))
-    {
-      player.setPlayerListName(ChatColor.DARK_PURPLE + "Pie");
-      player.setDisplayName("Pie");
-      event.setJoinMessage(ChatColor.YELLOW + "Pie has joined the game.");
-      event.setJoinMessage(ChatColor.AQUA + "Pie is a " + ChatColor.DARK_PURPLE + "Developer ");
-    }
-    else if (TFM_Util.SYS_ADMINS.contains(player.getName()))
-    {
-      player.setPlayerListName(ChatColor.DARK_RED + player.getName());
-      TFM_PlayerData.getPlayerData(player).setTag("&8[&dSys-Admin&8]");
-    }
-    else if (TFM_Util.SPECIAL_EXECS.contains(player.getName()))
-    {
-      player.setPlayerListName(ChatColor.YELLOW + player.getName());
-      TFM_PlayerData.getPlayerData(player).setTag("&8[&cSpecial-Exec&8]");
-    }
-    else if (TFM_Util.FOP_DEVELOPERS.contains(player.getName()))
-    {
-      player.setPlayerListName(ChatColor.DARK_PURPLE + player.getName());
-      TFM_PlayerData.getPlayerData(player).setTag("&8[&5Developer&8]");
-    }
-    else if (TFM_Util.DEVELOPERS.contains(player.getName()))
-    {
-      player.setPlayerListName(ChatColor.DARK_PURPLE + player.getName());
-      TFM_PlayerData.getPlayerData(player).setTag("&8[&5TFM-Developer&8]");
-    }
-    else if (TFM_AdminList.isSeniorAdmin(player))
-    {
+        final Player player = event.getPlayer();
+
+        String name = player.getName();
+
+        if (TFM_AdminList.isSuperAdmin(player))
+        {
+            TFM_PlayerData.getPlayerData(player).setCommandSpy(true);
+        }
+        if (player.getName().equals("Camzie99"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&9FOPM-Creator&8]");
+        }
+        else if (player.getName().equals("CrafterSmith12"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&9Owner&8]");
+
+        }
+        else if (player.getName().equals("SupItsDillon"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&cChief of Security&8]");
+        }
+         else if (player.getName().equalsIgnoreCase("aggelosQQ"))
+        {
+            player.setPlayerListName(ChatColor.YELLOW + "aggelosQQ");
+            TFM_EssentialsBridge.setNickname(player.getName(), ChatColor.DARK_RED + "ag" + ChatColor.RED + "ge" + ChatColor.DARK_BLUE + "lo" + ChatColor.BLUE + "sQ" + ChatColor.GREEN + "Q");
+            event.setJoinMessage(ChatColor.YELLOW + "aggelosQQ joined the game.");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&eSpecial Executive&8]");
+            player.chat("Hey everyone, I'm a Special Executive and the Lead Web Developer.");
+        }
+        else if (player.getName().equalsIgnoreCase("PieGuy7896"))
+        {
+            player.setPlayerListName(ChatColor.LIGHT_PURPLE + "PieGuy7886");
+            player.setDisplayName("Pie");
+            event.setJoinMessage(ChatColor.YELLOW + "Pie has joined the game.");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&dSenior Admin &8/ &5Dev&8]");
+            
+        }
+        else if (player.getName().equalsIgnoreCase("RobinGall2910"))
+        {
+            player.setPlayerListName(ChatColor.DARK_PURPLE + "Robin");
+            player.setDisplayName("Robin");
+            event.setJoinMessage(ChatColor.YELLOW + "Guess who came.");
+            event.setJoinMessage(ChatColor.YELLOW + "RobinGall2910 joined the game.");
+            event.setJoinMessage(ChatColor.AQUA + "Robin is a" + ChatColor.DARK_GREEN + "Zombie Killer ");
+        }
+
+        else if (TFM_Util.SYS_ADMINS.contains(player.getName()))
+        {
+        player.setPlayerListName(ChatColor.DARK_RED + player.getName());
+        TFM_PlayerData.getPlayerData(player).setTag("&8[&dSys-Admin&8]");
+        }
+        else if (TFM_Util.SPECIAL_EXECS.contains(player.getName()))
+        {
+        player.setPlayerListName(ChatColor.YELLOW + player.getName());
+        TFM_PlayerData.getPlayerData(player).setTag("&8[&cSpecial-Exec&8]");
+        }
+        else if (TFM_Util.FOP_DEVELOPERS.contains(player.getName()))
+        {
+        player.setPlayerListName(ChatColor.DARK_PURPLE + player.getName());
+        TFM_PlayerData.getPlayerData(player).setTag("&8[&5Developer&8]");
+        }
+        else if (TFM_Util.DEVELOPERS.contains(player.getName()))
+        {
+        player.setPlayerListName(ChatColor.DARK_PURPLE + player.getName());
+        TFM_PlayerData.getPlayerData(player).setTag("&8[&5TFM-Developer&8]");
+        }
+        else if (TFM_AdminList.isSeniorAdmin(player))
+        {
       player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
       TFM_PlayerData.getPlayerData(player).setTag("&8[&dSenior-Admin&8]");
-    }
-    else if (TFM_AdminList.isTelnetAdmin(player, true))
-    {
+        }
+        else if (TFM_AdminList.isTelnetAdmin(player, true))
+        {
       player.setPlayerListName(ChatColor.DARK_GREEN + player.getName());
       TFM_PlayerData.getPlayerData(player).setTag("&8[&2Telnet-Admin&8]");
-    }
-    else if (TFM_AdminList.isSuperAdmin(player))
-    {
+        }
+        else if (TFM_AdminList.isSuperAdmin(player))
+        {
       player.setPlayerListName(ChatColor.AQUA + player.getName());
       TFM_PlayerData.getPlayerData(player).setTag("&8[&bSuper-Admin&8]");
-    }
-  }
-  
-  @EventHandler
-  public void doubleJump(PlayerToggleFlightEvent event)
-  {
-    Player player = event.getPlayer();
-    if ((event.isFlying()) && (TFM_Util.isDoubleJumper(player)))
-    {
-      player.setFlying(false);
-      Vector jump = player.getLocation().getDirection().multiply(2).setY(1.1D);
-      player.setVelocity(player.getVelocity().add(jump));
-      event.setCancelled(true);
-    }
-  }
-  
-  @EventHandler
-  public void onPlayerHurt(EntityDamageEvent event)
-  {
-    if ((event.getEntity() instanceof Player))
-    {
-      Player player = (Player)event.getEntity();
-      if (TFM_Util.inGod(player)) {
-        event.setCancelled(true);
-      }
-    }
-  }
-  
-  @EventHandler
-  public void onEntityDamageByEntity(EntityDamageByEntityEvent event)
-  {
-    if ((event.getEntity() instanceof Player))
-    {
-      if ((event.getDamager() instanceof Player))
-      {
-        Player player = (Player)event.getDamager();
-        if (player.getGameMode() == GameMode.CREATIVE)
-        {
-          TFM_Util.playerMsg(player, "NO GM / GOD PVP!", ChatColor.DARK_RED);
-          event.setCancelled(true);
         }
-      }
-      if ((event.getDamager() instanceof Arrow))
-      {
-        Arrow arrow = (Arrow)event.getDamager();
-        if ((arrow.getShooter() instanceof Player))
+    }
+
+    @EventHandler
+    public void doubleJump(PlayerToggleFlightEvent event)
+    {
+        final Player player = event.getPlayer();
+        if (event.isFlying() && TFM_Util.isDoubleJumper(player))
         {
-          Player player = (Player)arrow.getShooter();
-          if ((player.getGameMode() == GameMode.CREATIVE) || (TFM_Util.inGod(player)))
-          {
-            TFM_Util.playerMsg(player, "NO GM / GOD PVP!", ChatColor.DARK_RED);
+            player.setFlying(false);
+            Vector jump = player.getLocation().getDirection().multiply(2).setY(1.1);
+            player.setVelocity(player.getVelocity().add(jump));
             event.setCancelled(true);
-          }
         }
-      }
     }
-    if ((event.getDamager() instanceof Arrow))
+
+    @EventHandler
+    public void onPlayerHurt(EntityDamageEvent event)
     {
-      Arrow arrow = (Arrow)event.getDamager();
-      if ((arrow.getShooter() instanceof Player))
-      {
-        Player player = (Player)arrow.getShooter();
-        if ((player.getItemInHand().equals(TFM_Util.CamBow())) && ((event.getEntity() instanceof LivingEntity)))
+        if (event.getEntity() instanceof Player)
         {
-          LivingEntity entity = (LivingEntity)event.getEntity();
-          entity.setHealth(0);
-          entity.getWorld().createExplosion(entity.getLocation(), 10.0F, false);
-          entity.getWorld().strikeLightningEffect(entity.getLocation());
-          entity.getLocation().getBlock().setType(Material.WOOL);
-          entity.getLocation().getBlock().setData((byte)10);
-        }
-      }
-    }
-    if ((event.getDamager() instanceof Player))
-    {
-      Player player = (Player)event.getDamager();
-      if ((player.getItemInHand().equals(TFM_Util.CamSword())) && ((event.getEntity() instanceof LivingEntity)))
-      {
-        LivingEntity entity = (LivingEntity)event.getEntity();
-        entity.setHealth(0);
-        entity.getWorld().strikeLightningEffect(entity.getLocation());
-        entity.getLocation().getBlock().setType(Material.WOOL);
-        entity.getLocation().getBlock().setData((byte)10);
-      }
-    }
-  }
-  
-  @EventHandler(priority=EventPriority.HIGHEST)
-  public void onPlayerJump(PlayerMoveEvent event)
-  {
-    Location from = event.getFrom();
-    Location to = event.getTo();
-    if (to.getBlockY() > from.getBlockY())
-    {
-      Player player = event.getPlayer();
-      if (TFM_Util.isDoubleJumper(player)) {
-        player.setAllowFlight(true);
-      }
-    }
-  }
-  
-  @EventHandler(priority=EventPriority.HIGHEST)
-  public void onPlayerDrinkPotion(PlayerItemConsumeEvent event)
-  {
-    if ((event.getItem().getType() == Material.POTION) && (!TFM_Util.isHighRank(event.getPlayer())))
-    {
-      TFM_Util.playerMsg(event.getPlayer(), "Please use /potion to add potion effects, thank you!", ChatColor.GREEN);
-      event.setCancelled(true);
-    }
-  }
-  
-  @EventHandler
-  public void onSplashPotion(PotionSplashEvent event)
-  {
-    if (event.getPotion().getEffects().contains(PotionEffectType.INVISIBILITY))
-    {
-      Projectile proj = event.getEntity();
-      if ((proj.getShooter() instanceof Player))
-      {
-        Player player = (Player)proj.getShooter();
-        TFM_Util.playerMsg(player, "You are not permitted to use invisibility potions!", ChatColor.RED);
-        event.setCancelled(true);
-      }
-    }
-  }
-  
-  @EventHandler
-  public void onPlyaerItemBreak(PlayerItemBreakEvent event)
-  {
-    switch (5.$SwitchMap$org$bukkit$Material[event.getBrokenItem().getType().ordinal()])
-    {
-    case 10: 
-      if (event.getBrokenItem().equals(TFM_Util.CamSword())) {
-        event.getPlayer().getInventory().setItem(0, TFM_Util.CamSword());
-      }
-    case 12: 
-      if (event.getBrokenItem().equals(TFM_Util.CamBow())) {
-        event.getPlayer().getInventory().setItem(8, TFM_Util.CamBow());
-      }
-    case 13: 
-      if (event.getBrokenItem().equals(TFM_Util.CamChest())) {
-        event.getPlayer().getInventory().setChestplate(TFM_Util.CamChest());
-      }
-    case 14: 
-      if (event.getBrokenItem().equals(TFM_Util.CamLegs())) {
-        event.getPlayer().getInventory().setLeggings(TFM_Util.CamLegs());
-      }
-    case 15: 
-      if (event.getBrokenItem().equals(TFM_Util.CamBoots())) {
-        event.getPlayer().getInventory().setBoots(TFM_Util.CamBoots());
-      }
-      break;
-    }
-  }
-  
-  @EventHandler
-  public void onPlayerEnterWater(PlayerMoveEvent event)
-  {
-    final Player player = event.getPlayer();
-    if (!TFM_PlayerData.getPlayerData(player).isPurple()) {
-      return;
-    }
-    Location loc = player.getLocation();
-    loc.add(0.0D, -1.0D, 0.0D);
-    Block block = loc.getBlock();
-    for (BlockFace face : BlockFace.values()) {
-      if ((!face.equals(BlockFace.DOWN)) && (!face.equals(BlockFace.UP)))
-      {
-        Block block1 = block.getRelative(face);
-        if ((block1.getType().equals(Material.WATER)) || (block.getType().equals(Material.STATIONARY_WATER)))
-        {
-          final Location location = block1.getLocation();
-          player.sendBlockChange(location, Material.WOOL, (byte)10);
-          new BukkitRunnable()
-          {
-            public void run()
+            Player player = (Player) event.getEntity();
+            if (TFM_Util.inGod(player))
             {
-              player.sendBlockChange(location, Material.STATIONARY_WATER, (byte)0);
+                event.setCancelled(true);
             }
-          }
-          
-            .runTaskLater(TotalFreedomMod.plugin, 40L);
         }
-      }
     }
-  }
+
+    @EventHandler
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event)
+    {
+        if (event.getEntity() instanceof Player)
+        {
+            if (event.getDamager() instanceof Player)
+            {
+                Player player = (Player) event.getDamager();
+                if (player.getGameMode() == GameMode.CREATIVE)
+                {
+                    TFM_Util.playerMsg(player, "NO GM / GOD PVP!", ChatColor.DARK_RED);
+                    event.setCancelled(true);
+                }
+            }
+            if (event.getDamager() instanceof Arrow)
+            {
+                Arrow arrow = (Arrow) event.getDamager();
+                if (arrow.getShooter() instanceof Player)
+                {
+                    Player player = (Player) arrow.getShooter();
+                    if (player.getGameMode() == GameMode.CREATIVE || TFM_Util.inGod(player))
+                    {
+                        TFM_Util.playerMsg(player, "NO GM / GOD PVP!", ChatColor.DARK_RED);
+                        event.setCancelled(true);
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerJump(PlayerMoveEvent event)
+    {
+        Location from = event.getFrom();
+        Location to = event.getTo();
+        if(to.getBlockY() > from.getBlockY())
+        {
+            Player player = event.getPlayer();
+            if (TFM_Util.isDoubleJumper(player))
+            {
+                player.setAllowFlight(true);
+            }
+        }
+    }
+    
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerDrinkPotion(PlayerItemConsumeEvent event)
+    {   
+        if(event.getItem().getType() == Material.POTION && !TFM_Util.isHighRank(event.getPlayer()))
+        {
+            playerMsg(event.getPlayer(), "Please use /potion to add potion effects, thank you!", ChatColor.GREEN);
+            event.setCancelled(true);
+        }
+    }
+    
+    @EventHandler
+    public void onSplashPotion(PotionSplashEvent event)
+    {
+        if(event.getPotion().getEffects().contains(INVISIBILITY))
+        {
+            Projectile proj = (Projectile) event.getEntity();
+            if (proj.getShooter() instanceof Player)
+            {
+                Player player = (Player) proj.getShooter();
+                playerMsg(player, "You are not permitted to use invisibility potions!", ChatColor.RED);
+                event.setCancelled(true);
+            }
+        }
+    }
 }
