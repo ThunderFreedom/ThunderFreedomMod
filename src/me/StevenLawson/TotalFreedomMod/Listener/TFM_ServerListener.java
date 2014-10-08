@@ -86,20 +86,18 @@ public class TFM_ServerListener implements Listener
         if (!TFM_ConfigEntry.SERVER_COLORFUL_MOTD.getBoolean())
         {
             event.setMotd(TFM_Util.colorize(TFM_ConfigEntry.SERVER_MOTD.getString()
-                    .replace("%mcversion%", TFM_ServerInterface.getVersion())));
+            .replace("%mcversion%", TFM_ServerInterface.getVersion())));
             return;
         }
-        // Colorful MOTD
-        
         String message = String.format("Welcome to FreedomOP%s! - Fast, Free, Fun! Running on Spigot %s", TFM_Util.getPlayerFromIp(ip), TFM_ServerInterface.getVersion());
 
         final StringBuilder motd = new StringBuilder();
 
         for (String word : message.split(" "))
         {
-            motd.append(TFM_Util.randomChatColor()).append(word).append(" ");
+        motd.append(TFM_Util.randomChatColor()).append(word).append(" ");
         }
 
         event.setMotd(TFM_Util.colorize(motd.toString()));
-    }
-}
+   }
+ }
