@@ -28,13 +28,13 @@ public class Command_wildcard extends TFM_Command
 
         for (String block : blocked)
         {
-            if(baseCommand.toLowerCase().contains(block) && !TFM_Util.isHighRank(sender_p))
+            if (baseCommand.toLowerCase().contains(block) && !TFM_Util.isHighRank(sender))
             {
                 TFM_Util.playerMsg(sender, String.format("You cannot use %s in a WildCard!", block), ChatColor.RED);
                 return true;
             }
         }
-        
+
         if (TFM_CommandBlocker.isCommandBlocked(baseCommand, sender))
         {
             // CommandBlocker handles messages and broadcasts

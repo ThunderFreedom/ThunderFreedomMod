@@ -1,11 +1,5 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
-import me.StevenLawson.TotalFreedomMod.Commands.AdminLevel;
-import me.StevenLawson.TotalFreedomMod.Commands.CommandParameters;
-import me.StevenLawson.TotalFreedomMod.Commands.CommandPermissions;
-import me.StevenLawson.TotalFreedomMod.Commands.SourceType;
-import me.StevenLawson.TotalFreedomMod.Commands.TFM_Command;
-import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import me.StevenLawson.TotalFreedomMod.TFM_BanManager;
 import me.StevenLawson.TotalFreedomMod.TFM_CommandBlocker;
@@ -44,7 +38,6 @@ public class Command_fopm extends TFM_Command
             TFM_PlayerList.load();
             TFM_BanManager.load();
             TFM_CommandBlocker.load();
-
 
             final String message = String.format("%s v%s.%s reloaded.",
                     TotalFreedomMod.pluginName,

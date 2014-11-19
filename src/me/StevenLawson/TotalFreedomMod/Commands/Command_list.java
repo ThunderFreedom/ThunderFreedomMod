@@ -2,10 +2,11 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 
 import java.util.ArrayList;
 import java.util.List;
-import me.StevenLawson.TotalFreedomMod.TFM_PlayerRank;
 import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
+import me.StevenLawson.TotalFreedomMod.TFM_PlayerRank;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -70,7 +71,7 @@ public class Command_list extends TFM_Command
         onlineStats.append(ChatColor.BLUE).append(" players online.");
 
         final List<String> names = new ArrayList<String>();
-        for (Player player : server.getOnlinePlayers())
+        for (Player player : Bukkit.getOnlinePlayers())
         {
             if (listFilter == ListFilter.ADMINS && !TFM_AdminList.isSuperAdmin(player))
             {

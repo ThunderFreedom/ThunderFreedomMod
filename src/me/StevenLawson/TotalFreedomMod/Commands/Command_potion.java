@@ -96,7 +96,7 @@ public class Command_potion extends TFM_Command
         {
             if (args[0].equalsIgnoreCase("add"))
             {
-                if(args[2].equalsIgnoreCase("invisibility") && !TFM_Util.isHighRank(sender_p))
+                if (args[2].equalsIgnoreCase("invisibility") && !TFM_Util.isHighRank(sender))
                 {
                     TFM_Util.playerMsg(sender, "You are not allowed to use invisibility!", ChatColor.RED);
                     return true;

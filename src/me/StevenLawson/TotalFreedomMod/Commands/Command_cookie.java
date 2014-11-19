@@ -30,13 +30,13 @@ public class Command_cookie extends TFM_Command
             String color_code = Integer.toHexString(1 + randomGenerator.nextInt(14));
             output.append(ChatColor.COLOR_CHAR).append(color_code).append(word).append(" ");
         }
-        for(Player player : Bukkit.getOnlinePlayers())
+        for (Player player : Bukkit.getOnlinePlayers())
         {
-        PlayerInventory inv = player.getInventory();
-        ItemStack cookie = new ItemStack(Material.COOKIE, 1);
-        ItemMeta meta = cookie.getItemMeta();
-        cookie.setItemMeta(meta);
-        inv.addItem(cookie);
+            PlayerInventory inv = player.getInventory();
+            ItemStack cookie = new ItemStack(Material.COOKIE, 1);
+            ItemMeta meta = cookie.getItemMeta();
+            cookie.setItemMeta(meta);
+            inv.addItem(cookie);
         }
 
         TFM_Util.bcastMsg(output.toString());

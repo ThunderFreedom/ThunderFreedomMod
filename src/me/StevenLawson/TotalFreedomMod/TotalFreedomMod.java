@@ -1,20 +1,24 @@
 package me.StevenLawson.TotalFreedomMod;
 
-import me.StevenLawson.TotalFreedomMod.Commands.TFM_CommandHandler;
-import me.StevenLawson.TotalFreedomMod.World.TFM_Flatlands;
-import me.StevenLawson.TotalFreedomMod.World.TFM_AdminWorld;
-import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import me.StevenLawson.TotalFreedomMod.Commands.TFM_CommandHandler;
 import me.StevenLawson.TotalFreedomMod.Commands.TFM_CommandLoader;
+import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.HTTPD.TFM_HTTPD_Manager;
-import me.StevenLawson.TotalFreedomMod.Listener.*;
+import me.StevenLawson.TotalFreedomMod.Listener.TFM_BlockListener;
+import me.StevenLawson.TotalFreedomMod.Listener.TFM_EntityListener;
+import me.StevenLawson.TotalFreedomMod.Listener.TFM_PlayerListener;
+import me.StevenLawson.TotalFreedomMod.Listener.TFM_ServerListener;
+import me.StevenLawson.TotalFreedomMod.Listener.TFM_TelnetListener;
+import me.StevenLawson.TotalFreedomMod.Listener.TFM_WeatherListener;
+import me.StevenLawson.TotalFreedomMod.World.TFM_AdminWorld;
+import me.StevenLawson.TotalFreedomMod.World.TFM_Flatlands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
@@ -60,7 +64,7 @@ public class TotalFreedomMod extends JavaPlugin
     public static BukkitTask mutePurgeTask = null;
     public static boolean lockdownEnabled = false;
     public static Map<Player, Double> fuckoffEnabledFor = new HashMap<Player, Double>();
-
+    
     @Override
     public void onLoad()
     {
@@ -78,7 +82,6 @@ public class TotalFreedomMod extends JavaPlugin
     @Override
     public void onEnable()
     {
-        TFM_Log.info("Herro");
         TFM_Log.info("Made by Madgeek1450 and DarthSalamon");
         TFM_Log.info("Compiled " + buildDate + " by " + buildCreator);
 
@@ -101,7 +104,6 @@ public class TotalFreedomMod extends JavaPlugin
         TFM_PermbanList.load();
         TFM_PlayerList.load();
         TFM_BanManager.load();
-        TFM_Announcer.load();
 
         // Protect area
         // TODO: Refractor to single .load() method
@@ -165,7 +167,7 @@ public class TotalFreedomMod extends JavaPlugin
         // Start services
         TFM_ServiceChecker.start();
         TFM_HTTPD_Manager.start();
-
+        
         TFM_Log.info("Version " + pluginVersion + " for " + TFM_ServerInterface.COMPILE_NMS_VERSION + " enabled");
 
         // Metrics @ http://mcstats.org/plugin/TotalFreedomMod
@@ -192,7 +194,7 @@ public class TotalFreedomMod extends JavaPlugin
                     if (TFM_AdminList.isSuperAdmin(player))
                     {
                         TFM_PlayerData.getPlayerData(player).setCommandSpy(true);
-            }
+                    }
                 }
             }
         }.runTaskLater(plugin, 20L);

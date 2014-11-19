@@ -18,7 +18,7 @@ public class Command_trainingmode extends TFM_Command
         {
             return false;
         }
-        
+
         if (args[0].equalsIgnoreCase("off -s"))
         {
             TFM_ConfigEntry.TRAINING_SESSION.setBoolean(false);

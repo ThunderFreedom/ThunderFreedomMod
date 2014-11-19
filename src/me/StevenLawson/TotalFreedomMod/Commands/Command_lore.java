@@ -3,8 +3,6 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 import java.util.Arrays;
 import java.util.List;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
-import net.minecraft.util.org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -32,19 +30,19 @@ public class Command_lore extends TFM_Command
             List<String> lore;
             if (args.length == 1)
             {
-                lore = Arrays.asList(TFM_Util.colorize(args[0]));
+                lore = Arrays.asList(TFM_Util.colorize(args[0]).replaceAll("_", " "));
             }
             else if (args.length == 2)
             {
-                lore = Arrays.asList(TFM_Util.colorize(args[0]), TFM_Util.colorize(args[1]));
+                lore = Arrays.asList(TFM_Util.colorize(args[0]).replaceAll("_", " "), TFM_Util.colorize(args[1]).replaceAll("_", " "));
             }
             else if (args.length == 3)
             {
-                lore = Arrays.asList(TFM_Util.colorize(args[0]), TFM_Util.colorize(args[1]), TFM_Util.colorize(args[2]));
+                lore = Arrays.asList(TFM_Util.colorize(args[0]).replaceAll("_", " "), TFM_Util.colorize(args[1]).replaceAll("_", " "), TFM_Util.colorize(args[2]).replaceAll("_", " "));
             }
             else
             {
-                lore = Arrays.asList(TFM_Util.colorize(args[0]), TFM_Util.colorize(args[1]), TFM_Util.colorize(args[2]), TFM_Util.colorize(args[3]));
+                lore = Arrays.asList(TFM_Util.colorize(args[0].replaceAll("_", " ")), TFM_Util.colorize(args[1].replaceAll("_", " ")), TFM_Util.colorize(args[2].replaceAll("_", " ")), TFM_Util.colorize(args[3]).replaceAll("_", " "));
             }
             im.setLore(lore);
             i.setItemMeta(im);

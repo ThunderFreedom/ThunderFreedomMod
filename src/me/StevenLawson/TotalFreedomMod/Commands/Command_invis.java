@@ -62,7 +62,6 @@ public class Command_invis extends TFM_Command
             TFM_Util.playerMsg(sender, "Invisble players (" + players.size() + "): " + StringUtils.join(players, ", "));
         }
 
-
         return true;
     }
 }

@@ -11,24 +11,25 @@ import org.bukkit.entity.Player;
 @CommandParameters(description = "Shows your rank.", usage = "/<command>")
 public class Command_rank extends TFM_Command
 {
+
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        if (senderIsConsole && args.length < 1)
+        if(senderIsConsole && args.length < 1)
         {
-            for (Player player : server.getOnlinePlayers())
+            for(Player player : server.getOnlinePlayers())
             {
                 playerMsg(player.getName() + " is " + TFM_PlayerRank.fromSender(player).getLoginMessage());
             }
             return true;
         }
 
-        if (args.length > 1)
+        if(args.length > 1)
         {
             return false;
         }
 
-        if (args.length == 0)
+        if(args.length == 0)
         {
             playerMsg(sender.getName() + " is " + TFM_PlayerRank.fromSender(sender).getLoginMessage(), ChatColor.AQUA);
             return true;
@@ -36,12 +37,11 @@ public class Command_rank extends TFM_Command
 
         final Player player = getPlayer(args[0]);
 
-        if (player == null)
+        if(player == null)
         {
             sender.sendMessage(TotalFreedomMod.PLAYER_NOT_FOUND);
             return true;
         }
-
 
         playerMsg(player.getName() + " is " + TFM_PlayerRank.fromSender(player).getLoginMessage(), ChatColor.AQUA);
 

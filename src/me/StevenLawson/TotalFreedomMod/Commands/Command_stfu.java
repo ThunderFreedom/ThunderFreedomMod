@@ -13,6 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 @CommandParameters(description = "Mutes a player with brute force.", usage = "/<command> [<player> [-s] | list | purge | all]", aliases = "mute")
 public class Command_stfu extends TFM_Command
 {
+
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
@@ -40,96 +41,102 @@ public class Command_stfu extends TFM_Command
                 playerMsg("- none");
             }
         }
-        else if (args[0].equalsIgnoreCase("purge"))
-        {
-            TFM_Util.adminAction(sender.getName(), "Unmuting all players.", true);
-            TFM_PlayerData info;
-            int count = 0;
-            for (Player mp : server.getOnlinePlayers())
-            {
-                info = TFM_PlayerData.getPlayerData(mp);
-                if (info.isMuted())
-                {
-                    info.setMuted(false);
-                    count++;
-                }
-            }
-            if (TotalFreedomMod.mutePurgeTask != null)
-            {
-                TotalFreedomMod.mutePurgeTask.cancel();
-            }
-            playerMsg("Unmuted " + count + " players.");
-        }
-        else if (args[0].equalsIgnoreCase("all"))
-        {
-            TFM_Util.adminAction(sender.getName(), "Muting all non-Superadmins", true);
-
-            TFM_PlayerData playerdata;
-            int counter = 0;
-            for (Player player : server.getOnlinePlayers())
-            {
-                if (!TFM_AdminList.isSuperAdmin(player))
-                {
-                    playerdata = TFM_PlayerData.getPlayerData(player);
-                    playerdata.setMuted(true);
-                    counter++;
-                }
-            }
-
-            if (TotalFreedomMod.mutePurgeTask != null)
-            {
-                TotalFreedomMod.mutePurgeTask.cancel();
-            }
-
-            TotalFreedomMod.mutePurgeTask = new BukkitRunnable()
-            {
-                @Override
-                public void run()
-                {
-                    TFM_Util.adminAction("MuteTimer", "Unmuting all players", false);
-                    for (Player player : server.getOnlinePlayers())
-                    {
-                        TFM_PlayerData.getPlayerData(player).setMuted(false);
-                    }
-                }
-            }.runTaskLater(plugin, 20L * 60L * 5L);
-
-            playerMsg("Muted " + counter + " players.");
-        }
         else
         {
-            final Player player = getPlayer(args[0]);
-
-            if (player == null)
+            if (args[0].equalsIgnoreCase("purge"))
             {
-                sender.sendMessage(TFM_Command.PLAYER_NOT_FOUND);
-                return true;
-            }
-
-            TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
-            if (playerdata.isMuted())
-            {
-                TFM_Util.adminAction(sender.getName(), "Unmuting " + player.getName(), true);
-                playerdata.setMuted(false);
-                playerMsg("Unmuted " + player.getName());
+                TFM_Util.adminAction(sender.getName(), "Unmuting all players.", true);
+                TFM_PlayerData info;
+                int count = 0;
+                for (Player mp : server.getOnlinePlayers())
+                {
+                    info = TFM_PlayerData.getPlayerData(mp);
+                    if (info.isMuted())
+                    {
+                        info.setMuted(false);
+                        count++;
+                    }
+                }
+                if (TotalFreedomMod.mutePurgeTask != null)
+                {
+                    TotalFreedomMod.mutePurgeTask.cancel();
+                }
+                playerMsg("Unmuted " + count + " players.");
             }
             else
             {
-                if (!TFM_AdminList.isSuperAdmin(player))
+                if (args[0].equalsIgnoreCase("all"))
                 {
-                    TFM_Util.adminAction(sender.getName(), "Muting " + player.getName(), true);
-                    playerdata.setMuted(true);
+                    TFM_Util.adminAction(sender.getName(), "Muting all non-Superadmins", true);
 
-                    if (args.length == 2 && args[1].equalsIgnoreCase("-s"))
+                    TFM_PlayerData playerdata;
+                    int counter = 0;
+                    for (Player player : server.getOnlinePlayers())
                     {
-                        Command_smite.smite(player);
+                        if (!TFM_AdminList.isSuperAdmin(player))
+                        {
+                            playerdata = TFM_PlayerData.getPlayerData(player);
+                            playerdata.setMuted(true);
+                            counter++;
+                        }
                     }
 
-                    playerMsg("Muted " + player.getName());
+                    if (TotalFreedomMod.mutePurgeTask != null)
+                    {
+                        TotalFreedomMod.mutePurgeTask.cancel();
+                    }
+
+                    TotalFreedomMod.mutePurgeTask = new BukkitRunnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            TFM_Util.adminAction("MuteTimer", "Unmuting all players", false);
+                            for (Player player : server.getOnlinePlayers())
+                            {
+                                TFM_PlayerData.getPlayerData(player).setMuted(false);
+                            }
+                        }
+                    }.runTaskLater(plugin, 20L * 60L * 5L);
+
+                    playerMsg("Muted " + counter + " players.");
                 }
                 else
                 {
-                    playerMsg(player.getName() + " is a superadmin, and can't be muted.");
+                    final Player player = getPlayer(args[0]);
+
+                    if (player == null)
+                    {
+                        sender.sendMessage(TFM_Command.PLAYER_NOT_FOUND);
+                        return true;
+                    }
+
+                    TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
+                    if (playerdata.isMuted())
+                    {
+                        TFM_Util.adminAction(sender.getName(), "Unmuting " + player.getName(), true);
+                        playerdata.setMuted(false);
+                        playerMsg("Unmuted " + player.getName());
+                    }
+                    else
+                    {
+                        if (!TFM_AdminList.isSuperAdmin(player))
+                        {
+                            TFM_Util.adminAction(sender.getName(), "Muting " + player.getName(), true);
+                            playerdata.setMuted(true);
+
+                            if (args.length == 2 && args[1].equalsIgnoreCase("-s"))
+                            {
+                                Command_smite.smite(player);
+                            }
+
+                            playerMsg("Muted " + player.getName());
+                        }
+                        else
+                        {
+                            playerMsg(player.getName() + " is a superadmin, and can't be muted.");
+                        }
+                    }
                 }
             }
         }

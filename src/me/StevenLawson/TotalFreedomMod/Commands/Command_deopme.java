@@ -13,9 +13,9 @@ public class Command_deopme extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-     sender.setOp(false);
-     TFM_Util.adminAction(sender.getName(), "Deopping themself.", true);
-     sender.sendMessage(TotalFreedomMod.YOU_ARE_NOT_OP);
-     return true;
+        sender.setOp(false);
+        TFM_Util.adminAction(sender.getName(), "Deopping themself.", true);
+        sender.sendMessage(TotalFreedomMod.YOU_ARE_NOT_OP);
+        return true;
     }
 }

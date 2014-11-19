@@ -64,7 +64,7 @@ public class Command_sys extends TFM_Command
                 }
                 return true;
             }
-            
+
             else if (args[0].equalsIgnoreCase("sadelete") || args[0].equalsIgnoreCase("del") || args[0].equalsIgnoreCase("remove"))
             {
 
@@ -81,10 +81,10 @@ public class Command_sys extends TFM_Command
                 TFM_Util.adminAction(sender.getName(), "Removing " + targetName + " from the superadmin list", true);
                 TFM_AdminList.removeSuperadmin(Bukkit.getOfflinePlayer(targetName));
 
-             return true;
+                return true;
             }
-        return true;
+            return true;
         }
-    return true;
+        return true;
     }
 }

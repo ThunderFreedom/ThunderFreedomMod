@@ -75,7 +75,6 @@ public class TFM_PlayerData
             return playerdata;
         }
 
-
         Iterator<Entry<Player, TFM_PlayerData>> it = userinfo.entrySet().iterator();
         while (it.hasNext())
         {
@@ -164,16 +163,17 @@ public class TFM_PlayerData
     {
         return this.inGod;
     }
-    
+
     public void setGod(boolean state)
     {
         this.inGod = state;
     }
+
     public boolean isDoubleJumper()
     {
         return this.isDoubleJumper;
     }
-    
+
     public void setDoubleJumper(boolean state)
     {
         this.isDoubleJumper = state;
@@ -525,25 +525,27 @@ public class TFM_PlayerData
     {
         return this.tag;
     }
-    
+
     public int getWarning()
     {
         return this.warning;
     }
-    
+
     public void incrementWarnings()
     {
         this.warning++;
-        
+
         if (warning >= 2)
         {
             this.player.getWorld().strikeLightning(this.player.getLocation());
             this.player.sendMessage(ChatColor.RED + "You have been warned at least twice now, make sure to read the rules at http://freedomop.boards.net/");
-            
+
         }
         {
-        if (warning >= 3)
-            this.player.kickPlayer("You've been kicked due to you have 3 warnings. Please read the rules at http://freedomop.boards.net/");
+            if (warning >= 3)
+            {
+                this.player.kickPlayer("You've been kicked due to you have 3 warnings. Please read the rules at http://freedomop.boards.net/");
+            }
         }
     }
 }

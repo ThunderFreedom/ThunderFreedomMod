@@ -54,7 +54,6 @@ public class Command_creative extends TFM_Command
                 return true;
             }
 
-
             player = getPlayer(args[0]);
 
             if (player == null)
@@ -67,7 +66,7 @@ public class Command_creative extends TFM_Command
         playerMsg("Setting " + player.getName() + " to game mode 'Creative'.");
         playerMsg(player, sender.getName() + " set your game mode to 'Creative'.");
         player.setGameMode(GameMode.CREATIVE);
-        
+
         return true;
     }
 }

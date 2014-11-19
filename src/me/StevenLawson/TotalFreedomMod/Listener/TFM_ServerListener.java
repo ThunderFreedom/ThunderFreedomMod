@@ -48,7 +48,7 @@ public class TFM_ServerListener implements Listener
      }
      }
      }*/
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onServerPing(ServerListPingEvent event)
     {
         final String ip = event.getAddress().getHostAddress();
@@ -58,46 +58,48 @@ public class TFM_ServerListener implements Listener
             event.setMotd(ChatColor.RED + "You are banned.");
             return;
         }
-        
-        if (TFM_ConfigEntry.TRAINING_SESSION.getBoolean())
-        {
-            event.setMotd(ChatColor.RED + "FreedomOP is in a Training Session.");
-            return;
-        }
 
         if (TFM_ConfigEntry.ADMIN_ONLY_MODE.getBoolean())
         {
-            event.setMotd(ChatColor.RED + "FreedomOP is closed.");
+            event.setMotd(ChatColor.RED + "Server is closed.");
             return;
         }
-      
+
         if (Bukkit.hasWhitelist())
         {
-            event.setMotd(ChatColor.RED + "FreedomOP has the Whitelist enabled.");
+            event.setMotd(ChatColor.RED + "Whitelist enabled.");
             return;
         }
 
         if (Bukkit.getOnlinePlayers().length >= Bukkit.getMaxPlayers())
         {
-            event.setMotd(ChatColor.RED + "FreedomOP is currently full.");
+            event.setMotd(ChatColor.RED + "Server is full.");
             return;
         }
+
+        /*if (TFM_ConfigEntry.ENABLE_CHAOS.getBoolean())
+        {
+            event.setMotd(ChatColor.RED + "Server is currently in chaos mode, prepare for some crazy shit!");
+            return;
+        }*/
 
         if (!TFM_ConfigEntry.SERVER_COLORFUL_MOTD.getBoolean())
         {
             event.setMotd(TFM_Util.colorize(TFM_ConfigEntry.SERVER_MOTD.getString()
-            .replace("%mcversion%", TFM_ServerInterface.getVersion())));
+                    .replace("%mcversion%", TFM_ServerInterface.getVersion())));
             return;
         }
-        String message = String.format("Welcome to FreedomOP%s! - Fast, Free, Fun! Running on Spigot %s", TFM_Util.getPlayerFromIp(ip), TFM_ServerInterface.getVersion());
+        // Colorful MOTD
+
+        String message = String.format("Welcome to FreedomOp%s! - Fun, Free and Easy! Running on CraftBukkit for Minecraft 1.7.10!", TFM_Util.getPlayerFromIp(ip));
 
         final StringBuilder motd = new StringBuilder();
 
         for (String word : message.split(" "))
         {
-        motd.append(TFM_Util.randomChatColor()).append(word).append(" ");
+            motd.append(TFM_Util.randomChatColor()).append(word).append(" ");
         }
 
         event.setMotd(TFM_Util.colorize(motd.toString()));
-   }
- }
+    }
+}

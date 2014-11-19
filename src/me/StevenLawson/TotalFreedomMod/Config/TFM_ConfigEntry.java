@@ -84,84 +84,84 @@ public enum TFM_ConfigEntry
     AUTO_ENTITY_WIPE(Boolean.class, "auto_wipe"),
     CONSOLE_IS_SENIOR(Boolean.class, "console_is_senior");
     //
-  private final Class<?> type;
-  private final String configName;
-  
-  private TFM_ConfigEntry(Class<?> type, String configName)
-  {
-    this.type = type;
-    this.configName = configName;
-  }
-  
-  public Class<?> getType()
-  {
+    private final Class<?> type;
+    private final String configName;
+
+    private TFM_ConfigEntry(Class<?> type, String configName)
+    {
+        this.type = type;
+        this.configName = configName;
+    }
+
+    public Class<?> getType()
+    {
         return type;
-  }
-  
-  public String getConfigName()
-  {
+    }
+
+    public String getConfigName()
+    {
         return configName;
-  }
-  
-  public String getString()
-  {
-    return TFM_MainConfig.getString(this);
-  }
-  
-  public String setString(String value)
-  {
-    TFM_MainConfig.setString(this, value);
-    return value;
-  }
-  
-  public Double getDouble()
-  {
-    return TFM_MainConfig.getDouble(this);
-  }
-  
-  public Double setDouble(Double value)
-  {
-    TFM_MainConfig.setDouble(this, value);
-    return value;
-  }
-  
-  public Boolean getBoolean()
-  {
-    return TFM_MainConfig.getBoolean(this);
-  }
-  
-  public Boolean setBoolean(Boolean value)
-  {
-    TFM_MainConfig.setBoolean(this, value);
-    return value;
-  }
-  
-  public Integer getInteger()
-  {
-    return TFM_MainConfig.getInteger(this);
-  }
-  
-  public Integer setInteger(Integer value)
-  {
-    TFM_MainConfig.setInteger(this, value);
-    return value;
-  }
-  
-  public List<?> getList()
-  {
-    return TFM_MainConfig.getList(this);
-  }
-  
-  public static TFM_ConfigEntry findConfigEntry(String name)
-  {
-    name = name.toLowerCase().replace("_", "");
+    }
+
+    public String getString()
+    {
+        return TFM_MainConfig.getString(this);
+    }
+
+    public String setString(String value)
+    {
+        TFM_MainConfig.setString(this, value);
+        return value;
+    }
+
+    public Double getDouble()
+    {
+        return TFM_MainConfig.getDouble(this);
+    }
+
+    public Double setDouble(Double value)
+    {
+        TFM_MainConfig.setDouble(this, value);
+        return value;
+    }
+
+    public Boolean getBoolean()
+    {
+        return TFM_MainConfig.getBoolean(this);
+    }
+
+    public Boolean setBoolean(Boolean value)
+    {
+        TFM_MainConfig.setBoolean(this, value);
+        return value;
+    }
+
+    public Integer getInteger()
+    {
+        return TFM_MainConfig.getInteger(this);
+    }
+
+    public Integer setInteger(Integer value)
+    {
+        TFM_MainConfig.setInteger(this, value);
+        return value;
+    }
+
+    public List<?> getList()
+    {
+        return TFM_MainConfig.getList(this);
+    }
+
+    public static TFM_ConfigEntry findConfigEntry(String name)
+    {
+        name = name.toLowerCase().replace("_", "");
         for (TFM_ConfigEntry entry : values())
         {
             if (entry.toString().toLowerCase().replace("_", "").equals(name))
             {
-        return entry;
-      }
+                return entry;
+            }
+        }
+        return null;
     }
-    return null;
-  }
 }

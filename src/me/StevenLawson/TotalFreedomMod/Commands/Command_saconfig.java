@@ -179,7 +179,6 @@ public class Command_saconfig extends TFM_Command
 
             String targetName = args[1];
 
-
             final Player player = getPlayer(targetName);
 
             if (player != null)

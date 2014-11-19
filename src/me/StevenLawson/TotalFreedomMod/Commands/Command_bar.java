@@ -18,7 +18,7 @@ public class Command_bar extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        if (!TFM_Util.isHighRank(sender_p))
+        if (!TFM_Util.isHighRank(sender))
         {
             return true;
         }
