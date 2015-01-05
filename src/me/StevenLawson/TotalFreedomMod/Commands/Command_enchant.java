@@ -1,7 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
-import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
@@ -9,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 @CommandPermissions(level = AdminLevel.OP, source = SourceType.ONLY_IN_GAME)
-@CommandParameters(description = "Enchant items.", usage = "/<command> <list | addall | reset | add <name> | remove <name>>")
+@CommandParameters(description = "Enchant items.", usage = "/<command> <list | addall | reset | add <name> | remove <name> | god <level>>")
 public class Command_enchant extends TFM_Command
 {
     @Override
@@ -84,6 +83,22 @@ public class Command_enchant extends TFM_Command
             if (args.length < 2)
             {
                 return false;
+            }
+            if(args[0].equalsIgnoreCase("god"))
+            {
+                int level;
+                try
+                {
+                    level = Integer.parseInt(args[1]);
+                }
+                catch(Exception ex)
+                {
+                    return false;
+                }
+                for(Enchantment ench : Enchantment.values())
+                {
+                    itemInHand.addUnsafeEnchantment(ench, level);
+                }
             }
 
             Enchantment ench = null;

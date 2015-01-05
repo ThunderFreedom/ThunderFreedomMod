@@ -1,9 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
-import me.confuser.barapi.BarAPI;
-import net.minecraft.util.org.apache.commons.lang3.ArrayUtils;
-import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -19,10 +16,12 @@ public class Command_admininfo extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        TFM_Util.playerMsg(sender_p, "So you wish to apply for admin do you?", ChatColor.GREEN);
-        TFM_Util.playerMsg(sender_p, "Sadly the applications are closed AGAIN", ChatColor.RED);
-        TFM_Util.playerMsg(sender_p, "Please read more at http://freedomop.boards.net/thread/2768/all-applications-on-hold", ChatColor.RED);
-        //TFM_Util.playerMsg(sender_p, "Don't beg to look at the application, it'll shorten the percentage on if it can get accepted.", ChatColor.GREEN);
+        TFM_Util.playerMsg(sender_p, "So you wish to apply for admin do you?", ChatColor.BLUE);
+        TFM_Util.playerMsg(sender_p, "Go to our forums at http://freedomop.boards.net", ChatColor.GREEN);
+        TFM_Util.playerMsg(sender_p, "Create a thread in the Super Admin applications forum following the template:", ChatColor.GREEN);
+        TFM_Util.playerMsg(sender_p, "http://freedomop.boards.net/thread/249/admin-application-template-revised-july", ChatColor.GREEN);
+        TFM_Util.playerMsg(sender_p, "wait for admin responses on your application and an eventual verfdict.", ChatColor.GREEN);
+        TFM_Util.playerMsg(sender_p, "Don't ask for admins to look at the application, it will lower your chances of being accepted.", ChatColor.RED);
         return true;
     }
 }

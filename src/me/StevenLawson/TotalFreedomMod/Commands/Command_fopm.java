@@ -57,6 +57,7 @@ public class Command_fopm extends TFM_Command
         {
             developers.append(", " + dev);
         }
+        developers.append(".");
         playerMsg(developers.toString(), ChatColor.AQUA);
         playerMsg("Visit " + ChatColor.AQUA + "http://freedomop.boards.net/" + ChatColor.GREEN + " to visit our forums and get support!", ChatColor.GREEN);
 

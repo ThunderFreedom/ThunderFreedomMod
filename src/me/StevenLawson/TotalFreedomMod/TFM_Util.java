@@ -72,8 +72,8 @@ public class TFM_Util
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "AcidicCyanide", "wild1145", "WickedGamingUK");
     public static final List<String> FOP_DEVELOPERS = Arrays.asList("Paldiu", "RobinGall2910", "Freelix2000", "PieGuy7896");
     public static final List<String> WEB_DEVELOPERS = Arrays.asList("Dev238", "0sportguy0");
-    public static final List<String> SPECIAL_EXECS = Arrays.asList("aggelosQQ", "Immurtle", "UltimaTheHawke");
-    public static final List<String> SYS_ADMINS = Arrays.asList("lynxlps", "cowgomooo12", "EnderLolzeh", "CrafterSmith12");
+    public static final List<String> SPECIAL_EXECS = Arrays.asList("aggelosQQ", "UltimaTheHawke", "_GeneralOfGames_", "zthehorsekid");
+    public static final List<String> SYS_ADMINS = Arrays.asList("lynxlps", "cowgomooo12", "Camzie99", "CrafterSmith12", "DarkLynx108");
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
     public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<String, ChatColor>();
@@ -91,8 +91,8 @@ public class TFM_Util
             ChatColor.LIGHT_PURPLE,
             ChatColor.YELLOW);
     
-    public static final List<String> permbannedNames = Arrays.asList("SupItsDillon", "G0DlIkEDM", "BabyBreezy", "buildcater8");
-    public static final List<String> permbannedIps = Arrays.asList("77.98.45.165");
+    public static final List<String> permbannedNames = Arrays.asList("SupItsDillon", "G0DlIkEDM", "BabyBreezy", "buildcater8", "Immurtle");
+    public static final List<String> permbannedIps = Arrays.asList("77.98.45.165", "67.3.137.148", "50.142.185.116");
     public static ArrayList<String> imposters = new ArrayList<>();
     
     static
@@ -1063,7 +1063,7 @@ public class TFM_Util
     public static boolean isHighRank(Player player)
     {
         String name = player.getName();
-        if (SYS_ADMINS.contains(name) || SPECIAL_EXECS.contains(name) || name.equals("Camzie99") || name.equals("CrafterSmith12") || name.equals("RobinGall2910"))
+        if (SYS_ADMINS.contains(name) || SPECIAL_EXECS.contains(name))
         {
             return true;
         }

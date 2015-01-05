@@ -37,9 +37,9 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -62,6 +62,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 import static org.bukkit.potion.PotionEffectType.INVISIBILITY;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -578,74 +579,76 @@ public class TFM_PlayerListener implements Listener
             String message = event.getMessage().trim();
 
             final TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
-
-            // Check for spam
-            final Long lastRan = TFM_Heartbeat.getLastRan();
-            if (lastRan == null || lastRan + TotalFreedomMod.HEARTBEAT_RATE * 1000L < System.currentTimeMillis())
+            if(!(TFM_AdminList.isSuperAdmin(player)))
             {
-                //TFM_Log.warning("Heartbeat service timeout - can't check block place/break rates.");
-            }
-            else
-            {
-                if (playerdata.incrementAndGetMsgCount() > MSG_PER_HEARTBEAT)
+                // Check for spam
+                final Long lastRan = TFM_Heartbeat.getLastRan();
+                if (lastRan == null || lastRan + TotalFreedomMod.HEARTBEAT_RATE * 1000L < System.currentTimeMillis())
                 {
-                    TFM_Util.bcastMsg(player.getName() + " was automatically kicked for spamming chat.", ChatColor.RED);
-                    TFM_Util.autoEject(player, "Kicked for spamming chat.");
-
-                    playerdata.resetMsgCount();
-
-                    event.setCancelled(true);
-                    return;
+                    //TFM_Log.warning("Heartbeat service timeout - can't check block place/break rates.");
                 }
-            }
-
-            // Check for message repeat
-            if (playerdata.getLastMessage().equalsIgnoreCase(message))
-            {
-                TFM_Util.playerMsg(player, "Please do not repeat messages.");
-                event.setCancelled(true);
-                return;
-            }
-
-            playerdata.setLastMessage(message);
-
-            // Check for muted
-            if (playerdata.isMuted())
-            {
-                if (!TFM_AdminList.isSuperAdmin(player))
+                else
                 {
-                    player.sendMessage(ChatColor.RED + "You are muted, STFU!");
-                    event.setCancelled(true);
-                    return;
-                }
-
-                playerdata.setMuted(false);
-            }
-
-            // Strip color from messages
-            message = ChatColor.stripColor(message);
-
-            // Truncate messages that are too long - 100 characters is vanilla client max
-            if (message.length() > 100)
-            {
-                message = message.substring(0, 100);
-                TFM_Util.playerMsg(player, "Message was shortened because it was too long to send.");
-            }
-
-            // Check for caps
-            if (message.length() >= 6)
-            {
-                int caps = 0;
-                for (char c : message.toCharArray())
-                {
-                    if (Character.isUpperCase(c))
+                    if (playerdata.incrementAndGetMsgCount() > MSG_PER_HEARTBEAT)
                     {
-                        caps++;
+                        TFM_Util.bcastMsg(player.getName() + " was automatically kicked for spamming chat.", ChatColor.RED);
+                        TFM_Util.autoEject(player, "Kicked for spamming chat.");
+
+                        playerdata.resetMsgCount();
+
+                        event.setCancelled(true);
+                        return;
                     }
                 }
-                if (((float) caps / (float) message.length()) > 0.65) //Compute a ratio so that longer sentences can have more caps.
+
+                // Check for message repeat
+                if (playerdata.getLastMessage().equalsIgnoreCase(message))
                 {
-                    message = message.toLowerCase();
+                    TFM_Util.playerMsg(player, "Please do not repeat messages.");
+                    event.setCancelled(true);
+                    return;
+                }
+
+                playerdata.setLastMessage(message);
+
+                // Check for muted
+                if (playerdata.isMuted())
+                {
+                    if (!TFM_AdminList.isSuperAdmin(player))
+                    {
+                        player.sendMessage(ChatColor.RED + "You are muted, STFU!");
+                        event.setCancelled(true);
+                        return;
+                    }
+
+                    playerdata.setMuted(false);
+                }
+
+                // Strip color from messages
+                message = ChatColor.stripColor(message);
+
+                // Truncate messages that are too long - 100 characters is vanilla client max
+                if (message.length() > 100)
+                {
+                    message = message.substring(0, 100);
+                    TFM_Util.playerMsg(player, "Message was shortened because it was too long to send.");
+                }
+
+                // Check for caps
+                if (message.length() >= 6)
+                {
+                    int caps = 0;
+                    for (char c : message.toCharArray())
+                    {
+                        if (Character.isUpperCase(c))
+                        {
+                            caps++;
+                        }
+                    }
+                    if (((float) caps / (float) message.length()) > 0.65) //Compute a ratio so that longer sentences can have more caps.
+                    {
+                        message = message.toLowerCase();
+                    }
                 }
             }
             else
@@ -682,7 +685,7 @@ public class TFM_PlayerListener implements Listener
         String command = event.getMessage();
         final Player player = event.getPlayer();
 
-        if (command.contains("&k") || command.contains("&m") || command.contains("&o") || command.contains("&n") && !TFM_AdminList.isSuperAdmin(player))
+        if ((command.contains("&k") || command.contains("&m") || command.contains("&o") || command.contains("&n")) && !TFM_AdminList.isSuperAdmin(player))
         {
             event.setCancelled(true);
             TFM_Util.playerMsg(player, ChatColor.RED + "You are not permitted to use &o, &k, &n or &m!");
@@ -930,6 +933,7 @@ public class TFM_PlayerListener implements Listener
         final Player player = event.getPlayer();
 
         String name = player.getName();
+        String name2;
         
         if(name.equals("SupItsDillon"))
         {
@@ -940,15 +944,15 @@ public class TFM_PlayerListener implements Listener
         {
             TFM_PlayerData.getPlayerData(player).setCommandSpy(true);
         }
-        if (player.getName().equals("Camzie99"))
+        if (player.getName().equals("Camzie99") || player.getName().equals("lynxlps") || player.getName().equals("DarkLynx108"))
         {
             player.setPlayerListName(ChatColor.BLUE + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&9FOPM-Creator&8]");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&9Owner&8]");
         }
         else if (player.getName().equals("CrafterSmith12"))
         {
             player.setPlayerListName(ChatColor.BLUE + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&9Owner&8]");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&9Founder&8]");
 
         }
         else if (player.getName().equalsIgnoreCase("aggelosQQ"))
@@ -978,12 +982,12 @@ public class TFM_PlayerListener implements Listener
 
         else if (TFM_Util.SYS_ADMINS.contains(player.getName()))
         {
-            player.setPlayerListName(ChatColor.DARK_RED + player.getName());
+            player.setPlayerListName((ChatColor.YELLOW + player.getName()).substring(0, Math.min(player.getName().length(), 16)));
             TFM_PlayerData.getPlayerData(player).setTag("&8[&dSys-Admin&8]");
         }
         else if (TFM_Util.SPECIAL_EXECS.contains(player.getName()))
         {
-            player.setPlayerListName(ChatColor.YELLOW + player.getName());
+            name2 = (ChatColor.YELLOW + player.getName()).substring(0, Math.min(player.getName().length(), 16));
             TFM_PlayerData.getPlayerData(player).setTag("&8[&cSpecial-Exec&8]");
         }
         else if (TFM_Util.FOP_DEVELOPERS.contains(player.getName()))
@@ -1102,14 +1106,17 @@ public class TFM_PlayerListener implements Listener
     @EventHandler
     public void onSplashPotion(PotionSplashEvent event)
     {
-        if (event.getPotion().getEffects().contains(INVISIBILITY))
+        for(PotionEffect effect : event.getPotion().getEffects())
         {
-            Projectile proj = (Projectile) event.getEntity();
-            if (proj.getShooter() instanceof Player)
+            if (effect.getType() == INVISIBILITY)
             {
-                Player player = (Player) proj.getShooter();
-                playerMsg(player, "You are not permitted to use invisibility potions!", ChatColor.RED);
-                event.setCancelled(true);
+                Entity e = event.getEntity();
+                if (e instanceof Player)
+                {
+                    Player player = (Player) e;
+                    playerMsg(player, "You are not permitted to use invisibility potions!", ChatColor.RED);
+                    event.setCancelled(true);
+                }
             }
         }
     }
