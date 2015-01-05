@@ -961,7 +961,7 @@ public class TFM_PlayerListener implements Listener
             TFM_EssentialsBridge.setNickname(player.getName(), ChatColor.DARK_RED + "ag" + ChatColor.RED + "ge" + ChatColor.DARK_BLUE + "lo" + ChatColor.BLUE + "sQ" + ChatColor.GREEN + "Q");
             event.setJoinMessage(ChatColor.YELLOW + "aggelosQQ joined the game.");
             TFM_PlayerData.getPlayerData(player).setTag("&8[&eSpecial Executive&8]");
-            player.chat("Hey everyone, I'm a Special Executive and the Lead Web Developer.");
+            player.chat("Hey everyone, I'm a Special Executive and the Associated Server Liason.");
         }
         else if (player.getName().equalsIgnoreCase("PieGuy7896"))
         {
