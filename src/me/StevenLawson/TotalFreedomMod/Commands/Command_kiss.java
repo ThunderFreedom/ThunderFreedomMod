@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 @CommandParameters(description = "Kiss those who you love :).", usage = "/<command> <player>")
 public class Command_kiss extends TFM_Command
 {
+    //This command requires CamUtils, please download it from http://files.cam-tech.net!
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
@@ -32,8 +33,8 @@ public class Command_kiss extends TFM_Command
         sender_p.teleport(target.getLocation().add(1, 0, 0));
         sender_p.getLocation().setYaw(-target.getLocation().getYaw());
         sender_p.getLocation().setPitch(-target.getLocation().getPitch());
-        sender_p.playSound(sender_p.getLocation(), Sound.VILLAGER_YES, 10, 10);
-        target.playSound(target.getLocation(), Sound.VILLAGER_YES, 10, 10);
+        sender_p.playSound(sender_p.getLocation(), Sound.CAT_MEOW, 10, 10);
+        target.playSound(target.getLocation(), Sound.CAT_MEOW, 10, 10);
         CUtils_Particle effect = CUtils_Particle.HEART;
         CUtils_Particle.sendToLocation(effect, target.getLocation(), 1, 1, 1, 2, 10);
         return true;

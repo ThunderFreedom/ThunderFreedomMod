@@ -22,7 +22,7 @@ public class Command_wildcard extends TFM_Command
             return false;
         }
 
-        List<String> blocked = Arrays.asList("doom", "gtfo", "wildcard", "smite", "forcechat", "fchat", "fc", "explode", "hug");
+        List<String> blocked = Arrays.asList("doom", "gtfo", "wildcard", "smite", "forcechat", "fchat", "fc", "explode", "hug", "kiss");
 
         String baseCommand = StringUtils.join(args, " ");
 
