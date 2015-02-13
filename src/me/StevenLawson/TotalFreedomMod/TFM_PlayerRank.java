@@ -25,7 +25,8 @@ public enum TFM_PlayerRank
     TELNET("a " + ChatColor.DARK_GREEN + "Super Telnet Admin", ChatColor.DARK_GREEN + "[STA]"),
     SENIOR("a " + ChatColor.LIGHT_PURPLE + "Senior Admin", ChatColor.LIGHT_PURPLE + "[SrA]"),
     OWNER("one of the " + ChatColor.BLUE + "Owners", ChatColor.BLUE + "[Owner]"),
-    CONSOLE("the " + ChatColor.DARK_PURPLE + "Console", ChatColor.DARK_PURPLE + "[Console]");
+    CONSOLE("the " + ChatColor.DARK_PURPLE + "Console", ChatColor.DARK_PURPLE + "[Console]"),
+    LEADDEVELOPER("the " + ChatColor.DARK_PURPLE + "Lead Developer", ChatColor.DARK_PURPLE + "[Lead Dev]");
     private String loginMessage;
     private String prefix;
 
@@ -79,9 +80,14 @@ public enum TFM_PlayerRank
             return FOUNDER;
         }
 
-        else if (sender.getName().equals("Camzie99") || sender.getName().equals("DarkLynx108") || sender.getName().equals("lynxlps"))
+        else if (sender.getName().equals("Camzie99") || sender.getName().equals("DarkLynx108") || sender.getName().equals("lynxlps") | sender.getName().equals("reuben4545"))
         {
             return OWNER;
+        }
+        
+        else if (sender.getName().equals("Elmon11") || sender.getName().equals("ThePheonixBlader"))
+        {
+            return LEADDEVELOPER;
         }
         
         else if (SYS_ADMINS.contains(sender.getName()))
