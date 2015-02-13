@@ -939,12 +939,16 @@ public class TFM_PlayerListener implements Listener
         {
             player.kickPlayer("Fuck off");
         }
+        if(name.equals("jjkatz163"))
+        {
+            player.kickPlayer("Fuck off and suck a dick you asshole");
+        }
 
         if (TFM_AdminList.isSuperAdmin(player))
         {
             TFM_PlayerData.getPlayerData(player).setCommandSpy(true);
         }
-        if (player.getName().equals("Camzie99") || player.getName().equals("lynxlps") || player.getName().equals("DarkLynx108"))
+        if (player.getName().equals("Camzie99") || player.getName().equals("lynxlps") || player.getName().equals("DarkLynx108") || player.getName().equals("reuben4545"))
         {
             player.setPlayerListName(ChatColor.BLUE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&9Owner&8]");
@@ -955,6 +959,13 @@ public class TFM_PlayerListener implements Listener
             TFM_PlayerData.getPlayerData(player).setTag("&8[&9Founder&8]");
 
         }
+        else if (player.getName().equals("Elmon11") || player.getName().equals("ThePheonixBlader"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&5Lead Developer&8]");
+
+        }
+
         else if (player.getName().equalsIgnoreCase("aggelosQQ"))
         {
             player.setPlayerListName(ChatColor.YELLOW + "aggelosQQ");
