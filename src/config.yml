@@ -10,7 +10,7 @@ server:
   address: fop.us.to
 
   # Shown at the server list
-  motd: FreedomOP &8- Fun, Free, and Easy!
+  motd: RubyFreedom &8- Fun, Free, and Easy!
 
   # Every word in the MOTD will be a different color unless prefixed by a color code
   colorful_motd: true
@@ -205,10 +205,10 @@ announcer:
   interval: 30
 
   # Prefix for all announcements
-  prefix: '&5[&eTotalFreedom&5] &b'
+  prefix: '&5[&a&lRuby&bFreedom&5] &b'
 
   announcements:
-    - 'Be sure to visit our forums at &6http://totalfreedom.boards.net/'
+    - 'Be sure to visit our forums at &6http://rubyfreedom.boards.net/'
     - 'You can always review the server rules here: &6http://totalfreedom.me/'
     - 'If you aren''t OP, be sure to ask!'
 
