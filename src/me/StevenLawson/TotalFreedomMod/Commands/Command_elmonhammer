@@ -42,7 +42,7 @@ import org.bukkit.util.Vector;
 
 
 
-@CommandPermissions(level = AdminLevel.OWNER, source = SourceType.ONLY_IN_GAME)
+@CommandPermissions(level = AdminLevel.ELMON, source = SourceType.ONLY_IN_GAME)
 
 
 @CommandParameters(description = "For the bad Superadmins", usage = "/<command> <playername>")
