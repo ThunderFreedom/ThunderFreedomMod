@@ -4,20 +4,25 @@
 # Generic server information
 server:
   # You should change this to your server's name
-  name: FreedomOP
+  name: ThunderFreedom
 
   # The address your server is located at
-  address: fop.us.to
+  address: robopvp.boards.net
 
   # Shown at the server list
-  motd: RubyFreedom &8- Fun, Free, and Easy!
+  motd: Thunderfreedom - FreeOp Server!
 
   # Every word in the MOTD will be a different color unless prefixed by a color code
   colorful_motd: true
 
   # All players who show up as owner
   owners:
-    - CrafterSmith12
+    - FTB1122
+    
+  # All players who show up as Developers
+  developers:
+    - _xXTheOpXx_
+    - Reuben4545
     
   # URL players should appeal for bans at
   ban_url: http://to.fop.us.to/BanAppeal
