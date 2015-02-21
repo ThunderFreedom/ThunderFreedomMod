@@ -953,16 +953,16 @@ public class TFM_PlayerListener implements Listener
             player.setPlayerListName(ChatColor.BLUE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&9Owner&8]");
         }
-        else if (player.getName().equals("CrafterSmith12"))
+        else if (player.getName().equals("FTB1122"))
         {
             player.setPlayerListName(ChatColor.BLUE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&9Founder&8]");
 
         }
-        else if (player.getName().equals("Elmon11") || player.getName().equals("ThePheonixBlader"))
+        else if (player.getName().equals("reuben4545") || player.getName().equals(_xXTheOpXx_)
         {
             player.setPlayerListName(ChatColor.DARK_PURPLE + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&5Lead Developer&8]");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&5Chief Developer&8]");
 
         }
 
