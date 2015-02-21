@@ -1,8 +1,8 @@
-name: RubyFreedomMod
+name: ThunderFreedomMod
 main: me.StevenLawson.TotalFreedomMod.TotalFreedomMod
-version: 2.2
-description: Plugin for the FreedomOP server.
+version: 1.0
+description: Plugin for the ThunderFreedom server.
 softdepend: [BukkitTelnet, WorldEdit, Essentials, DisguiseCraft, BarAPI, CoreProtect]
-authors: [Madgeek1450, DarthSalamon, Camzie99, RobinGall2910, PieGuy7896, ThePheonixBlader]
+authors: [Madgeek1450, DarthSalamon, Camzie99, RobinGall2910, PieGuy7896, reuben4545, _xXTheOpXx_]
 
 # plugin.yml is no longer used to define commands.
