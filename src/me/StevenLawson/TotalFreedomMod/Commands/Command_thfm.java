@@ -49,17 +49,17 @@ public class Command_fopm extends TFM_Command
             return true;
         }
 
-        playerMsg("Welcome to the FreedomOpMod; our server's main plugin!", ChatColor.GOLD);
-        playerMsg("Created by Camzie99", ChatColor.GOLD);
+        playerMsg("Welcome to the ThunderFreedomMod; our server's main plugin!", ChatColor.GOLD);
+        playerMsg("Created by reuben4545 and _xXTheOpXx_", ChatColor.GOLD);
         StringBuilder developers = new StringBuilder();
-        developers.append("Later worked on by: CrafterSmith12");
+        developers.append("Later worked on by: Nobody");
         for (String dev : TFM_Util.FOP_DEVELOPERS)
         {
             developers.append(", " + dev);
         }
         developers.append(".");
         playerMsg(developers.toString(), ChatColor.AQUA);
-        playerMsg("Visit " + ChatColor.AQUA + "http://freedomop.boards.net/" + ChatColor.GREEN + " to visit our forums and get support!", ChatColor.GREEN);
+        playerMsg("Visit " + ChatColor.AQUA + "http://robopvp.boards.net/" + ChatColor.GREEN + " to visit our forums and get support!", ChatColor.GREEN);
 
         return true;
     }
